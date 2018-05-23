@@ -454,9 +454,6 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
     }
 	
 
-
-
-
     if(!IsSuperblockVoteTriggered(nBlockHeight))
     {
         LogPrintf("CSuperblockManager::IsSuperblockVoteTriggered -- Can't get vote at height %d\n", nBlockHeight);
@@ -464,7 +461,7 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
     }
 
     // GET THE BEST SUPERBLOCK FOR THIS BLOCK HEIGHT
-
+    /*
     CSuperblock_sptr pSuperblock;
     if(!CSuperblockManager::GetBestSuperblock(pSuperblock, nBlockHeight)) {
         LogPrint("gobject", "CSuperblockManager::CreateSuperblock -- Can't find superblock for height %d\n", nBlockHeight);
@@ -505,6 +502,8 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
     }
 
     DBG( cout << "CSuperblockManager::CreateSuperblock End" << endl; );
+    */
+    LogPrintf("CSuperblockManager::CreateSuperblock -- END");
 }
 
 bool CSuperblockManager::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward)
