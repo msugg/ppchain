@@ -69,10 +69,9 @@ private:
     static bool GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int nBlockHeight);
 
 public:
-
+    //popchain
     static bool IsSuperblockTriggered(int nBlockHeight);
     static bool IsSuperblockVoteTriggered(int nBlockHeight);
-
     static void AppendFoundersReward(CMutableTransaction &txNewRet, int nBlockHeight,CTxOut&  txoutFound);
     static void CreateSuperblock(CMutableTransaction& txNewRet, int nBlockHeight, std::vector<CTxOut>& voutSuperblockRet,CTxOut&  txoutFound);
 
@@ -161,7 +160,10 @@ public:
     CSuperblock();
     CSuperblock(uint256& nHash);
 
+    //popchain
     static bool IsValidBlockHeight(int nBlockHeight);
+
+
     static CAmount GetPaymentsLimit(int nBlockHeight);
 	static bool IsFounderValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward);
     int GetStatus() { return nStatus; }

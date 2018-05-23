@@ -289,10 +289,11 @@ bool CSuperblockManager::IsSuperblockTriggered(int nBlockHeight)
     return true;
 }
 
+// popchain
 bool CSuperblockManager::IsSuperblockVoteTriggered(int nBlockHeight)
 {
     if (CSuperblockManager::IsSuperblockTriggered(nBlockHeight)){
-        LogPrintf("test popchain 1, superblock triggered.");
+        LogPrintf("test popchain 1, superblock triggered.\n");
         /*
         LOCK(governance.cs);
         // GET ALL ACTIVE TRIGGERS
@@ -400,7 +401,7 @@ bool CSuperblockManager::GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int
 *    Append Founders reward
 *    - Append selected founder address according to a given height
 */
-
+//popchain
 void CSuperblockManager::AppendFoundersReward(CMutableTransaction& txNewRet, int nBlockHeight,CTxOut&  txoutFound)
 {
     // add founders reward
@@ -435,7 +436,7 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
 {
     DBG( cout << "CSuperblockManager::CreateSuperblock Start" << endl; );
 
-    LogPrintf("CSuperblockManager::CreateSuperblock -- start superblock");
+    LogPrintf("CSuperblockManager::CreateSuperblock -- start superblock.\n");
 
     //LOCK(governance.cs);
 	
@@ -503,7 +504,6 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
 
     DBG( cout << "CSuperblockManager::CreateSuperblock End" << endl; );
     */
-    LogPrintf("CSuperblockManager::CreateSuperblock -- END");
 }
 
 bool CSuperblockManager::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward)
@@ -574,7 +574,7 @@ CSuperblock(uint256& nHash)
  *
  *   - See if a block at this height can be a superblock
  */
-
+//popchain
 bool CSuperblock::IsValidBlockHeight(int nBlockHeight)
 {
     // SUPERBLOCKS CAN HAPPEN ONLY after hardfork and only ONCE PER CYCLE
