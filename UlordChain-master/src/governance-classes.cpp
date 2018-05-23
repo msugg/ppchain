@@ -278,7 +278,7 @@ std::vector<CSuperblock_sptr> CGovernanceTriggerManager::GetActiveTriggers()
 *
 *   - Does this block have a non-executed and actived trigger?
 */
-
+// popchain
 bool CSuperblockManager::IsSuperblockTriggered(int nBlockHeight)
 {
     LogPrint("gobject", "CSuperblockManager::IsSuperblockTriggered -- Start nBlockHeight = %d\n", nBlockHeight);
@@ -292,6 +292,8 @@ bool CSuperblockManager::IsSuperblockTriggered(int nBlockHeight)
 bool CSuperblockManager::IsSuperblockVoteTriggered(int nBlockHeight)
 {
     if (CSuperblockManager::IsSuperblockTriggered(nBlockHeight)){
+        LogPrintf("test popchain 1, superblock triggered.");
+        /*
         LOCK(governance.cs);
         // GET ALL ACTIVE TRIGGERS
         std::vector<CSuperblock_sptr> vecTriggers = triggerman.GetActiveTriggers();
@@ -345,8 +347,10 @@ bool CSuperblockManager::IsSuperblockVoteTriggered(int nBlockHeight)
                 DBG( cout << "IsSuperblockTriggered No fCachedFunding, continuing" << endl; );
             }
         }
+        */
         return false;
     }
+
     return false;
 }
 
@@ -426,12 +430,14 @@ void CSuperblockManager::AppendFoundersReward(CMutableTransaction& txNewRet, int
 *
 *   - Create the correct payment structure for a given superblock
 */
-
+//popchain
 void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBlockHeight, std::vector<CTxOut>& voutSuperblockRet,CTxOut&  txoutFound)
 {
     DBG( cout << "CSuperblockManager::CreateSuperblock Start" << endl; );
 
-    LOCK(governance.cs);
+    LogPrintf("CSuperblockManager::CreateSuperblock -- start superblock");
+
+    //LOCK(governance.cs);
 	
     // make sure it's empty, just in case
     voutSuperblockRet.clear();
@@ -447,6 +453,10 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
         AppendFoundersReward(txNewRet, nBlockHeight,txoutFound);
     }
 	
+
+
+
+
     if(!IsSuperblockVoteTriggered(nBlockHeight))
     {
         LogPrintf("CSuperblockManager::IsSuperblockVoteTriggered -- Can't get vote at height %d\n", nBlockHeight);
