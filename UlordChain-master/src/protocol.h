@@ -348,16 +348,16 @@ enum {
     MSG_SPORK,
     MSG_MASTERNODE_PAYMENT_VOTE,
     MSG_MASTERNODE_PAYMENT_BLOCK, // reusing, was MSG_MASTERNODE_SCANNING_ERROR previousely, was NOT used in 12.0
-    MSG_BUDGET_VOTE, // depreciated since 12.1
-    MSG_BUDGET_PROPOSAL, // depreciated since 12.1
-    MSG_BUDGET_FINALIZED, // depreciated since 12.1
-    MSG_BUDGET_FINALIZED_VOTE, // depreciated since 12.1
+//    MSG_BUDGET_VOTE, // depreciated since 12.1
+//    MSG_BUDGET_PROPOSAL, // depreciated since 12.1
+//    MSG_BUDGET_FINALIZED, // depreciated since 12.1
+//    MSG_BUDGET_FINALIZED_VOTE, // depreciated since 12.1
     MSG_MASTERNODE_QUORUM, // not implemented
     MSG_MASTERNODE_ANNOUNCE,
     MSG_MASTERNODE_PING,
     MSG_DSTX,
-    MSG_GOVERNANCE_OBJECT,
-    MSG_GOVERNANCE_OBJECT_VOTE,
+//    MSG_GOVERNANCE_OBJECT,
+//    MSG_GOVERNANCE_OBJECT_VOTE,
     MSG_MASTERNODE_VERIFY,
 };
 
