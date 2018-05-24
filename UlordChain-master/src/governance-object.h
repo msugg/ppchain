@@ -107,244 +107,244 @@ struct vote_rec_t {
 
 class CGovernanceObject
 {
-//    friend class CGovernanceManager;
+    friend class CGovernanceManager;
 
-//    friend class CGovernanceTriggerManager;
+    friend class CGovernanceTriggerManager;
 
-//public: // Types
-//    typedef std::map<int, vote_rec_t> vote_m_t;
+public: // Types
+    typedef std::map<int, vote_rec_t> vote_m_t;
 
-//    typedef vote_m_t::iterator vote_m_it;
+    typedef vote_m_t::iterator vote_m_it;
 
-//    typedef vote_m_t::const_iterator vote_m_cit;
+    typedef vote_m_t::const_iterator vote_m_cit;
 
-//    typedef CacheMultiMap<CTxIn, vote_time_pair_t> vote_mcache_t;
+    typedef CacheMultiMap<CTxIn, vote_time_pair_t> vote_mcache_t;
 
-//private:
-//    /// critical section to protect the inner data structures
-//    mutable CCriticalSection cs;
+private:
+    /// critical section to protect the inner data structures
+    mutable CCriticalSection cs;
 
-//    /// Object typecode
-//    int nObjectType;
+    /// Object typecode
+    int nObjectType;
 
-//    /// parent object, 0 is root
-//    uint256 nHashParent;
+    /// parent object, 0 is root
+    uint256 nHashParent;
 
-//    /// object revision in the system
-//    int nRevision;
+    /// object revision in the system
+    int nRevision;
 
-//    /// time this object was created
-//    int64_t nTime;
+    /// time this object was created
+    int64_t nTime;
 
-//    /// time this object was marked for deletion
-//    int64_t nDeletionTime;
+    /// time this object was marked for deletion
+    int64_t nDeletionTime;
 
-//    /// fee-tx
-//    uint256 nCollateralHash;
+    /// fee-tx
+    uint256 nCollateralHash;
 
-//    /// Data field - can be used for anything
-//    std::string strData;
+    /// Data field - can be used for anything
+    std::string strData;
 
-//    /// Masternode info for signed objects
-//    CTxIn vinMasternode;
-//    std::vector<unsigned char> vchSig;
+    /// Masternode info for signed objects
+    CTxIn vinMasternode;
+    std::vector<unsigned char> vchSig;
 
-//    /// is valid by blockchain
-//    bool fCachedLocalValidity;
-//    std::string strLocalValidityError;
+    /// is valid by blockchain
+    bool fCachedLocalValidity;
+    std::string strLocalValidityError;
 
-//    // VARIOUS FLAGS FOR OBJECT / SET VIA MASTERNODE VOTING
+    // VARIOUS FLAGS FOR OBJECT / SET VIA MASTERNODE VOTING
 
-//    /// true == minimum network support has been reached for this object to be funded (doesn't mean it will for sure though)
-//    bool fCachedFunding;
+    /// true == minimum network support has been reached for this object to be funded (doesn't mean it will for sure though)
+    bool fCachedFunding;
 
-//    /// true == minimum network has been reached flagging this object as a valid and understood goverance object (e.g, the serialized data is correct format, etc)
-//    bool fCachedValid;
+    /// true == minimum network has been reached flagging this object as a valid and understood goverance object (e.g, the serialized data is correct format, etc)
+    bool fCachedValid;
 
-//    /// true == minimum network support has been reached saying this object should be deleted from the system entirely
-//    bool fCachedDelete;
+    /// true == minimum network support has been reached saying this object should be deleted from the system entirely
+    bool fCachedDelete;
 
-//    /** true == minimum network support has been reached flagging this object as endorsed by an elected representative body
-//     * (e.g. business review board / technecial review board /etc)
-//     */
-//    bool fCachedEndorsed;
+    /** true == minimum network support has been reached flagging this object as endorsed by an elected representative body
+     * (e.g. business review board / technecial review board /etc)
+     */
+    bool fCachedEndorsed;
 
-//    /// object was updated and cached values should be updated soon
-//    bool fDirtyCache;
+    /// object was updated and cached values should be updated soon
+    bool fDirtyCache;
 
-//    /// Object is no longer of interest
-//    bool fExpired;
+    /// Object is no longer of interest
+    bool fExpired;
 
-//    /// Failed to parse object data
-//    bool fUnparsable;
+    /// Failed to parse object data
+    bool fUnparsable;
 
-//    vote_m_t mapCurrentMNVotes;
+    vote_m_t mapCurrentMNVotes;
 
-//    /// Limited map of votes orphaned by MN
-//    vote_mcache_t mapOrphanVotes;
+    /// Limited map of votes orphaned by MN
+    vote_mcache_t mapOrphanVotes;
 
-//    CGovernanceObjectVoteFile fileVotes;
+    CGovernanceObjectVoteFile fileVotes;
 
-//public:
-//    CGovernanceObject();
+public:
+    CGovernanceObject();
 
-//    CGovernanceObject(uint256 nHashParentIn, int nRevisionIn, int64_t nTime, uint256 nCollateralHashIn, std::string strDataIn);
+    CGovernanceObject(uint256 nHashParentIn, int nRevisionIn, int64_t nTime, uint256 nCollateralHashIn, std::string strDataIn);
 
-//    CGovernanceObject(const CGovernanceObject& other);
+    CGovernanceObject(const CGovernanceObject& other);
 
-//    void swap(CGovernanceObject& first, CGovernanceObject& second); // nothrow
+    void swap(CGovernanceObject& first, CGovernanceObject& second); // nothrow
 
-//    // Public Getter methods
+    // Public Getter methods
 
-//    int64_t GetCreationTime() const {
-//        return nTime;
-//    }
+    int64_t GetCreationTime() const {
+        return nTime;
+    }
 
-//    int64_t GetDeletionTime() const {
-//        return nDeletionTime;
-//    }
+    int64_t GetDeletionTime() const {
+        return nDeletionTime;
+    }
 
-//    int GetObjectType() const {
-//        return nObjectType;
-//    }
+    int GetObjectType() const {
+        return nObjectType;
+    }
 
-//    const uint256& GetCollateralHash() const {
-//        return nCollateralHash;
-//    }
+    const uint256& GetCollateralHash() const {
+        return nCollateralHash;
+    }
 
-//    const CTxIn& GetMasternodeVin() const {
-//        return vinMasternode;
-//    }
+    const CTxIn& GetMasternodeVin() const {
+        return vinMasternode;
+    }
 
-//    bool IsSetCachedFunding() const {
-//        return fCachedFunding;
-//    }
+    bool IsSetCachedFunding() const {
+        return fCachedFunding;
+    }
 
-//    bool IsSetCachedValid() const {
-//        return fCachedValid;
-//    }
+    bool IsSetCachedValid() const {
+        return fCachedValid;
+    }
 
-//    bool IsSetCachedDelete() const {
-//        return fCachedDelete;
-//    }
+    bool IsSetCachedDelete() const {
+        return fCachedDelete;
+    }
 
-//    bool IsSetCachedEndorsed() const {
-//        return fCachedEndorsed;
-//    }
+    bool IsSetCachedEndorsed() const {
+        return fCachedEndorsed;
+    }
 
-//    bool IsSetDirtyCache() const {
-//        return fDirtyCache;
-//    }
+    bool IsSetDirtyCache() const {
+        return fDirtyCache;
+    }
 
-//    bool IsSetExpired() const {
-//        return fExpired;
-//    }
+    bool IsSetExpired() const {
+        return fExpired;
+    }
 
-//    void InvalidateVoteCache() {
-//        fDirtyCache = true;
-//    }
+    void InvalidateVoteCache() {
+        fDirtyCache = true;
+    }
 
-//    CGovernanceObjectVoteFile& GetVoteFile() {
-//        return fileVotes;
-//    }
+    CGovernanceObjectVoteFile& GetVoteFile() {
+        return fileVotes;
+    }
 
-//    // Signature related functions
+    // Signature related functions
 
-//    void SetMasternodeInfo(const CTxIn& vin);
-//    bool Sign(CKey& keyMasternode, CPubKey& pubKeyMasternode);
-//    bool CheckSignature(CPubKey& pubKeyMasternode);
+    void SetMasternodeInfo(const CTxIn& vin);
+    bool Sign(CKey& keyMasternode, CPubKey& pubKeyMasternode);
+    bool CheckSignature(CPubKey& pubKeyMasternode);
 
-//    std::string GetSignatureMessage() const;
+    std::string GetSignatureMessage() const;
 
-//    // CORE OBJECT FUNCTIONS
+    // CORE OBJECT FUNCTIONS
 
-//    bool IsValidLocally(std::string& strError, bool fCheckCollateral);
+    bool IsValidLocally(std::string& strError, bool fCheckCollateral);
 
-//    bool IsValidLocally(std::string& strError, bool& fMissingMasternode, bool fCheckCollateral);
+    bool IsValidLocally(std::string& strError, bool& fMissingMasternode, bool fCheckCollateral);
 
-//    /// Check the collateral transaction for the budget proposal/finalized budget
-//    bool IsCollateralValid(std::string& strError);
+    /// Check the collateral transaction for the budget proposal/finalized budget
+    bool IsCollateralValid(std::string& strError);
 
-//    void UpdateLocalValidity();
+    void UpdateLocalValidity();
 
-//    void UpdateSentinelVariables();
+    void UpdateSentinelVariables();
 
-//    int GetObjectSubtype();
+    int GetObjectSubtype();
 
-//    CAmount GetMinCollateralFee();
+    CAmount GetMinCollateralFee();
 
-//    UniValue GetJSONObject();
+    UniValue GetJSONObject();
 
-//    void Relay();
+    void Relay();
 
-//    uint256 GetHash() const;
+    uint256 GetHash() const;
 
-//    // GET VOTE COUNT FOR SIGNAL
+    // GET VOTE COUNT FOR SIGNAL
 
-//    int CountMatchingVotes(vote_signal_enum_t eVoteSignalIn, vote_outcome_enum_t eVoteOutcomeIn) const;
+    int CountMatchingVotes(vote_signal_enum_t eVoteSignalIn, vote_outcome_enum_t eVoteOutcomeIn) const;
 
-//    int GetAbsoluteYesCount(vote_signal_enum_t eVoteSignalIn) const;
-//    int GetAbsoluteNoCount(vote_signal_enum_t eVoteSignalIn) const;
-//    int GetYesCount(vote_signal_enum_t eVoteSignalIn) const;
-//    int GetNoCount(vote_signal_enum_t eVoteSignalIn) const;
-//    int GetAbstainCount(vote_signal_enum_t eVoteSignalIn) const;
+    int GetAbsoluteYesCount(vote_signal_enum_t eVoteSignalIn) const;
+    int GetAbsoluteNoCount(vote_signal_enum_t eVoteSignalIn) const;
+    int GetYesCount(vote_signal_enum_t eVoteSignalIn) const;
+    int GetNoCount(vote_signal_enum_t eVoteSignalIn) const;
+    int GetAbstainCount(vote_signal_enum_t eVoteSignalIn) const;
 
-//    bool GetCurrentMNVotes(const CTxIn& mnCollateralOutpoint, vote_rec_t& voteRecord);
+    bool GetCurrentMNVotes(const CTxIn& mnCollateralOutpoint, vote_rec_t& voteRecord);
 
-//    // FUNCTIONS FOR DEALING WITH DATA STRING
+    // FUNCTIONS FOR DEALING WITH DATA STRING
 
-//    std::string GetDataAsHex();
-//    std::string GetDataAsString();
+    std::string GetDataAsHex();
+    std::string GetDataAsString();
 
-//    // SERIALIZER
+    // SERIALIZER
 
-//    ADD_SERIALIZE_METHODS;
+    ADD_SERIALIZE_METHODS;
 
-//    template <typename Stream, typename Operation>
-//    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
-//    {
-//        // SERIALIZE DATA FOR SAVING/LOADING OR NETWORK FUNCTIONS
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
+        // SERIALIZE DATA FOR SAVING/LOADING OR NETWORK FUNCTIONS
 
-//        READWRITE(nHashParent);
-//        READWRITE(nRevision);
-//        READWRITE(nTime);
-//        READWRITE(nCollateralHash);
-//        READWRITE(LIMITED_STRING(strData, MAX_GOVERNANCE_OBJECT_DATA_SIZE));
-//        READWRITE(nObjectType);
-//        READWRITE(vinMasternode);
-//        READWRITE(vchSig);
-//        if(nType & SER_DISK) {
-//            // Only include these for the disk file format
-//            LogPrint("gobject", "CGovernanceObject::SerializationOp Reading/writing votes from/to disk\n");
-//            READWRITE(mapCurrentMNVotes);
-//            READWRITE(fileVotes);
-//            LogPrint("gobject", "CGovernanceObject::SerializationOp hash = %s, vote count = %d\n", GetHash().ToString(), fileVotes.GetVoteCount());
-//        }
+        READWRITE(nHashParent);
+        READWRITE(nRevision);
+        READWRITE(nTime);
+        READWRITE(nCollateralHash);
+        READWRITE(LIMITED_STRING(strData, MAX_GOVERNANCE_OBJECT_DATA_SIZE));
+        READWRITE(nObjectType);
+        READWRITE(vinMasternode);
+        READWRITE(vchSig);
+        if(nType & SER_DISK) {
+            // Only include these for the disk file format
+            LogPrint("gobject", "CGovernanceObject::SerializationOp Reading/writing votes from/to disk\n");
+            READWRITE(mapCurrentMNVotes);
+            READWRITE(fileVotes);
+            LogPrint("gobject", "CGovernanceObject::SerializationOp hash = %s, vote count = %d\n", GetHash().ToString(), fileVotes.GetVoteCount());
+        }
 
-//        // AFTER DESERIALIZATION OCCURS, CACHED VARIABLES MUST BE CALCULATED MANUALLY
-//    }
+        // AFTER DESERIALIZATION OCCURS, CACHED VARIABLES MUST BE CALCULATED MANUALLY
+    }
 
-//    CGovernanceObject& operator=(CGovernanceObject from)
-//    {
-//        swap(*this, from);
-//        return *this;
-//    }
+    CGovernanceObject& operator=(CGovernanceObject from)
+    {
+        swap(*this, from);
+        return *this;
+    }
 
-//private:
-//    // FUNCTIONS FOR DEALING WITH DATA STRING
-//    void LoadData();
-//    void GetData(UniValue& objResult);
+private:
+    // FUNCTIONS FOR DEALING WITH DATA STRING
+    void LoadData();
+    void GetData(UniValue& objResult);
 
-//    bool ProcessVote(CNode* pfrom,
-//                     const CGovernanceVote& vote,
-//                     CGovernanceException& exception);
+    bool ProcessVote(CNode* pfrom,
+                     const CGovernanceVote& vote,
+                     CGovernanceException& exception);
 
-//    void RebuildVoteMap();
+    void RebuildVoteMap();
 
-//    /// Called when MN's which have voted on this object have been removed
-//    void ClearMasternodeVotes();
+    /// Called when MN's which have voted on this object have been removed
+    void ClearMasternodeVotes();
 
-//    void CheckOrphanVotes();
+    void CheckOrphanVotes();
 
 };
 
