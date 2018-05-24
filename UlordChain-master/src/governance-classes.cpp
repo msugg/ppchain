@@ -101,7 +101,7 @@ CAmount ParsePaymentAmount(const std::string& strAmount)
 /**
 *   Add Governance Object
 */
-
+/*
 bool CGovernanceTriggerManager::AddNewTrigger(uint256 nHash)
 {
     DBG( cout << "CGovernanceTriggerManager::AddNewTrigger: Start" << endl; );
@@ -145,6 +145,7 @@ bool CGovernanceTriggerManager::AddNewTrigger(uint256 nHash)
 
     return true;
 }
+*/
 
 /**
 *
@@ -248,30 +249,30 @@ void CGovernanceTriggerManager::CleanAndRemove()
 *   - Return the triggers in a list
 */
 
-std::vector<CSuperblock_sptr> CGovernanceTriggerManager::GetActiveTriggers()
-{
-    AssertLockHeld(governance.cs);
-    std::vector<CSuperblock_sptr> vecResults;
+//std::vector<CSuperblock_sptr> CGovernanceTriggerManager::GetActiveTriggers()
+//{
+//    AssertLockHeld(governance.cs);
+//    std::vector<CSuperblock_sptr> vecResults;
 
-    DBG( cout << "GetActiveTriggers: mapTrigger.size() = " << mapTrigger.size() << endl; );
+//    DBG( cout << "GetActiveTriggers: mapTrigger.size() = " << mapTrigger.size() << endl; );
 
-    // LOOK AT THESE OBJECTS AND COMPILE A VALID LIST OF TRIGGERS
-    trigger_m_it it = mapTrigger.begin();
-    while(it != mapTrigger.end()) {
+//    // LOOK AT THESE OBJECTS AND COMPILE A VALID LIST OF TRIGGERS
+//    trigger_m_it it = mapTrigger.begin();
+//    while(it != mapTrigger.end()) {
 
-        CGovernanceObject* pObj = governance.FindGovernanceObject((*it).first);
+//        CGovernanceObject* pObj = governance.FindGovernanceObject((*it).first);
 
-        if(pObj) {
-            DBG( cout << "GetActiveTriggers: pObj->GetDataAsString() = " << pObj->GetDataAsString() << endl; );
-            vecResults.push_back(it->second);
-        }
-        ++it;
-    }
+//        if(pObj) {
+//            DBG( cout << "GetActiveTriggers: pObj->GetDataAsString() = " << pObj->GetDataAsString() << endl; );
+//            vecResults.push_back(it->second);
+//        }
+//        ++it;
+//    }
 
-    DBG( cout << "GetActiveTriggers: vecResults.size() = " << vecResults.size() << endl; );
+//    DBG( cout << "GetActiveTriggers: vecResults.size() = " << vecResults.size() << endl; );
 
-    return vecResults;
-}
+//    return vecResults;
+//}
 
 /**
 *   Is Superblock Triggered
