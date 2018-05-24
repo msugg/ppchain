@@ -369,7 +369,7 @@ bool CSuperblockManager::GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int
     AssertLockHeld(governance.cs);
     std::vector<CSuperblock_sptr> vecTriggers = triggerman.GetActiveTriggers();
     //popchain test
-    LogPrintf("popchain CSuperblockManager::GetBestSuperblock -- vecTriggers size = d%.\n",vecTriggers.size());
+    LogPrintf("popchain CSuperblockManager::GetBestSuperblock -- vecTriggers size = %d\n",vecTriggers.size());
 
 
     int nYesCount = 0;
