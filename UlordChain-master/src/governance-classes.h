@@ -43,18 +43,18 @@ class CGovernanceTriggerManager
     friend class CGovernanceManager;
 
 private:
-    typedef std::map<uint256, CSuperblock_sptr> trigger_m_t;
-    typedef trigger_m_t::iterator trigger_m_it;
-    typedef trigger_m_t::const_iterator trigger_m_cit;
+//    typedef std::map<uint256, CSuperblock_sptr> trigger_m_t;
+//    typedef trigger_m_t::iterator trigger_m_it;
+//    typedef trigger_m_t::const_iterator trigger_m_cit;
 
-    trigger_m_t mapTrigger;
+//    trigger_m_t mapTrigger;
 
-    std::vector<CSuperblock_sptr> GetActiveTriggers();
-    bool AddNewTrigger(uint256 nHash);
-    void CleanAndRemove();
+    //std::vector<CSuperblock_sptr> GetActiveTriggers();
+    //bool AddNewTrigger(uint256 nHash);
+    //void CleanAndRemove();
 
 public:
-    CGovernanceTriggerManager() : mapTrigger() {}
+    //CGovernanceTriggerManager() : mapTrigger() {}
 };
 
 /**

@@ -101,7 +101,8 @@ CAmount ParsePaymentAmount(const std::string& strAmount)
 /**
 *   Add Governance Object
 */
-
+//popchain doesn't need this function
+/*
 bool CGovernanceTriggerManager::AddNewTrigger(uint256 nHash)
 {
     DBG( cout << "CGovernanceTriggerManager::AddNewTrigger: Start" << endl; );
@@ -145,14 +146,14 @@ bool CGovernanceTriggerManager::AddNewTrigger(uint256 nHash)
 
     return true;
 }
-
+*/
 
 /**
 *
 *   Clean And Remove
 *
 */
-
+/*
 void CGovernanceTriggerManager::CleanAndRemove()
 {
     LogPrint("gobject", "CGovernanceTriggerManager::CleanAndRemove -- Start\n");
@@ -241,6 +242,7 @@ void CGovernanceTriggerManager::CleanAndRemove()
 
     DBG( cout << "CGovernanceTriggerManager::CleanAndRemove: End" << endl; );
 }
+*/
 
 /**
 *   Get Active Triggers
@@ -248,34 +250,38 @@ void CGovernanceTriggerManager::CleanAndRemove()
 *   - Look through triggers and scan for active ones
 *   - Return the triggers in a list
 */
+// popchain return vecResults.size = 0
+//std::vector<CSuperblock_sptr> CGovernanceTriggerManager::GetActiveTriggers()
+//{
+//    /*
+//    AssertLockHeld(governance.cs);
+//    std::vector<CSuperblock_sptr> vecResults;
 
-std::vector<CSuperblock_sptr> CGovernanceTriggerManager::GetActiveTriggers()
-{
-    AssertLockHeld(governance.cs);
-    std::vector<CSuperblock_sptr> vecResults;
-
-    DBG( cout << "GetActiveTriggers: mapTrigger.size() = " << mapTrigger.size() << endl; );
-    //popchain test
-    LogPrintf("popchain GetActiveTriggers: mapTrigger.size() = %d.\n",mapTrigger.size());
+//    DBG( cout << "GetActiveTriggers: mapTrigger.size() = " << mapTrigger.size() << endl; );
+//    //popchain test mapTrigger.size() = 0
+//    //LogPrintf("popchain GetActiveTriggers: mapTrigger.size() = %d.\n",mapTrigger.size());
 
 
-    // LOOK AT THESE OBJECTS AND COMPILE A VALID LIST OF TRIGGERS
-    trigger_m_it it = mapTrigger.begin();
-    while(it != mapTrigger.end()) {
+//    // LOOK AT THESE OBJECTS AND COMPILE A VALID LIST OF TRIGGERS
+//    trigger_m_it it = mapTrigger.begin();
+//    while(it != mapTrigger.end()) {
 
-        CGovernanceObject* pObj = governance.FindGovernanceObject((*it).first);
+//        CGovernanceObject* pObj = governance.FindGovernanceObject((*it).first);
 
-        if(pObj) {
-            DBG( cout << "GetActiveTriggers: pObj->GetDataAsString() = " << pObj->GetDataAsString() << endl; );
-            vecResults.push_back(it->second);
-        }
-        ++it;
-    }
+//        if(pObj) {
+//            DBG( cout << "GetActiveTriggers: pObj->GetDataAsString() = " << pObj->GetDataAsString() << endl; );
+//            vecResults.push_back(it->second);
+//        }
+//        ++it;
+//    }
 
-    DBG( cout << "GetActiveTriggers: vecResults.size() = " << vecResults.size() << endl; );
+//    DBG( cout << "GetActiveTriggers: vecResults.size() = " << vecResults.size() << endl; );
 
-    return vecResults;
-}
+//    return vecResults;
+//    */
+//    std::vector<CSuperblock_sptr> vecResults;
+//    return vecResults;
+//}
 
 /**
 *   Is Superblock Triggered
@@ -359,8 +365,10 @@ bool CSuperblockManager::IsSuperblockVoteTriggered(int nBlockHeight)
 }
 
 
+// popchain return false
 bool CSuperblockManager::GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int nBlockHeight)
 {
+    /*
     if(!CSuperblock::IsValidBlockHeight(nBlockHeight)) {
         return false;
     }
@@ -368,7 +376,7 @@ bool CSuperblockManager::GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int
     AssertLockHeld(governance.cs);
     std::vector<CSuperblock_sptr> vecTriggers = triggerman.GetActiveTriggers();
     //popchain test vecTriggers size = 0
-    LogPrintf("popchain CSuperblockManager::GetBestSuperblock -- vecTriggers size = %d\n",vecTriggers.size());
+    //LogPrintf("popchain CSuperblockManager::GetBestSuperblock -- vecTriggers size = %d\n",vecTriggers.size());
 
     int nYesCount = 0;
 
@@ -402,6 +410,8 @@ bool CSuperblockManager::GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int
     }
 
     return nYesCount > 0;
+    */
+    return false;
 }
 
 
@@ -463,7 +473,8 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
     }
 	
     CSuperblock_sptr pSuperblock;
-    CSuperblockManager::GetBestSuperblock(pSuperblock, nBlockHeight);
+    //popchain test
+    //CSuperblockManager::GetBestSuperblock(pSuperblock, nBlockHeight);
 
     if(!IsSuperblockVoteTriggered(nBlockHeight))
     {
@@ -516,6 +527,7 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
     */
 }
 
+//popchain return false
 bool CSuperblockManager::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward)
 {
     // GET BEST SUPERBLOCK, SHOULD MATCH
