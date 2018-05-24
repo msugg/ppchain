@@ -25,7 +25,7 @@ static const int TRIGGER_SUPERBLOCK         = 1000;
 typedef boost::shared_ptr<CSuperblock> CSuperblock_sptr;
 
 // DECLARE GLOBAL VARIABLES FOR GOVERNANCE CLASSES
-//extern CGovernanceTriggerManager triggerman;
+extern CGovernanceTriggerManager triggerman;
 
 // SPLIT A STRING UP - USED FOR SUPERBLOCK PAYMENTS
 std::vector<std::string> SplitBy(std::string strCommand, std::string strDelimit);
