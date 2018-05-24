@@ -532,12 +532,12 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
 bool CSuperblockManager::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward)
 {
     // GET BEST SUPERBLOCK, SHOULD MATCH
-    LOCK(governance.cs);
+//    LOCK(governance.cs);
 
-    CSuperblock_sptr pSuperblock;
-    if(CSuperblockManager::GetBestSuperblock(pSuperblock, nBlockHeight)) {
-        return pSuperblock->IsValid(txNew, nBlockHeight, blockReward);
-    }
+//    CSuperblock_sptr pSuperblock;
+//    if(CSuperblockManager::GetBestSuperblock(pSuperblock, nBlockHeight)) {
+//        return pSuperblock->IsValid(txNew, nBlockHeight, blockReward);
+//    }
 
     return false;
 }
@@ -588,8 +588,8 @@ CSuperblock(uint256& nHash)
 //    std::string strAmounts = obj["payment_amounts"].get_str();
 //    ParsePaymentSchedule(strAddresses, strAmounts);
 
-    LogPrint("gobject", "CSuperblock -- nEpochStart = %d, strAddresses = %s, strAmounts = %s, vecPayments.size() = %d\n",
-             nEpochStart, strAddresses, strAmounts, vecPayments.size());
+//    LogPrint("gobject", "CSuperblock -- nEpochStart = %d, strAddresses = %s, strAmounts = %s, vecPayments.size() = %d\n",
+//             nEpochStart, strAddresses, strAmounts, vecPayments.size());
 
     //popchain
     LogPrintf("CSuperblock -- nEpochStart = %d",nEpochStart);
@@ -695,27 +695,27 @@ CAmount CSuperblock::GetPaymentsLimit(int nBlockHeight)
 //    }
 //}
 
-bool CSuperblock::GetPayment(int nPaymentIndex, CGovernancePayment& paymentRet)
-{
-    if((nPaymentIndex<0) || (nPaymentIndex >= (int)vecPayments.size())) {
-        return false;
-    }
+//bool CSuperblock::GetPayment(int nPaymentIndex, CGovernancePayment& paymentRet)
+//{
+//    if((nPaymentIndex<0) || (nPaymentIndex >= (int)vecPayments.size())) {
+//        return false;
+//    }
 
-    paymentRet = vecPayments[nPaymentIndex];
-    return true;
-}
+//    paymentRet = vecPayments[nPaymentIndex];
+//    return true;
+//}
 
-CAmount CSuperblock::GetPaymentsTotalAmount()
-{
-    CAmount nPaymentsTotalAmount = 0;
-    int nPayments = CountPayments();
+//CAmount CSuperblock::GetPaymentsTotalAmount()
+//{
+//    CAmount nPaymentsTotalAmount = 0;
+//    int nPayments = CountPayments();
 
-    for(int i = 0; i < nPayments; i++) {
-        nPaymentsTotalAmount += vecPayments[i].nAmount;
-    }
+//    for(int i = 0; i < nPayments; i++) {
+//        nPaymentsTotalAmount += vecPayments[i].nAmount;
+//    }
 
-    return nPaymentsTotalAmount;
-}
+//    return nPaymentsTotalAmount;
+//}
 /**
 *   Is Transaction Valid
 *
@@ -872,40 +872,40 @@ bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount b
 *   - Get a string representing the payments required for a given superblock
 */
 
-std::string CSuperblockManager::GetRequiredPaymentsString(int nBlockHeight)
-{
-    LOCK(governance.cs);
-    std::string ret = "Unknown";
+//std::string CSuperblockManager::GetRequiredPaymentsString(int nBlockHeight)
+//{
+//    LOCK(governance.cs);
+//    std::string ret = "Unknown";
 
-    // GET BEST SUPERBLOCK
+//    // GET BEST SUPERBLOCK
 
-    CSuperblock_sptr pSuperblock;
-    if(!GetBestSuperblock(pSuperblock, nBlockHeight)) {
-        LogPrint("gobject", "CSuperblockManager::GetRequiredPaymentsString -- Can't find superblock for height %d\n", nBlockHeight);
-        return "error";
-    }
+//    CSuperblock_sptr pSuperblock;
+//    if(!GetBestSuperblock(pSuperblock, nBlockHeight)) {
+//        LogPrint("gobject", "CSuperblockManager::GetRequiredPaymentsString -- Can't find superblock for height %d\n", nBlockHeight);
+//        return "error";
+//    }
 
-    // LOOP THROUGH SUPERBLOCK PAYMENTS, CONFIGURE OUTPUT STRING
+//    // LOOP THROUGH SUPERBLOCK PAYMENTS, CONFIGURE OUTPUT STRING
 
-    for(int i = 0; i < pSuperblock->CountPayments(); i++) {
-        CGovernancePayment payment;
-        if(pSuperblock->GetPayment(i, payment)) {
-            // PRINT NICE LOG OUTPUT FOR SUPERBLOCK PAYMENT
+//    for(int i = 0; i < pSuperblock->CountPayments(); i++) {
+//        CGovernancePayment payment;
+//        if(pSuperblock->GetPayment(i, payment)) {
+//            // PRINT NICE LOG OUTPUT FOR SUPERBLOCK PAYMENT
 
-            CTxDestination address1;
-            ExtractDestination(payment.script, address1);
-            CBitcoinAddress address2(address1);
+//            CTxDestination address1;
+//            ExtractDestination(payment.script, address1);
+//            CBitcoinAddress address2(address1);
 
-            // RETURN NICE OUTPUT FOR CONSOLE
+//            // RETURN NICE OUTPUT FOR CONSOLE
 
-            if(ret != "Unknown") {
-                ret += ", " + address2.ToString();
-            }
-            else {
-                ret = address2.ToString();
-            }
-        }
-    }
+//            if(ret != "Unknown") {
+//                ret += ", " + address2.ToString();
+//            }
+//            else {
+//                ret = address2.ToString();
+//            }
+//        }
+//    }
 
-    return ret;
-}
+//    return ret;
+//}

@@ -107,8 +107,8 @@ static const int SEEN_OBJECT_UNKNOWN = 4; // the default
 *
 */
 //popchain doesn't need this class
-//class CGovernanceObject
-//{
+class CGovernanceObject
+{
 //    friend class CGovernanceManager;
 
 //    friend class CGovernanceTriggerManager;
@@ -348,7 +348,7 @@ static const int SEEN_OBJECT_UNKNOWN = 4; // the default
 
 //    void CheckOrphanVotes();
 
-//};
+};
 
 
 #endif

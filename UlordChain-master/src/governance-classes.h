@@ -78,7 +78,7 @@ public:
     static void AppendFoundersReward(CMutableTransaction &txNewRet, int nBlockHeight,CTxOut&  txoutFound);
     static void CreateSuperblock(CMutableTransaction& txNewRet, int nBlockHeight, std::vector<CTxOut>& voutSuperblockRet,CTxOut&  txoutFound);
 
-    static std::string GetRequiredPaymentsString(int nBlockHeight);
+    //static std::string GetRequiredPaymentsString(int nBlockHeight);
     static bool IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward);
 };
 
@@ -154,7 +154,7 @@ private:
 
     int nEpochStart;
     int nStatus;
-    std::vector<CGovernancePayment> vecPayments;
+    //std::vector<CGovernancePayment> vecPayments;
 
     //void ParsePaymentSchedule(std::string& strPaymentAddresses, std::string& strPaymentAmounts);
 
@@ -206,9 +206,9 @@ public:
         return nEpochStart;
     }
 
-    int CountPayments() { return (int)vecPayments.size(); }
-    bool GetPayment(int nPaymentIndex, CGovernancePayment& paymentRet);
-    CAmount GetPaymentsTotalAmount();
+    //int CountPayments() { return (int)vecPayments.size(); }
+    //bool GetPayment(int nPaymentIndex, CGovernancePayment& paymentRet);
+    //CAmount GetPaymentsTotalAmount();
 
     bool IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward);
 };
