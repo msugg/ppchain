@@ -255,6 +255,9 @@ std::vector<CSuperblock_sptr> CGovernanceTriggerManager::GetActiveTriggers()
     std::vector<CSuperblock_sptr> vecResults;
 
     DBG( cout << "GetActiveTriggers: mapTrigger.size() = " << mapTrigger.size() << endl; );
+    //popchain test
+    LogPrintf("popchain GetActiveTriggers: mapTrigger.size() = d%.\n",mapTrigger.size());
+
 
     // LOOK AT THESE OBJECTS AND COMPILE A VALID LIST OF TRIGGERS
     trigger_m_it it = mapTrigger.begin();
@@ -365,6 +368,10 @@ bool CSuperblockManager::GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int
 
     AssertLockHeld(governance.cs);
     std::vector<CSuperblock_sptr> vecTriggers = triggerman.GetActiveTriggers();
+    //popchain test
+    LogPrintf("pop chain CSuperblockManager::GetBestSuperblock -- vecTriggers size = d%.\n",vecTriggers.size());
+
+
     int nYesCount = 0;
 
     BOOST_FOREACH(CSuperblock_sptr pSuperblock, vecTriggers) {
