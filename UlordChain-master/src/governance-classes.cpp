@@ -369,7 +369,7 @@ bool CSuperblockManager::GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int
     AssertLockHeld(governance.cs);
     std::vector<CSuperblock_sptr> vecTriggers = triggerman.GetActiveTriggers();
     //popchain test
-    LogPrintf("pop chain CSuperblockManager::GetBestSuperblock -- vecTriggers size = d%.\n",vecTriggers.size());
+    LogPrintf("popchain CSuperblockManager::GetBestSuperblock -- vecTriggers size = d%.\n",vecTriggers.size());
 
 
     int nYesCount = 0;
@@ -464,6 +464,8 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
         AppendFoundersReward(txNewRet, nBlockHeight,txoutFound);
     }
 	
+    CSuperblock_sptr pSuperblock;
+    CSuperblockManager::GetBestSuperblock(pSuperblock, nBlockHeight);
 
     if(!IsSuperblockVoteTriggered(nBlockHeight))
     {
