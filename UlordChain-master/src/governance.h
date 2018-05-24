@@ -19,13 +19,14 @@
 #include "timedata.h"
 #include "util.h"
 
-class CGovernanceManager;
-class CGovernanceTriggerManager;
+// popchain dont need it
+//class CGovernanceManager;
+//class CGovernanceTriggerManager;
 class CGovernanceObject;
 class CGovernanceVote;
 
 extern std::map<uint256, int64_t> mapAskedForGovernanceObject;
-extern CGovernanceManager governance;
+//extern CGovernanceManager governance;
 
 typedef std::pair<CGovernanceObject, int64_t> object_time_pair_t;
 

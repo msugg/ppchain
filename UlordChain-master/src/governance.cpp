@@ -14,7 +14,7 @@
 #include "netfulfilledman.h"
 #include "util.h"
 
-CGovernanceManager governance;
+//CGovernanceManager governance;
 
 //std::map<uint256, int64_t> mapAskedForGovernanceObject;
 

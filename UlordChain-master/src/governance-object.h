@@ -18,8 +18,9 @@
 
 #include <univalue.h>
 
+// popchain dont need it
 //class CGovernanceManager;
-class CGovernanceTriggerManager;
+//class CGovernanceTriggerManager;
 class CGovernanceObject;
 class CGovernanceVote;
 
@@ -107,7 +108,7 @@ struct vote_rec_t {
 
 class CGovernanceObject
 {
-    friend class CGovernanceManager;
+    //friend class CGovernanceManager;
 
     //friend class CGovernanceTriggerManager;
 
