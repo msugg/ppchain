@@ -818,7 +818,7 @@ bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount b
     }
 
     // payments should not exceed limit
-//    const Consensus::Params& cp = Params().GetConsensus();
+    const Consensus::Params& cp = Params().GetConsensus();
 //    CAmount budgetsActual = GetPaymentsTotalAmount();
 //    CAmount budgetLimit = GetBudget(nBlockHeight, cp);
 //    if(budgetsActual > budgetLimit) {
