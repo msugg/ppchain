@@ -49,7 +49,7 @@
 #include "darksend.h"
 #include "dsnotificationinterface.h"
 #include "flat-database.h"
-#include "governance.h"
+//#include "governance.h"
 #include "instantx.h"
 #ifdef ENABLE_WALLET
 #include "keepass.h"
@@ -229,8 +229,9 @@ void PrepareShutdown()
     flatdb1.Dump(mnodeman);
     CFlatDB<CMasternodePayments> flatdb2("mnpayments.dat", "magicMasternodePaymentsCache");
     flatdb2.Dump(mnpayments);
-    CFlatDB<CGovernanceManager> flatdb3("governance.dat", "magicGovernanceCache");
-    flatdb3.Dump(governance);
+    // popchain
+    //CFlatDB<CGovernanceManager> flatdb3("governance.dat", "magicGovernanceCache");
+    //flatdb3.Dump(governance);
     CFlatDB<CNetFulfilledRequestManager> flatdb4("netfulfilled.dat", "magicFulfilledCache");
     flatdb4.Dump(netfulfilledman);
 
@@ -562,7 +563,9 @@ std::string HelpMessage(HelpMessageMode mode)
     }
     strUsage += HelpMessageOpt("-shrinkdebugfile", _("Shrink debug.log file on client startup (default: 1 when no -debug)"));
     AppendParamsHelpMessages(strUsage, showDebug);
-    strUsage += HelpMessageOpt("-litemode=<n>", strprintf(_("Disable all Ulord specific functionality (Masternodes, PrivateSend, InstantSend, Governance) (0-1, default: %u)"), 0));
+    //popchain
+    //strUsage += HelpMessageOpt("-litemode=<n>", strprintf(_("Disable all Ulord specific functionality (Masternodes, PrivateSend, InstantSend, Governance) (0-1, default: %u)"), 0));
+    strUsage += HelpMessageOpt("-litemode=<n>", strprintf(_("Disable all Ulord specific functionality (Masternodes, PrivateSend, InstantSend) (0-1, default: %u)"), 0));
 
     strUsage += HelpMessageGroup(_("Masternode options:"));
     strUsage += HelpMessageOpt("-masternode=<n>", strprintf(_("Enable the client to act as a masternode (0-1, default: %u)"), 0));
@@ -1906,15 +1909,18 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
         if(!flatdb2.Load(mnpayments)) {
             return InitError("Failed to load masternode payments cache from mnpayments.dat");
         }
+        // popchain doesn't need governance part
 
-        uiInterface.InitMessage(_("Loading governance cache..."));
-        CFlatDB<CGovernanceManager> flatdb3("governance.dat", "magicGovernanceCache");
-        if(!flatdb3.Load(governance)) {
-            return InitError("Failed to load governance cache from governance.dat");
-        }
-        governance.InitOnLoad();
-    } else {
-        uiInterface.InitMessage(_("Masternode cache is empty, skipping payments and governance cache..."));
+//        uiInterface.InitMessage(_("Loading governance cache..."));
+//        CFlatDB<CGovernanceManager> flatdb3("governance.dat", "magicGovernanceCache");
+//        if(!flatdb3.Load(governance)) {
+//            return InitError("Failed to load governance cache from governance.dat");
+//        }
+//        governance.InitOnLoad();
+    }
+    else {
+        //uiInterface.InitMessage(_("Masternode cache is empty, skipping payments and governance cache..."));
+        uiInterface.InitMessage(_("Masternode cache is empty, skipping payments cache..."));
     }
 
     uiInterface.InitMessage(_("Loading fullfiled requests cache..."));
@@ -1932,7 +1938,8 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     darkSendPool.UpdatedBlockTip(chainActive.Tip());
     mnpayments.UpdatedBlockTip(chainActive.Tip());
     masternodeSync.UpdatedBlockTip(chainActive.Tip());
-    governance.UpdatedBlockTip(chainActive.Tip());
+    // popchain
+    //governance.UpdatedBlockTip(chainActive.Tip());
 
     // ********************************************************* Step 11d: start ulord-privatesend thread
 

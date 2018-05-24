@@ -18,7 +18,7 @@
 
 #include <univalue.h>
 
-class CGovernanceManager;
+//class CGovernanceManager;
 class CGovernanceTriggerManager;
 class CGovernanceObject;
 class CGovernanceVote;
@@ -109,7 +109,7 @@ class CGovernanceObject
 {
     friend class CGovernanceManager;
 
-    friend class CGovernanceTriggerManager;
+    //friend class CGovernanceTriggerManager;
 
 public: // Types
     typedef std::map<int, vote_rec_t> vote_m_t;

@@ -17,7 +17,8 @@
 #include <univalue.h>
 
 // DECLARE GLOBAL VARIABLES FOR GOVERNANCE CLASSES
-CGovernanceTriggerManager triggerman;
+//popchain dont need
+//CGovernanceTriggerManager triggerman;
 
 // SPLIT UP STRING BY DELIMITER
 // http://www.boost.org/doc/libs/1_58_0/doc/html/boost/algorithm/split_idp202406848.html
