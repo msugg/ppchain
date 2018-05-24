@@ -49,7 +49,7 @@
 #include "darksend.h"
 #include "dsnotificationinterface.h"
 #include "flat-database.h"
-//#include "governance.h"
+#include "governance.h"
 #include "instantx.h"
 #ifdef ENABLE_WALLET
 #include "keepass.h"

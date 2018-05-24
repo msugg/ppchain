@@ -1764,6 +1764,8 @@ CAmount GetMinerSubsidy(const int height, const Consensus::Params &cp)
     }
 }
 
+//popchain doesn't have masternode pay
+/*
 CAmount GetMasternodePayment(const int height)
 {
     const Consensus::Params cp = Params().GetConsensus();
@@ -1801,7 +1803,10 @@ CAmount GetMasternodePayment(const int height)
 		return cp.mnReward5 >> halvings;
     }
 }
+*/
 
+//popchain
+/*
 CAmount GetBudget(const int height, const Consensus::Params &cp)
 {
     const int beg = cp.nSuperblockStartBlock;
@@ -1825,6 +1830,7 @@ CAmount GetBudget(const int height, const Consensus::Params &cp)
 	return cp.bdgetReward5 >> halvings;
     }
 }
+*/
 
 CAmount GetFoundersReward(const int height, const Consensus::Params &cp)
 {
@@ -1840,8 +1846,8 @@ CAmount GetFoundersReward(const int height, const Consensus::Params &cp)
 // return all subsidy
 CAmount GetBlockSubsidy(const int height, const Consensus::Params &cp)
 {
-    return GetBudget(height, cp) +
-           GetMasternodePayment(height) +
+    return //GetBudget(height, cp) +
+           //GetMasternodePayment(height) +
            GetMinerSubsidy(height, cp) +
            GetFoundersReward(height, cp);
 }

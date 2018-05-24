@@ -622,6 +622,7 @@ CAmount CSuperblock::GetPaymentsLimit(int nBlockHeight)
     }
     CAmount nPaymentsLimit = GetBlockSubsidy(nBlockHeight, consensusParams);
     LogPrint("gobject", "CSuperblock::GetPaymentsLimit -- Valid superblock height %d, payments max %lld\n", nBlockHeight, nPaymentsLimit);
+    //popchain
     LogPrintf("popchain CSuperblock::GetPaymentsLimit -- Valid superblock height %d, payments max %lld\n", nBlockHeight, nPaymentsLimit);
     return nPaymentsLimit;
 }
@@ -758,11 +759,15 @@ bool CSuperblock::IsFounderValid(const CTransaction& txNew, int nBlockHeight, CA
             return false;
         }
     }
-	CAmount budgetLimit = GetBudget(nBlockHeight, cp);
+
+    //popchain
+    //CAmount budgetLimit = GetBudget(nBlockHeight, cp);
 	// miner should not get more than he would usually get
-    if(nBlockValue > blockReward + budgetLimit + foundersExpected)
+    //if(nBlockValue > blockReward + budgetLimit + foundersExpected)
+    if(nBlockValue > blockReward + foundersExpected)
     {
-        LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid, block value limit exceeded: block %lld, limit %lld\n", nBlockValue, blockReward + budgetLimit + foundersExpected);
+//        LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid, block value limit exceeded: block %lld, limit %lld\n", nBlockValue, blockReward + budgetLimit + foundersExpected);
+        LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid, block value limit exceeded: block %lld, limit %lld\n", nBlockValue, blockReward + foundersExpected);
         return false;
     }
     return true;
@@ -791,11 +796,15 @@ bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount b
     // CONFIGURE SUPERBLOCK OUTPUTS
 
     int nOutputs = txNew.vout.size();
-    int nPayments = CountPayments();
-    int nMinerPayments = nOutputs - nPayments - 1;        // founders reward
+    //popchain
+    //int nPayments = CountPayments();
+    //int nMinerPayments = nOutputs - nPayments - 1;        // founders reward
+    int nMinerPayments = nOutputs - 1;
 
-    LogPrint("gobject", "CSuperblock::IsValid nOutputs = %d, nPayments = %d, strData = %s\n",
-             nOutputs, nPayments, GetGovernanceObject()->GetDataAsHex());
+//    LogPrint("gobject", "CSuperblock::IsValid nOutputs = %d, nPayments = %d, strData = %s\n",
+//             nOutputs, nPayments, GetGovernanceObject()->GetDataAsHex());
+     //popchain
+     LogPrintf("CSuperblock::IsValid nOutputs = %d \n",nOutputs);
 
     // We require an exact match (including order) between the expected
     // superblock payments and the payments actually in the block.
@@ -809,13 +818,13 @@ bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount b
     }
 
     // payments should not exceed limit
-    const Consensus::Params& cp = Params().GetConsensus();
-    CAmount budgetsActual = GetPaymentsTotalAmount();
-    CAmount budgetLimit = GetBudget(nBlockHeight, cp);
-    if(budgetsActual > budgetLimit) {
-        LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid, payments limit exceeded: payments %lld, limit %lld\n", budgetsActual, budgetLimit);
-        return false;
-    }
+//    const Consensus::Params& cp = Params().GetConsensus();
+//    CAmount budgetsActual = GetPaymentsTotalAmount();
+//    CAmount budgetLimit = GetBudget(nBlockHeight, cp);
+//    if(budgetsActual > budgetLimit) {
+//        LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid, payments limit exceeded: payments %lld, limit %lld\n", budgetsActual, budgetLimit);
+//        return false;
+//    }
 
     // founder reward check
     // it's ok to use founders address as budget address ?
@@ -823,12 +832,20 @@ bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount b
     CAmount nBlockValue = txNew.GetValueOut();
 
     // miner should not get more than he would usually get
-    if(nBlockValue > blockReward + budgetLimit + foundersExpected)
+//    if(nBlockValue > blockReward + budgetLimit + foundersExpected)
+//    {
+//        LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid, block value limit exceeded: block %lld, limit %lld\n", nBlockValue, blockReward + budgetLimit + foundersExpected);
+//        return false;
+//    }
+
+    if(nBlockValue > blockReward + foundersExpected)
     {
-        LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid, block value limit exceeded: block %lld, limit %lld\n", nBlockValue, blockReward + budgetLimit + foundersExpected);
+        LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid, block value limit exceeded: block %lld, limit %lld\n", nBlockValue, blockReward + foundersExpected);
         return false;
     }
 
+    //popchain
+    /*
     int nVoutIndex = 0;
     for(int i = 0; i < nPayments; i++) {
         CGovernancePayment payment;
@@ -862,6 +879,7 @@ bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount b
             return false;
         }
     }
+    */
 
     return true;
 }

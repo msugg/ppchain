@@ -211,7 +211,7 @@ CMasternodeMan::CMasternodeMan()
   fIndexRebuilt(false),
   fMasternodesAdded(false),
   fMasternodesRemoved(false),
-  vecDirtyGovernanceObjectHashes(),
+  //vecDirtyGovernanceObjectHashes(),
   nLastWatchdogVoteTime(0),
   mapSeenMasternodeBroadcast(),
   mapSeenMasternodePing(),
@@ -1768,23 +1768,23 @@ bool CMasternodeMan::IsWatchdogActive()
     return (GetTime() - nLastWatchdogVoteTime) <= MASTERNODE_WATCHDOG_MAX_SECONDS;
 }
 
-void CMasternodeMan::AddGovernanceVote(const CTxIn& vin, uint256 nGovernanceObjectHash)
-{
-    LOCK(cs);
-    CMasternode* pMN = Find(vin);
-    if(!pMN)  {
-        return;
-    }
-    pMN->AddGovernanceVote(nGovernanceObjectHash);
-}
+//void CMasternodeMan::AddGovernanceVote(const CTxIn& vin, uint256 nGovernanceObjectHash)
+//{
+//    LOCK(cs);
+//    CMasternode* pMN = Find(vin);
+//    if(!pMN)  {
+//        return;
+//    }
+//    pMN->AddGovernanceVote(nGovernanceObjectHash);
+//}
 
-void CMasternodeMan::RemoveGovernanceObject(uint256 nGovernanceObjectHash)
-{
-    LOCK(cs);
-    BOOST_FOREACH(CMasternode& mn, vMasternodes) {
-        mn.RemoveGovernanceObject(nGovernanceObjectHash);
-    }
-}
+//void CMasternodeMan::RemoveGovernanceObject(uint256 nGovernanceObjectHash)
+//{
+//    LOCK(cs);
+//    BOOST_FOREACH(CMasternode& mn, vMasternodes) {
+//        mn.RemoveGovernanceObject(nGovernanceObjectHash);
+//    }
+//}
 
 void CMasternodeMan::CheckMasternode(const CTxIn& vin, bool fForce)
 {
@@ -1878,13 +1878,13 @@ void CMasternodeMan::NotifyMasternodeUpdates()
         fMasternodesRemovedLocal = fMasternodesRemoved;
     }
 
-    if(fMasternodesAddedLocal) {
-        governance.CheckMasternodeOrphanObjects();
-        governance.CheckMasternodeOrphanVotes();
-    }
-    if(fMasternodesRemovedLocal) {
-        governance.UpdateCachesAndClean();
-    }
+//    if(fMasternodesAddedLocal) {
+//        governance.CheckMasternodeOrphanObjects();
+//        governance.CheckMasternodeOrphanVotes();
+//    }
+//    if(fMasternodesRemovedLocal) {
+//        governance.UpdateCachesAndClean();
+//    }
 
     LOCK(cs);
     fMasternodesAdded = false;

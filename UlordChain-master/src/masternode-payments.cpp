@@ -248,9 +248,9 @@ void FillBlockPayments(CMutableTransaction& txNew, int nBlockHeight, CAmount blo
 std::string GetRequiredPaymentsString(int nBlockHeight)
 {
     // IF WE HAVE A ACTIVATED TRIGGER FOR THIS HEIGHT - IT IS A SUPERBLOCK, GET THE REQUIRED PAYEES
-    if(CSuperblockManager::IsSuperblockVoteTriggered(nBlockHeight)) {
-        return CSuperblockManager::GetRequiredPaymentsString(nBlockHeight);
-    }
+//    if(CSuperblockManager::IsSuperblockVoteTriggered(nBlockHeight)) {
+//        return CSuperblockManager::GetRequiredPaymentsString(nBlockHeight);
+//    }
 
     // OTHERWISE, PAY MASTERNODE
     return mnpayments.GetRequiredPaymentsString(nBlockHeight);

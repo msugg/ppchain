@@ -153,7 +153,7 @@ private:
     /// Set when masternodes are removed, cleared when CGovernanceManager is notified
     bool fMasternodesRemoved;
 
-    std::vector<uint256> vecDirtyGovernanceObjectHashes;
+    //std::vector<uint256> vecDirtyGovernanceObjectHashes;
 
     int64_t nLastWatchdogVoteTime;
 
@@ -336,24 +336,24 @@ public:
 
     void CheckAndRebuildMasternodeIndex();
 
-    void AddDirtyGovernanceObjectHash(const uint256& nHash)
-    {
-        LOCK(cs);
-        vecDirtyGovernanceObjectHashes.push_back(nHash);
-    }
+//    void AddDirtyGovernanceObjectHash(const uint256& nHash)
+//    {
+//        LOCK(cs);
+//        vecDirtyGovernanceObjectHashes.push_back(nHash);
+//    }
 
-    std::vector<uint256> GetAndClearDirtyGovernanceObjectHashes()
-    {
-        LOCK(cs);
-        std::vector<uint256> vecTmp = vecDirtyGovernanceObjectHashes;
-        vecDirtyGovernanceObjectHashes.clear();
-        return vecTmp;;
-    }
+//    std::vector<uint256> GetAndClearDirtyGovernanceObjectHashes()
+//    {
+//        LOCK(cs);
+//        std::vector<uint256> vecTmp = vecDirtyGovernanceObjectHashes;
+//        vecDirtyGovernanceObjectHashes.clear();
+//        return vecTmp;;
+//    }
 
     bool IsWatchdogActive();
     void UpdateWatchdogVoteTime(const CTxIn& vin);
-    void AddGovernanceVote(const CTxIn& vin, uint256 nGovernanceObjectHash);
-    void RemoveGovernanceObject(uint256 nGovernanceObjectHash);
+    //void AddGovernanceVote(const CTxIn& vin, uint256 nGovernanceObjectHash);
+    //void RemoveGovernanceObject(uint256 nGovernanceObjectHash);
 
     void CheckMasternode(const CTxIn& vin, bool fForce = false);
     void CheckMasternode(const CPubKey& pubKeyMasternode, bool fForce = false);

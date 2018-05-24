@@ -258,8 +258,9 @@ bool GetTransaction(const uint256 &hash, CTransaction &tx, const Consensus::Para
 bool ActivateBestChain(CValidationState& state, const CChainParams& chainparams, const CBlock* pblock = NULL);
 
 CAmount GetMinerSubsidy(const int height, const Consensus::Params &cp);
-CAmount GetMasternodePayment(const int height);
-CAmount GetBudget(const int height, const Consensus::Params &cp);
+//popchain dont need this
+//CAmount GetMasternodePayment(const int height);
+//CAmount GetBudget(const int height, const Consensus::Params &cp);
 CAmount GetFoundersReward(const int height, const Consensus::Params &cp);
 CAmount GetBlockSubsidy(const int height, const Consensus::Params &cp);
 

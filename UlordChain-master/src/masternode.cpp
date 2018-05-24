@@ -982,17 +982,18 @@ void CMasternode::UpdateWatchdogVoteTime()
 *   - When masternode come and go on the network, we must flag the items they voted on to recalc it's cached flags
 *
 */
-void CMasternode::FlagGovernanceItemsAsDirty()
-{
-    std::vector<uint256> vecDirty;
-    {
-        std::map<uint256, int>::iterator it = mapGovernanceObjectsVotedOn.begin();
-        while(it != mapGovernanceObjectsVotedOn.end()) {
-            vecDirty.push_back(it->first);
-            ++it;
-        }
-    }
-    for(size_t i = 0; i < vecDirty.size(); ++i) {
-        mnodeman.AddDirtyGovernanceObjectHash(vecDirty[i]);
-    }
-}
+//popchain
+//void CMasternode::FlagGovernanceItemsAsDirty()
+//{
+//    std::vector<uint256> vecDirty;
+//    {
+//        std::map<uint256, int>::iterator it = mapGovernanceObjectsVotedOn.begin();
+//        while(it != mapGovernanceObjectsVotedOn.end()) {
+//            vecDirty.push_back(it->first);
+//            ++it;
+//        }
+//    }
+//    for(size_t i = 0; i < vecDirty.size(); ++i) {
+//        mnodeman.AddDirtyGovernanceObjectHash(vecDirty[i]);
+//    }
+//}
