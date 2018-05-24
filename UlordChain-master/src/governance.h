@@ -138,281 +138,282 @@ public:
 //
 // Governance Manager : Contains all proposals for the budget
 // second stage we will upgrate centoaize vote and send vote node,node send money to address
-class CGovernanceManager
-{
-    friend class CGovernanceObject;
+// popchain doesn't need this class
+//class CGovernanceManager
+//{
+//    friend class CGovernanceObject;
 
-public: // Types
-    struct last_object_rec {
-        last_object_rec(bool fStatusOKIn = true)
-            : triggerBuffer(),
-              watchdogBuffer(),
-              fStatusOK(fStatusOKIn)
-            {}
+//public: // Types
+//    struct last_object_rec {
+//        last_object_rec(bool fStatusOKIn = true)
+//            : triggerBuffer(),
+//              watchdogBuffer(),
+//              fStatusOK(fStatusOKIn)
+//            {}
 
-        ADD_SERIALIZE_METHODS;
+//        ADD_SERIALIZE_METHODS;
 
-        template <typename Stream, typename Operation>
-        inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
-        {
-            READWRITE(triggerBuffer);
-            READWRITE(watchdogBuffer);
-            READWRITE(fStatusOK);
-        }
+//        template <typename Stream, typename Operation>
+//        inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+//        {
+//            READWRITE(triggerBuffer);
+//            READWRITE(watchdogBuffer);
+//            READWRITE(fStatusOK);
+//        }
 
-        CRateCheckBuffer triggerBuffer;
-        CRateCheckBuffer watchdogBuffer;
-        bool fStatusOK;
-    };
+//        CRateCheckBuffer triggerBuffer;
+//        CRateCheckBuffer watchdogBuffer;
+//        bool fStatusOK;
+//    };
 
 
-    typedef std::map<uint256, CGovernanceObject> object_m_t;
+//    typedef std::map<uint256, CGovernanceObject> object_m_t;
 
-    typedef object_m_t::iterator object_m_it;
+//    typedef object_m_t::iterator object_m_it;
 
-    typedef object_m_t::const_iterator object_m_cit;
+//    typedef object_m_t::const_iterator object_m_cit;
 
-    typedef CacheMap<uint256, CGovernanceObject*> object_ref_cache_t;
+//    typedef CacheMap<uint256, CGovernanceObject*> object_ref_cache_t;
 
-    typedef std::map<uint256, int> count_m_t;
+//    typedef std::map<uint256, int> count_m_t;
 
-    typedef count_m_t::iterator count_m_it;
+//    typedef count_m_t::iterator count_m_it;
 
-    typedef count_m_t::const_iterator count_m_cit;
+//    typedef count_m_t::const_iterator count_m_cit;
 
-    typedef std::map<uint256, CGovernanceVote> vote_m_t;
+//    typedef std::map<uint256, CGovernanceVote> vote_m_t;
 
-    typedef vote_m_t::iterator vote_m_it;
+//    typedef vote_m_t::iterator vote_m_it;
 
-    typedef vote_m_t::const_iterator vote_m_cit;
+//    typedef vote_m_t::const_iterator vote_m_cit;
 
-    typedef CacheMap<uint256, CGovernanceVote> vote_cache_t;
+//    typedef CacheMap<uint256, CGovernanceVote> vote_cache_t;
 
-    typedef CacheMultiMap<uint256, vote_time_pair_t> vote_mcache_t;
+//    typedef CacheMultiMap<uint256, vote_time_pair_t> vote_mcache_t;
 
-    typedef object_m_t::size_type size_type;
+//    typedef object_m_t::size_type size_type;
 
-    typedef std::map<COutPoint, last_object_rec > txout_m_t;
+//    typedef std::map<COutPoint, last_object_rec > txout_m_t;
 
-    typedef txout_m_t::iterator txout_m_it;
+//    typedef txout_m_t::iterator txout_m_it;
 
-    typedef txout_m_t::const_iterator txout_m_cit;
+//    typedef txout_m_t::const_iterator txout_m_cit;
 
-    typedef std::set<uint256> hash_s_t;
+//    typedef std::set<uint256> hash_s_t;
 
-    typedef hash_s_t::iterator hash_s_it;
+//    typedef hash_s_t::iterator hash_s_it;
 
-    typedef hash_s_t::const_iterator hash_s_cit;
+//    typedef hash_s_t::const_iterator hash_s_cit;
 
-    typedef std::map<uint256, object_time_pair_t> object_time_m_t;
+//    typedef std::map<uint256, object_time_pair_t> object_time_m_t;
 
-    typedef object_time_m_t::iterator object_time_m_it;
+//    typedef object_time_m_t::iterator object_time_m_it;
 
-    typedef object_time_m_t::const_iterator object_time_m_cit;
+//    typedef object_time_m_t::const_iterator object_time_m_cit;
 
-    typedef std::map<uint256, int64_t> hash_time_m_t;
+//    typedef std::map<uint256, int64_t> hash_time_m_t;
 
-    typedef hash_time_m_t::iterator hash_time_m_it;
+//    typedef hash_time_m_t::iterator hash_time_m_it;
 
-    typedef hash_time_m_t::const_iterator hash_time_m_cit;
+//    typedef hash_time_m_t::const_iterator hash_time_m_cit;
 
-private:
-    static const int MAX_CACHE_SIZE = 1000000;
+//private:
+//    static const int MAX_CACHE_SIZE = 1000000;
 
-    static const std::string SERIALIZATION_VERSION_STRING;
+//    static const std::string SERIALIZATION_VERSION_STRING;
 
-    // Keep track of current block index
-    const CBlockIndex *pCurrentBlockIndex;
+//    // Keep track of current block index
+//    const CBlockIndex *pCurrentBlockIndex;
 
-    int64_t nTimeLastDiff;
-    int nCachedBlockHeight;
+//    int64_t nTimeLastDiff;
+//    int nCachedBlockHeight;
 
-    // keep track of the scanning errors
-    object_m_t mapObjects;
+//    // keep track of the scanning errors
+//    object_m_t mapObjects;
 
-    count_m_t mapSeenGovernanceObjects;
+//    count_m_t mapSeenGovernanceObjects;
 
-    object_time_m_t mapMasternodeOrphanObjects;
+//    object_time_m_t mapMasternodeOrphanObjects;
 
-    hash_time_m_t mapWatchdogObjects;
+//    hash_time_m_t mapWatchdogObjects;
 
-    object_ref_cache_t mapVoteToObject;
+//    object_ref_cache_t mapVoteToObject;
 
-    vote_cache_t mapInvalidVotes;
+//    vote_cache_t mapInvalidVotes;
 
-    vote_mcache_t mapOrphanVotes;
+//    vote_mcache_t mapOrphanVotes;
 
-    txout_m_t mapLastMasternodeObject;
+//    txout_m_t mapLastMasternodeObject;
 
-    hash_s_t setRequestedObjects;
+//    hash_s_t setRequestedObjects;
 
-    hash_s_t setRequestedVotes;
+//    hash_s_t setRequestedVotes;
 
-    bool fRateChecksEnabled;
+//    bool fRateChecksEnabled;
 
-public:
-    // critical section to protect the inner data structures
-    mutable CCriticalSection cs;
+//public:
+//    // critical section to protect the inner data structures
+//    mutable CCriticalSection cs;
 
-    CGovernanceManager();
+//    CGovernanceManager();
 
-    virtual ~CGovernanceManager() {}
+//    virtual ~CGovernanceManager() {}
 
-    int CountProposalInventoryItems()
-    {
-        // TODO What is this for ?
-        return mapSeenGovernanceObjects.size();
-        //return mapSeenGovernanceObjects.size() + mapSeenVotes.size();
-    }
+//    int CountProposalInventoryItems()
+//    {
+//        // TODO What is this for ?
+//        return mapSeenGovernanceObjects.size();
+//        //return mapSeenGovernanceObjects.size() + mapSeenVotes.size();
+//    }
 
-    /**
-     * This is called by AlreadyHave in main.cpp as part of the inventory
-     * retrieval process.  Returns true if we want to retrieve the object, otherwise
-     * false. (Note logic is inverted in AlreadyHave).
-     */
-    bool ConfirmInventoryRequest(const CInv& inv);
+//    /**
+//     * This is called by AlreadyHave in main.cpp as part of the inventory
+//     * retrieval process.  Returns true if we want to retrieve the object, otherwise
+//     * false. (Note logic is inverted in AlreadyHave).
+//     */
+//    bool ConfirmInventoryRequest(const CInv& inv);
 
-    void Sync(CNode* node, const uint256& nProp, const CBloomFilter& filter);
+//    void Sync(CNode* node, const uint256& nProp, const CBloomFilter& filter);
 
-    void ProcessMessage(CNode* pfrom, std::string& strCommand, CDataStream& vRecv);
+//    void ProcessMessage(CNode* pfrom, std::string& strCommand, CDataStream& vRecv);
 
-    void NewBlock();
+//    void NewBlock();
 
-    CGovernanceObject *FindGovernanceObject(const uint256& nHash);
+//    CGovernanceObject *FindGovernanceObject(const uint256& nHash);
 
-    std::vector<CGovernanceVote> GetMatchingVotes(const uint256& nParentHash);
-    std::vector<CGovernanceVote> GetCurrentVotes(const uint256& nParentHash, const CTxIn& mnCollateralOutpointFilter);
-    std::vector<CGovernanceObject*> GetAllNewerThan(int64_t nMoreThanTime);
+//    std::vector<CGovernanceVote> GetMatchingVotes(const uint256& nParentHash);
+//    std::vector<CGovernanceVote> GetCurrentVotes(const uint256& nParentHash, const CTxIn& mnCollateralOutpointFilter);
+//    std::vector<CGovernanceObject*> GetAllNewerThan(int64_t nMoreThanTime);
 
-    bool IsBudgetPaymentBlock(int nBlockHeight);
-    bool AddGovernanceObject (CGovernanceObject& govobj);
+//    bool IsBudgetPaymentBlock(int nBlockHeight);
+//    bool AddGovernanceObject (CGovernanceObject& govobj);
 
-    std::string GetRequiredPaymentsString(int nBlockHeight);
+//    std::string GetRequiredPaymentsString(int nBlockHeight);
 
-    void UpdateCachesAndClean();
+//    void UpdateCachesAndClean();
 
-    void CheckAndRemove() {UpdateCachesAndClean();}
+//    void CheckAndRemove() {UpdateCachesAndClean();}
 
-    void Clear()
-    {
-        LOCK(cs);
+//    void Clear()
+//    {
+//        LOCK(cs);
 
-        LogPrint("gobject", "Governance object manager was cleared\n");
-        mapObjects.clear();
-        mapSeenGovernanceObjects.clear();
-        mapWatchdogObjects.clear();
-        mapVoteToObject.Clear();
-        mapInvalidVotes.Clear();
-        mapOrphanVotes.Clear();
-        mapLastMasternodeObject.clear();
-    }
+//        LogPrint("gobject", "Governance object manager was cleared\n");
+//        mapObjects.clear();
+//        mapSeenGovernanceObjects.clear();
+//        mapWatchdogObjects.clear();
+//        mapVoteToObject.Clear();
+//        mapInvalidVotes.Clear();
+//        mapOrphanVotes.Clear();
+//        mapLastMasternodeObject.clear();
+//    }
 
-    std::string ToString() const;
+//    std::string ToString() const;
 
-    ADD_SERIALIZE_METHODS;
+//    ADD_SERIALIZE_METHODS;
 
-    template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
-        LOCK(cs);
-        std::string strVersion;
-        if(ser_action.ForRead()) {
-            READWRITE(strVersion);
-        }
-        else {
-            strVersion = SERIALIZATION_VERSION_STRING;
-            READWRITE(strVersion);
-        }
-        READWRITE(mapSeenGovernanceObjects);
-        READWRITE(mapInvalidVotes);
-        READWRITE(mapOrphanVotes);
-        READWRITE(mapObjects);
-        READWRITE(mapWatchdogObjects);
-        READWRITE(mapLastMasternodeObject);
-        if(ser_action.ForRead() && (strVersion != SERIALIZATION_VERSION_STRING)) {
-            Clear();
-            return;
-        }
-    }
+//    template <typename Stream, typename Operation>
+//    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
+//        LOCK(cs);
+//        std::string strVersion;
+//        if(ser_action.ForRead()) {
+//            READWRITE(strVersion);
+//        }
+//        else {
+//            strVersion = SERIALIZATION_VERSION_STRING;
+//            READWRITE(strVersion);
+//        }
+//        READWRITE(mapSeenGovernanceObjects);
+//        READWRITE(mapInvalidVotes);
+//        READWRITE(mapOrphanVotes);
+//        READWRITE(mapObjects);
+//        READWRITE(mapWatchdogObjects);
+//        READWRITE(mapLastMasternodeObject);
+//        if(ser_action.ForRead() && (strVersion != SERIALIZATION_VERSION_STRING)) {
+//            Clear();
+//            return;
+//        }
+//    }
 
-    void UpdatedBlockTip(const CBlockIndex *pindex);
-    int64_t GetLastDiffTime() { return nTimeLastDiff; }
-    void UpdateLastDiffTime(int64_t nTimeIn) { nTimeLastDiff = nTimeIn; }
+//    void UpdatedBlockTip(const CBlockIndex *pindex);
+//    int64_t GetLastDiffTime() { return nTimeLastDiff; }
+//    void UpdateLastDiffTime(int64_t nTimeIn) { nTimeLastDiff = nTimeIn; }
 
-    int GetCachedBlockHeight() { return nCachedBlockHeight; }
+//    int GetCachedBlockHeight() { return nCachedBlockHeight; }
 
-    // Accessors for thread-safe access to maps
-    bool HaveObjectForHash(uint256 nHash);
+//    // Accessors for thread-safe access to maps
+//    bool HaveObjectForHash(uint256 nHash);
 
-    bool HaveVoteForHash(uint256 nHash);
+//    bool HaveVoteForHash(uint256 nHash);
 
-    bool SerializeObjectForHash(uint256 nHash, CDataStream& ss);
+//    bool SerializeObjectForHash(uint256 nHash, CDataStream& ss);
 
-    bool SerializeVoteForHash(uint256 nHash, CDataStream& ss);
+//    bool SerializeVoteForHash(uint256 nHash, CDataStream& ss);
 
-    void AddSeenGovernanceObject(uint256 nHash, int status);
+//    void AddSeenGovernanceObject(uint256 nHash, int status);
 
-    void AddSeenVote(uint256 nHash, int status);
+//    void AddSeenVote(uint256 nHash, int status);
 
-    bool MasternodeRateCheck(const CGovernanceObject& govobj, bool fUpdateLast = false);
+//    bool MasternodeRateCheck(const CGovernanceObject& govobj, bool fUpdateLast = false);
 
-    bool MasternodeRateCheck(const CGovernanceObject& govobj, bool fUpdateLast, bool fForce, bool& fRateCheckBypassed);
+//    bool MasternodeRateCheck(const CGovernanceObject& govobj, bool fUpdateLast, bool fForce, bool& fRateCheckBypassed);
 
-    bool ProcessVoteAndRelay(const CGovernanceVote& vote, CGovernanceException& exception) {
-        bool fOK = ProcessVote(NULL, vote, exception);
-        if(fOK) {
-            vote.Relay();
-        }
-        return fOK;
-    }
+//    bool ProcessVoteAndRelay(const CGovernanceVote& vote, CGovernanceException& exception) {
+//        bool fOK = ProcessVote(NULL, vote, exception);
+//        if(fOK) {
+//            vote.Relay();
+//        }
+//        return fOK;
+//    }
 
-    void CheckMasternodeOrphanVotes();
+//    void CheckMasternodeOrphanVotes();
 
-    void CheckMasternodeOrphanObjects();
+//    void CheckMasternodeOrphanObjects();
 
-    bool AreRateChecksEnabled() const {
-        LOCK(cs);
-        return fRateChecksEnabled;
-    }
+//    bool AreRateChecksEnabled() const {
+//        LOCK(cs);
+//        return fRateChecksEnabled;
+//    }
 
-    void InitOnLoad();
+//    void InitOnLoad();
 
-    void RequestGovernanceObjectVotes(CNode* pnode);
-    void RequestGovernanceObjectVotes(const std::vector<CNode*>& vNodesCopy);
+//    void RequestGovernanceObjectVotes(CNode* pnode);
+//    void RequestGovernanceObjectVotes(const std::vector<CNode*>& vNodesCopy);
 
-private:
-    void RequestGovernanceObject(CNode* pfrom, const uint256& nHash, bool fUseFilter = false);
+//private:
+//    void RequestGovernanceObject(CNode* pfrom, const uint256& nHash, bool fUseFilter = false);
 
-    void AddInvalidVote(const CGovernanceVote& vote)
-    {
-        mapInvalidVotes.Insert(vote.GetHash(), vote);
-    }
+//    void AddInvalidVote(const CGovernanceVote& vote)
+//    {
+//        mapInvalidVotes.Insert(vote.GetHash(), vote);
+//    }
 
-    void AddOrphanVote(const CGovernanceVote& vote)
-    {
-        mapOrphanVotes.Insert(vote.GetHash(), vote_time_pair_t(vote, GetAdjustedTime() + GOVERNANCE_ORPHAN_EXPIRATION_TIME));
-    }
+//    void AddOrphanVote(const CGovernanceVote& vote)
+//    {
+//        mapOrphanVotes.Insert(vote.GetHash(), vote_time_pair_t(vote, GetAdjustedTime() + GOVERNANCE_ORPHAN_EXPIRATION_TIME));
+//    }
 
-    bool ProcessVote(CNode* pfrom, const CGovernanceVote& vote, CGovernanceException& exception);
+//    bool ProcessVote(CNode* pfrom, const CGovernanceVote& vote, CGovernanceException& exception);
 
-    /// Called to indicate a requested object has been received
-    bool AcceptObjectMessage(const uint256& nHash);
+//    /// Called to indicate a requested object has been received
+//    bool AcceptObjectMessage(const uint256& nHash);
 
-    /// Called to indicate a requested vote has been received
-    bool AcceptVoteMessage(const uint256& nHash);
+//    /// Called to indicate a requested vote has been received
+//    bool AcceptVoteMessage(const uint256& nHash);
 
-    static bool AcceptMessage(const uint256& nHash, hash_s_t& setHash);
+//    static bool AcceptMessage(const uint256& nHash, hash_s_t& setHash);
 
-    void CheckOrphanVotes(CGovernanceObject& govobj, CGovernanceException& exception);
+//    void CheckOrphanVotes(CGovernanceObject& govobj, CGovernanceException& exception);
 
-    void RebuildIndexes();
+//    void RebuildIndexes();
 
-    /// Returns MN index, handling the case of index rebuilds
-    int GetMasternodeIndex(const CTxIn& masternodeVin);
+//    /// Returns MN index, handling the case of index rebuilds
+//    int GetMasternodeIndex(const CTxIn& masternodeVin);
 
-    void RebuildVoteMaps();
+//    void RebuildVoteMaps();
 
-    void AddCachedTriggers();
+//    void AddCachedTriggers();
 
-};
+//};
 
 #endif
