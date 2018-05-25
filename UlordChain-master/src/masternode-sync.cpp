@@ -167,7 +167,7 @@ std::string CMasternodeSync::GetAssetName()
         case(MASTERNODE_SYNC_SPORKS):       return "MASTERNODE_SYNC_SPORKS";
         case(MASTERNODE_SYNC_LIST):         return "MASTERNODE_SYNC_LIST";
         case(MASTERNODE_SYNC_MNW):          return "MASTERNODE_SYNC_MNW";
-        case(MASTERNODE_SYNC_GOVERNANCE):   return "MASTERNODE_SYNC_GOVERNANCE";
+//        case(MASTERNODE_SYNC_GOVERNANCE):   return "MASTERNODE_SYNC_GOVERNANCE";
         case(MASTERNODE_SYNC_FAILED):       return "MASTERNODE_SYNC_FAILED";
         case MASTERNODE_SYNC_FINISHED:      return "MASTERNODE_SYNC_FINISHED";
         default:                            return "UNKNOWN";
@@ -199,25 +199,34 @@ void CMasternodeSync::SwitchToNextAsset()
         case(MASTERNODE_SYNC_MNW):
             nTimeLastGovernanceItem = GetTime();
             //nRequestedMasternodeAssets = MASTERNODE_SYNC_GOVERNANCE;
-            LogPrintf("CMasternodeSync::SwitchToNextAsset -- Starting %s\n", GetAssetName());
-
-
-            break;
-        case(MASTERNODE_SYNC_GOVERNANCE):
+            //LogPrintf("CMasternodeSync::SwitchToNextAsset -- Starting %s\n", GetAssetName());
             LogPrintf("CMasternodeSync::SwitchToNextAsset -- Sync has finished\n");
             nRequestedMasternodeAssets = MASTERNODE_SYNC_FINISHED;
             uiInterface.NotifyAdditionalDataSyncProgressChanged(1);
-            //try to activate our masternode if possible
             activeMasternode.ManageState();
-
             TRY_LOCK(cs_vNodes, lockRecv);
             if(!lockRecv) return;
 
             BOOST_FOREACH(CNode* pnode, vNodes) {
                 netfulfilledman.AddFulfilledRequest(pnode->addr, "full-sync");
             }
-
             break;
+
+//        case(MASTERNODE_SYNC_GOVERNANCE):
+//            LogPrintf("CMasternodeSync::SwitchToNextAsset -- Sync has finished\n");
+//            nRequestedMasternodeAssets = MASTERNODE_SYNC_FINISHED;
+//            uiInterface.NotifyAdditionalDataSyncProgressChanged(1);
+//            //try to activate our masternode if possible
+//            activeMasternode.ManageState();
+
+//            TRY_LOCK(cs_vNodes, lockRecv);
+//            if(!lockRecv) return;
+
+//            BOOST_FOREACH(CNode* pnode, vNodes) {
+//                netfulfilledman.AddFulfilledRequest(pnode->addr, "full-sync");
+//            }
+
+//            break;
     }
     nRequestedMasternodeAttempt = 0;
     nTimeAssetSyncStarted = GetTime();
