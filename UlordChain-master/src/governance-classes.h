@@ -15,9 +15,9 @@
 #include <boost/shared_ptr.hpp>
 
 class CSuperblock;
-class CGovernanceTrigger;
 //popchain dont need
-//class CGovernanceTriggerManager;
+//class CGovernanceTrigger;
+class CGovernanceTriggerManager;
 class CSuperblockManager;
 
 static const int TRIGGER_UNKNOWN            = -1;
@@ -40,8 +40,8 @@ std::vector<std::string> SplitBy(std::string strCommand, std::string strDelimit)
 */
 // popchain doesn't need this class
 // second stage upgrade ,trigger manager will modify, replace on time trigger
-//class CGovernanceTriggerManager
-//{
+class CGovernanceTriggerManager
+{
 //    friend class CSuperblockManager;
 //    friend class CGovernanceManager;
 
@@ -58,7 +58,7 @@ std::vector<std::string> SplitBy(std::string strCommand, std::string strDelimit)
 
 //public:
 //    CGovernanceTriggerManager() : mapTrigger() {}
-//};
+};
 
 /**
 *   Superblock Manager

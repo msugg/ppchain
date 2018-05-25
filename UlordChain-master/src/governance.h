@@ -20,7 +20,7 @@
 #include "util.h"
 
 // popchain dont need it
-//class CGovernanceManager;
+class CGovernanceManager;
 //class CGovernanceTriggerManager;
 class CGovernanceObject;
 class CGovernanceVote;
@@ -140,8 +140,8 @@ public:
 // Governance Manager : Contains all proposals for the budget
 // second stage we will upgrate centoaize vote and send vote node,node send money to address
 // popchain doesn't need this class
-//class CGovernanceManager
-//{
+class CGovernanceManager
+{
 //    friend class CGovernanceObject;
 
 //public: // Types
@@ -415,6 +415,6 @@ public:
 
 //    void AddCachedTriggers();
 
-//};
+};
 
 #endif
