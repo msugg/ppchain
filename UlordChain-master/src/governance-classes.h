@@ -87,8 +87,8 @@ public:
 *
 */
 // popchain doesn't need this class
-//class CGovernancePayment
-//{
+class CGovernancePayment
+{
 //private:
 //    bool fValid;
 
@@ -127,7 +127,7 @@ public:
 //    }
 
 //    bool IsValid() { return fValid; }
-//};
+};
 
 
 /**
