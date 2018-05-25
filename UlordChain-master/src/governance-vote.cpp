@@ -9,6 +9,8 @@
 
 #include <boost/lexical_cast.hpp>
 
+//popchain dosen't need this vote function
+
 std::string CGovernanceVoting::ConvertOutcomeToString(vote_outcome_enum_t nOutcome)
 {
     switch(nOutcome)
@@ -225,8 +227,8 @@ CGovernanceVote::CGovernanceVote(CTxIn vinMasternodeIn, uint256 nParentHashIn, v
 
 void CGovernanceVote::Relay() const
 {
-    CInv inv(MSG_GOVERNANCE_OBJECT_VOTE, GetHash());
-    RelayInv(inv, PROTOCOL_VERSION);
+//    CInv inv(MSG_GOVERNANCE_OBJECT_VOTE, GetHash());
+//    RelayInv(inv, PROTOCOL_VERSION);
 }
 
 bool CGovernanceVote::Sign(CKey& keyMasternode, CPubKey& pubKeyMasternode)

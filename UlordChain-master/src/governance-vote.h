@@ -71,6 +71,8 @@ static const int MAX_SUPPORTED_VOTE_SIGNAL = VOTE_SIGNAL_ENDORSED;
 *   Static class for accessing governance data
 */
 
+// popchain does't need this class
+
 class CGovernanceVoting
 {
 public:
@@ -78,7 +80,7 @@ public:
     static vote_signal_enum_t ConvertVoteSignal(std::string strVoteSignal);
     static std::string ConvertOutcomeToString(vote_outcome_enum_t nOutcome);
     static std::string ConvertSignalToString(vote_signal_enum_t nSignal);
-};
+//};
 
 //
 // CGovernanceVote - Allow a masternode node to vote and broadcast throughout the network
