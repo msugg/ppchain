@@ -279,7 +279,6 @@ libbitcoin_wallet_a_SOURCES = \
   wallet/wallet.cpp \
   wallet/wallet_ismine.cpp \
   wallet/walletdb.cpp \
-　　governance-classes.cpp \
   policy/rbf.cpp \
   $(BITCOIN_CORE_H)
 
