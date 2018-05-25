@@ -80,7 +80,7 @@ public:
     static vote_signal_enum_t ConvertVoteSignal(std::string strVoteSignal);
     static std::string ConvertOutcomeToString(vote_outcome_enum_t nOutcome);
     static std::string ConvertSignalToString(vote_signal_enum_t nSignal);
-//};
+};
 
 //
 // CGovernanceVote - Allow a masternode node to vote and broadcast throughout the network
