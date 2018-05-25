@@ -519,7 +519,7 @@ void CMasternodeSync::ProcessTick()
 
 //                ReleaseNodes(vNodesCopy);
 //                return; //this will cause each peer to get one request each six seconds for the various assets we need
-           }
+//           }
         }
     }
     // looped through all nodes, release them
