@@ -1765,7 +1765,7 @@ CAmount GetMinerSubsidy(const int height, const Consensus::Params &cp)
 }
 
 //popchain doesn't have masternode pay
-/*
+
 CAmount GetMasternodePayment(const int height)
 {
     const Consensus::Params cp = Params().GetConsensus();
@@ -1803,7 +1803,7 @@ CAmount GetMasternodePayment(const int height)
 		return cp.mnReward5 >> halvings;
     }
 }
-*/
+
 
 //popchain
 /*
