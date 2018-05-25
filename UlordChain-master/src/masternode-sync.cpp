@@ -297,7 +297,8 @@ void CMasternodeSync::ProcessTick()
 /*            if(nMnCount == 0) {
                 LogPrintf("CMasternodeSync::ProcessTick -- WARNING: not enough data, restarting sync\n");
                 Reset();
-            } else*/ {
+            } else*/
+            {
 //                std::vector<CNode*> vNodesCopy;
 //                {
 //                    LOCK(cs_vNodes);
@@ -308,7 +309,7 @@ void CMasternodeSync::ProcessTick()
 //                governance.RequestGovernanceObjectVotes(vNodesCopy);
 //                ReleaseNodes(vNodesCopy);
 //                return;
-//            }
+            }
         }
 
         //try syncing again
