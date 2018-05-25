@@ -240,11 +240,12 @@ extern const char *DSTX;
 extern const char *DSQUEUE;
 extern const char *DSEG;
 extern const char *SYNCSTATUSCOUNT;
-extern const char *MNGOVERNANCESYNC;
+//popchain
+//extern const char *MNGOVERNANCESYNC;
 extern const char *MNGOVERNANCEOBJECT;
 extern const char *MNGOVERNANCEOBJECTVOTE;
 extern const char *MNVERIFY;
-};
+}
 
 /* Get a vector of all valid message types (see above) */
 const std::vector<std::string> &getAllNetMessageTypes();

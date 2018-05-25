@@ -361,9 +361,9 @@ void CMasternodeSync::ProcessTick()
             } else if(nRequestedMasternodeAttempt < 4) {
                 mnodeman.DsegUpdate(pnode);
             } else if(nRequestedMasternodeAttempt < 6) {
-                int nMnCount = mnodeman.CountMasternodes();
-                pnode->PushMessage(NetMsgType::MASTERNODEPAYMENTSYNC, nMnCount); //sync payment votes
-                SendGovernanceSyncRequest(pnode);
+//                int nMnCount = mnodeman.CountMasternodes();
+//                pnode->PushMessage(NetMsgType::MASTERNODEPAYMENTSYNC, nMnCount); //sync payment votes
+//                SendGovernanceSyncRequest(pnode);
             } else {
                 nRequestedMasternodeAssets = MASTERNODE_SYNC_FINISHED;
             }
@@ -526,18 +526,18 @@ void CMasternodeSync::ProcessTick()
     ReleaseNodes(vNodesCopy);
 }
 
-void CMasternodeSync::SendGovernanceSyncRequest(CNode* pnode)
-{
-    if(pnode->nVersion >= GOVERNANCE_FILTER_PROTO_VERSION) {
-        CBloomFilter filter;
-        filter.clear();
+//void CMasternodeSync::SendGovernanceSyncRequest(CNode* pnode)
+//{
+//    if(pnode->nVersion >= GOVERNANCE_FILTER_PROTO_VERSION) {
+//        CBloomFilter filter;
+//        filter.clear();
 
-        pnode->PushMessage(NetMsgType::MNGOVERNANCESYNC, uint256(), filter);
-    }
-    else {
-        pnode->PushMessage(NetMsgType::MNGOVERNANCESYNC, uint256());
-    }
-}
+//        pnode->PushMessage(NetMsgType::MNGOVERNANCESYNC, uint256(), filter);
+//    }
+//    else {
+//        pnode->PushMessage(NetMsgType::MNGOVERNANCESYNC, uint256());
+//    }
+//}
 
 void CMasternodeSync::UpdatedBlockTip(const CBlockIndex *pindex)
 {
