@@ -24,7 +24,7 @@ void CDSNotificationInterface::UpdatedBlockTip(const CBlockIndex *pindex)
     darkSendPool.UpdatedBlockTip(pindex);
     instantsend.UpdatedBlockTip(pindex);
     mnpayments.UpdatedBlockTip(pindex);
-    governance.UpdatedBlockTip(pindex);
+    //governance.UpdatedBlockTip(pindex);
     masternodeSync.UpdatedBlockTip(pindex);
 }
 
