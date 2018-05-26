@@ -13,7 +13,7 @@ private:
 
 public:
     testpopchain(int a):a(a){}
-    int ra();
+    int ra(){return a;}
 };
 
 
