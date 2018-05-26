@@ -273,6 +273,7 @@ libbitcoin_wallet_a_SOURCES = \
   masternodeconfig.cpp \
   masternodeman.cpp \
   keepass.cpp \
+  governance-popchain.cpp\
   wallet/crypter.cpp \
   wallet/db.cpp \
   wallet/rpcdump.cpp \
