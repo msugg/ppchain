@@ -159,7 +159,7 @@ private:
 
 public:
     testpopchain(int a):a(a){}
-    int ra(){return a;}
+    static int ra();
 };
 
 

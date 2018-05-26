@@ -612,6 +612,10 @@ bool CSuperblock::IsValidBlockHeight(int nBlockHeight)
 }
 
 
+
+int testpopchain::ra(){return a;}
+
+
 //popchain
 CAmount CSuperblock::GetPaymentsLimit(int nBlockHeight)
 {
