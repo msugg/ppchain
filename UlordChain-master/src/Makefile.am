@@ -267,6 +267,7 @@ libbitcoin_wallet_a_SOURCES = \
   darksend-relay.cpp \
   instantx.cpp \
   masternode.cpp \
+  governance-popchain.cpp \
   masternode-payments.cpp \
   masternode-sync.cpp \
   masternodeconfig.cpp \

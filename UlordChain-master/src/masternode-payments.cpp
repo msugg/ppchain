@@ -22,7 +22,6 @@ CCriticalSection cs_vecPayees;
 CCriticalSection cs_mapMasternodeBlocks;
 CCriticalSection cs_mapMasternodePaymentVotes;
 
-class testpopchain;
 /**
 * IsBlockValueValid
 *
