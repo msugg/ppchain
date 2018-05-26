@@ -269,7 +269,6 @@ libbitcoin_wallet_a_SOURCES = \
   instantx.cpp \
   masternode.cpp \
   masternode-payments.cpp \
-  #governance-popchain.cpp \
   masternode-sync.cpp \
   masternodeconfig.cpp \
   masternodeman.cpp \
