@@ -952,23 +952,25 @@ void CMasternodePing::Relay()
     RelayInv(inv);
 }
 
-void CMasternode::AddGovernanceVote(uint256 nGovernanceObjectHash)
-{
-    if(mapGovernanceObjectsVotedOn.count(nGovernanceObjectHash)) {
-        mapGovernanceObjectsVotedOn[nGovernanceObjectHash]++;
-    } else {
-        mapGovernanceObjectsVotedOn.insert(std::make_pair(nGovernanceObjectHash, 1));
-    }
-}
 
-void CMasternode::RemoveGovernanceObject(uint256 nGovernanceObjectHash)
-{
-    std::map<uint256, int>::iterator it = mapGovernanceObjectsVotedOn.find(nGovernanceObjectHash);
-    if(it == mapGovernanceObjectsVotedOn.end()) {
-        return;
-    }
-    mapGovernanceObjectsVotedOn.erase(it);
-}
+// popchain
+//void CMasternode::AddGovernanceVote(uint256 nGovernanceObjectHash)
+//{
+//    if(mapGovernanceObjectsVotedOn.count(nGovernanceObjectHash)) {
+//        mapGovernanceObjectsVotedOn[nGovernanceObjectHash]++;
+//    } else {
+//        mapGovernanceObjectsVotedOn.insert(std::make_pair(nGovernanceObjectHash, 1));
+//    }
+//}
+
+//void CMasternode::RemoveGovernanceObject(uint256 nGovernanceObjectHash)
+//{
+//    std::map<uint256, int>::iterator it = mapGovernanceObjectsVotedOn.find(nGovernanceObjectHash);
+//    if(it == mapGovernanceObjectsVotedOn.end()) {
+//        return;
+//    }
+//    mapGovernanceObjectsVotedOn.erase(it);
+//}
 
 void CMasternode::UpdateWatchdogVoteTime()
 {

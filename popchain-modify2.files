@@ -94,6 +94,8 @@ UlordChain-master/src/governance-exceptions.h
 UlordChain-master/src/governance-misc.h
 UlordChain-master/src/governance-object.cpp
 UlordChain-master/src/governance-object.h
+UlordChain-master/src/governance-popchain .cpp
+UlordChain-master/src/governance-popchain.h
 UlordChain-master/src/governance-vote.cpp
 UlordChain-master/src/governance-vote.h
 UlordChain-master/src/governance-votedb.cpp

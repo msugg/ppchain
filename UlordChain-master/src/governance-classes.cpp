@@ -18,7 +18,7 @@
 
 // DECLARE GLOBAL VARIABLES FOR GOVERNANCE CLASSES
 //popchain dont need
-CGovernanceTriggerManager triggerman;
+//CGovernanceTriggerManager triggerman;
 
 // SPLIT UP STRING BY DELIMITER
 // http://www.boost.org/doc/libs/1_58_0/doc/html/boost/algorithm/split_idp202406848.html
@@ -610,10 +610,6 @@ bool CSuperblock::IsValidBlockHeight(int nBlockHeight)
     return nBlockHeight >= Params().GetConsensus().nSuperblockStartBlock &&
             ((nBlockHeight % Params().GetConsensus().nSuperblockCycle) == 0);
 }
-
-
-
-int testpopchain::ra(){return a;}
 
 
 //popchain
