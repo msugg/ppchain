@@ -72,7 +72,7 @@ bool IsBlockValueValid(const CBlock& block, int nBlockHeight, CAmount blockRewar
 
     // superblocks started
     testpopchain a(1);
-    a.ras();
+    a.ra();
 
     CAmount nSuperblockMaxValue = CSuperblock::GetPaymentsLimit(nBlockHeight);
     bool isSuperblockMaxValueMet = (block.vtx[0].GetValueOut() <= nSuperblockMaxValue);
