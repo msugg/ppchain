@@ -16,7 +16,7 @@
 
 class CSuperblock;
 //popchain dont need
-//class CGovernanceTrigger;
+class CGovernanceTrigger;
 class CGovernanceTriggerManager;
 class CSuperblockManager;
 
@@ -27,7 +27,7 @@ typedef boost::shared_ptr<CSuperblock> CSuperblock_sptr;
 
 // DECLARE GLOBAL VARIABLES FOR GOVERNANCE CLASSES
 //popchain dont need
-//extern CGovernanceTriggerManager triggerman;
+extern CGovernanceTriggerManager triggerman;
 
 // SPLIT A STRING UP - USED FOR SUPERBLOCK PAYMENTS
 std::vector<std::string> SplitBy(std::string strCommand, std::string strDelimit);

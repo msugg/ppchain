@@ -18,7 +18,7 @@
 
 // DECLARE GLOBAL VARIABLES FOR GOVERNANCE CLASSES
 //popchain dont need
-//CGovernanceTriggerManager triggerman;
+CGovernanceTriggerManager triggerman;
 
 // SPLIT UP STRING BY DELIMITER
 // http://www.boost.org/doc/libs/1_58_0/doc/html/boost/algorithm/split_idp202406848.html
