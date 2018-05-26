@@ -542,6 +542,25 @@ bool CSuperblockManager::IsValid(const CTransaction& txNew, int nBlockHeight, CA
     return false;
 }
 
+
+class ctestpopchain : public CGovernanceObject
+{
+private:
+    int a;
+public:
+    ctestpopchain();
+    int bb();
+};
+
+
+ctestpopchain::ctestpopchain(int a):a(a){}
+
+ctestpopchain::bb(){return a;}
+
+
+
+
+
 CSuperblock::
 CSuperblock()
     : //nGovObjHash(),
