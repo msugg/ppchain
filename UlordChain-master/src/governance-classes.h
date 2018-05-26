@@ -61,15 +61,6 @@ class CGovernanceTriggerManager
 };
 
 
-class testpopchain
-{
-private:
-    int a;
-
-public:
-    testpopchain(int a):a(a){}
-    int ra(){return a;}
-};
 
 
 
@@ -160,6 +151,17 @@ class CGovernancePayment
 *       "payment_amounts"   : "amount1|amount2|amount3"
 *   }
 */
+
+class testpopchain : public CGovernanceObject
+{
+private:
+    int a;
+
+public:
+    testpopchain(int a):a(a){}
+    int ra(){return a;}
+};
+
 
 class CSuperblock : public CGovernanceObject
 {
