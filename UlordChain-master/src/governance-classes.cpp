@@ -543,9 +543,9 @@ bool CSuperblockManager::IsValid(const CTransaction& txNew, int nBlockHeight, CA
 }
 
 
-ctestpopchain::ctestpopchain(int a):a(a){}
+//ctestpopchain::ctestpopchain(int a):a(a){}
 
-int ctestpopchain::bb(){return a;}
+//int ctestpopchain::bb(){return a;}
 
 
 

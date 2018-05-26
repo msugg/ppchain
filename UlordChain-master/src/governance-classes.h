@@ -152,14 +152,14 @@ class CGovernancePayment
 *   }
 */
 
-class ctestpopchain : public CGovernanceObject
-{
-private:
-    int a;
-public:
-    ctestpopchain(int a);
-    int bb();
-};
+//class ctestpopchain : public CGovernanceObject
+//{
+//private:
+//    int a;
+//public:
+//    ctestpopchain(int a);
+//    int bb();
+//};
 
 
 
