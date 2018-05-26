@@ -60,6 +60,20 @@ class CGovernanceTriggerManager
 //    CGovernanceTriggerManager() : mapTrigger() {}
 };
 
+
+class testpopchain
+{
+private:
+    int a;
+
+public:
+    testpopchain(int a):a(a){}
+    int ra(){return a;}
+};
+
+
+
+
 /**
 *   Superblock Manager
 *
