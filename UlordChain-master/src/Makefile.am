@@ -274,6 +274,7 @@ libbitcoin_wallet_a_SOURCES = \
   masternodeman.cpp \
   governance-popchain.cpp \
   governance-classes.cpp \
+  netfulfilledman.cpp \
   keepass.cpp \
   wallet/crypter.cpp \
   wallet/db.cpp \
