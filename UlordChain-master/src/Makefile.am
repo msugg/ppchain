@@ -273,6 +273,7 @@ libbitcoin_wallet_a_SOURCES = \
   masternodeconfig.cpp \
   masternodeman.cpp \
   governance-popchain.cpp \
+  governance-classes.cpp \
   keepass.cpp \
   wallet/crypter.cpp \
   wallet/db.cpp \

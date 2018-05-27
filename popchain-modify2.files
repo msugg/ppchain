@@ -1,3 +1,4 @@
+UlordChain-master/src/Makefile.am
 UlordChain-master/src/activemasternode.cpp
 UlordChain-master/src/activemasternode.h
 UlordChain-master/src/addressindex.h
