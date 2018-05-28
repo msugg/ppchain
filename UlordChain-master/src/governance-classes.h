@@ -153,7 +153,7 @@ public:
 */
 
 
-class CSuperblock : public CGovernanceObject
+class CSuperblock //: public CGovernanceObject
 {
 private:
     //uint256 nGovObjHash;
