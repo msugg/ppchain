@@ -2,16 +2,16 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "core_io.h"
-#include "darksend.h"
-#include "governance.h"
-#include "governance-classes.h"
-#include "governance-object.h"
-#include "governance-vote.h"
-#include "masternodeman.h"
-#include "util.h"
+//#include "core_io.h"
+//#include "darksend.h"
+//#include "governance.h"
+//#include "governance-classes.h"
+//#include "governance-object.h"
+//#include "governance-vote.h"
+//#include "masternodeman.h"
+//#include "util.h"
 
-#include <univalue.h>
+//#include <univalue.h>
 
 //CGovernanceObject::CGovernanceObject()
 //: cs(),

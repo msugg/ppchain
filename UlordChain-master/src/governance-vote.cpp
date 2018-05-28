@@ -2,12 +2,12 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "darksend.h"
-#include "governance-vote.h"
-#include "masternodeman.h"
-#include "util.h"
+//#include "darksend.h"
+//#include "governance-vote.h"
+//#include "masternodeman.h"
+//#include "util.h"
 
-#include <boost/lexical_cast.hpp>
+//#include <boost/lexical_cast.hpp>
 
 //popchain dosen't need this vote function
 

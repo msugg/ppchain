@@ -17,7 +17,7 @@
 class CSuperblock;
 //popchain dont need
 //class CGovernanceTrigger;
-class CGovernanceTriggerManager;
+//class CGovernanceTriggerManager;
 class CSuperblockManager;
 
 static const int TRIGGER_UNKNOWN            = -1;
@@ -40,8 +40,8 @@ typedef boost::shared_ptr<CSuperblock> CSuperblock_sptr;
 */
 // popchain doesn't need this class
 // second stage upgrade ,trigger manager will modify, replace on time trigger
-class CGovernanceTriggerManager
-{
+//class CGovernanceTriggerManager
+//{
 //    friend class CSuperblockManager;
 //    friend class CGovernanceManager;
 
@@ -58,7 +58,7 @@ class CGovernanceTriggerManager
 
 //public:
 //    CGovernanceTriggerManager() : mapTrigger() {}
-};
+//};
 
 
 
@@ -92,8 +92,8 @@ public:
 *
 */
 // popchain doesn't need this class
-class CGovernancePayment
-{
+//class CGovernancePayment
+//{
 //private:
 //    bool fValid;
 
@@ -132,7 +132,7 @@ class CGovernancePayment
 //    }
 
 //    bool IsValid() { return fValid; }
-};
+//};
 
 
 /**

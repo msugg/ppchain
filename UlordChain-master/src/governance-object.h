@@ -7,21 +7,21 @@
 
 //#define ENABLE_UC_DEBUG
 
-#include "cachemultimap.h"
-#include "governance-exceptions.h"
-#include "governance-vote.h"
-#include "governance-votedb.h"
-#include "key.h"
-#include "net.h"
-#include "sync.h"
-#include "util.h"
+//#include "cachemultimap.h"
+//#include "governance-exceptions.h"
+//#include "governance-vote.h"
+//#include "governance-votedb.h"
+//#include "key.h"
+//#include "net.h"
+//#include "sync.h"
+//#include "util.h"
 
-#include <univalue.h>
+//#include <univalue.h>
 
 // popchain dont need it
 //class CGovernanceManager;
 //class CGovernanceTriggerManager;
-class CGovernanceObject;
+//class CGovernanceObject;
 //class CGovernanceVote;
 
 //static const int MAX_GOVERNANCE_OBJECT_DATA_SIZE = 16 * 1024;
@@ -106,8 +106,8 @@ class CGovernanceObject;
 *
 */
 //popchain doesn't need this class
-class CGovernanceObject
-{
+//class CGovernanceObject
+//{
 //    friend class CGovernanceManager;
 
 //    friend class CGovernanceTriggerManager;
@@ -347,7 +347,7 @@ class CGovernanceObject
 
 //    void CheckOrphanVotes();
 
-};
+//};
 
 
 #endif

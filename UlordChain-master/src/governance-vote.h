@@ -5,14 +5,14 @@
 #ifndef GOVERNANCE_VOTE_H
 #define GOVERNANCE_VOTE_H
 
-#include "key.h"
-#include "primitives/transaction.h"
+//#include "key.h"
+//#include "primitives/transaction.h"
 
-#include <boost/lexical_cast.hpp>
+//#include <boost/lexical_cast.hpp>
 
 //using namespace std;
 
-class CGovernanceVote;
+//class CGovernanceVote;
 
 // INTENTION OF MASTERNODES REGARDING ITEM
 //enum vote_outcome_enum_t  {
@@ -86,8 +86,8 @@ class CGovernanceVote;
 // CGovernanceVote - Allow a masternode node to vote and broadcast throughout the network
 //
 
-class CGovernanceVote
-{
+//class CGovernanceVote
+//{
 //    friend bool operator==(const CGovernanceVote& vote1, const CGovernanceVote& vote2);
 
 //    friend bool operator<(const CGovernanceVote& vote1, const CGovernanceVote& vote2);
@@ -201,7 +201,7 @@ class CGovernanceVote
 //        READWRITE(vchSig);
 //    }
 
-};
+//};
 
 
 

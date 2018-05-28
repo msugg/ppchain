@@ -5,10 +5,10 @@
 #ifndef GOVERNANCE_EXCEPTIONS_H
 #define GOVERNANCE_EXCEPTIONS_H
 
-#include <exception>
-#include <iostream>
-#include <sstream>
-#include <string>
+//#include <exception>
+//#include <iostream>
+//#include <sstream>
+//#include <string>
 
 //enum governance_exception_type_enum_t {
 //    /// Default value, normally indicates no exception condition occurred
@@ -52,8 +52,8 @@
  * (ie. will be caught by a std::exception handler) but may also be used as a
  * normal object.
  */
-class CGovernanceException : public std::exception
-{
+//class CGovernanceException : public std::exception
+//{
 //private:
 //    std::string strMessage;
 
@@ -94,6 +94,6 @@ class CGovernanceException : public std::exception
 //    int GetNodePenalty() const {
 //        return nNodePenalty;
 //    }
-};
+//};
 
 #endif
