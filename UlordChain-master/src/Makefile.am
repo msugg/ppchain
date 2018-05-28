@@ -110,7 +110,6 @@ BITCOIN_CORE_H = \
   governance-object.h \
   governance-vote.h \
   governance-votedb.h \
-  governance-popchain.h \
   flat-database.h \
   hash.h \
   httprpc.h \
@@ -272,7 +271,6 @@ libbitcoin_wallet_a_SOURCES = \
   masternode-sync.cpp \
   masternodeconfig.cpp \
   masternodeman.cpp \
-  governance-popchain.cpp \
   governance-classes.cpp \
   netfulfilledman.cpp \
   keepass.cpp \
