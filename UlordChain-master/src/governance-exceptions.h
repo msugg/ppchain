@@ -52,8 +52,8 @@
  * (ie. will be caught by a std::exception handler) but may also be used as a
  * normal object.
  */
-//class CGovernanceException : public std::exception
-//{
+class CGovernanceException : public std::exception
+{
 //private:
 //    std::string strMessage;
 
@@ -94,6 +94,6 @@
 //    int GetNodePenalty() const {
 //        return nNodePenalty;
 //    }
-//};
+};
 
 #endif

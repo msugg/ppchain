@@ -12,7 +12,7 @@
 
 //using namespace std;
 
-//class CGovernanceVote;
+class CGovernanceVote;
 
 // INTENTION OF MASTERNODES REGARDING ITEM
 //enum vote_outcome_enum_t  {
@@ -86,8 +86,8 @@
 // CGovernanceVote - Allow a masternode node to vote and broadcast throughout the network
 //
 
-//class CGovernanceVote
-//{
+class CGovernanceVote
+{
 //    friend bool operator==(const CGovernanceVote& vote1, const CGovernanceVote& vote2);
 
 //    friend bool operator<(const CGovernanceVote& vote1, const CGovernanceVote& vote2);
@@ -201,7 +201,7 @@
 //        READWRITE(vchSig);
 //    }
 
-//};
+};
 
 
 
