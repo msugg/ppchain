@@ -13,7 +13,6 @@
 #include "util.h"
 
 #include <boost/lexical_cast.hpp>
-#include "governance-popchain.h"
 
 /** Object for who's going to get paid on which blocks */
 CMasternodePayments mnpayments;
