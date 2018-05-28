@@ -203,27 +203,27 @@
 //    return eSignal;
 //}
 
-CGovernanceVote::CGovernanceVote()
-    : fValid(true),
-      fSynced(false),
-      nVoteSignal(int(VOTE_SIGNAL_NONE)),
-      vinMasternode(),
-      nParentHash(),
-      nVoteOutcome(int(VOTE_OUTCOME_NONE)),
-      nTime(0),
-      vchSig()
-{}
+//CGovernanceVote::CGovernanceVote()
+//    : fValid(true),
+//      fSynced(false),
+//      nVoteSignal(int(VOTE_SIGNAL_NONE)),
+//      vinMasternode(),
+//      nParentHash(),
+//      nVoteOutcome(int(VOTE_OUTCOME_NONE)),
+//      nTime(0),
+//      vchSig()
+//{}
 
-CGovernanceVote::CGovernanceVote(CTxIn vinMasternodeIn, uint256 nParentHashIn, vote_signal_enum_t eVoteSignalIn, vote_outcome_enum_t eVoteOutcomeIn)
-    : fValid(true),
-      fSynced(false),
-      nVoteSignal(eVoteSignalIn),
-      vinMasternode(vinMasternodeIn),
-      nParentHash(nParentHashIn),
-      nVoteOutcome(eVoteOutcomeIn),
-      nTime(GetAdjustedTime()),
-      vchSig()
-{}
+//CGovernanceVote::CGovernanceVote(CTxIn vinMasternodeIn, uint256 nParentHashIn, vote_signal_enum_t eVoteSignalIn, vote_outcome_enum_t eVoteOutcomeIn)
+//    : fValid(true),
+//      fSynced(false),
+//      nVoteSignal(eVoteSignalIn),
+//      vinMasternode(vinMasternodeIn),
+//      nParentHash(nParentHashIn),
+//      nVoteOutcome(eVoteOutcomeIn),
+//      nTime(GetAdjustedTime()),
+//      vchSig()
+//{}
 
 //void CGovernanceVote::Relay() const
 //{
@@ -295,43 +295,43 @@ CGovernanceVote::CGovernanceVote(CTxIn vinMasternodeIn, uint256 nParentHashIn, v
 //    return true;
 //}
 
-bool operator==(const CGovernanceVote& vote1, const CGovernanceVote& vote2)
-{
-    bool fResult = ((vote1.vinMasternode == vote2.vinMasternode) &&
-                    (vote1.nParentHash == vote2.nParentHash) &&
-                    (vote1.nVoteOutcome == vote2.nVoteOutcome) &&
-                    (vote1.nVoteSignal == vote2.nVoteSignal) &&
-                    (vote1.nTime == vote2.nTime));
-    return fResult;
-}
+//bool operator==(const CGovernanceVote& vote1, const CGovernanceVote& vote2)
+//{
+//    bool fResult = ((vote1.vinMasternode == vote2.vinMasternode) &&
+//                    (vote1.nParentHash == vote2.nParentHash) &&
+//                    (vote1.nVoteOutcome == vote2.nVoteOutcome) &&
+//                    (vote1.nVoteSignal == vote2.nVoteSignal) &&
+//                    (vote1.nTime == vote2.nTime));
+//    return fResult;
+//}
 
-bool operator<(const CGovernanceVote& vote1, const CGovernanceVote& vote2)
-{
-    bool fResult = (vote1.vinMasternode < vote2.vinMasternode);
-    if(!fResult) {
-        return false;
-    }
-    fResult = (vote1.vinMasternode == vote2.vinMasternode);
+//bool operator<(const CGovernanceVote& vote1, const CGovernanceVote& vote2)
+//{
+//    bool fResult = (vote1.vinMasternode < vote2.vinMasternode);
+//    if(!fResult) {
+//        return false;
+//    }
+//    fResult = (vote1.vinMasternode == vote2.vinMasternode);
 
-    fResult = fResult && (vote1.nParentHash < vote2.nParentHash);
-    if(!fResult) {
-        return false;
-    }
-    fResult = fResult && (vote1.nParentHash == vote2.nParentHash);
+//    fResult = fResult && (vote1.nParentHash < vote2.nParentHash);
+//    if(!fResult) {
+//        return false;
+//    }
+//    fResult = fResult && (vote1.nParentHash == vote2.nParentHash);
 
-    fResult = fResult && (vote1.nVoteOutcome < vote2.nVoteOutcome);
-    if(!fResult) {
-        return false;
-    }
-    fResult = fResult && (vote1.nVoteOutcome == vote2.nVoteOutcome);
+//    fResult = fResult && (vote1.nVoteOutcome < vote2.nVoteOutcome);
+//    if(!fResult) {
+//        return false;
+//    }
+//    fResult = fResult && (vote1.nVoteOutcome == vote2.nVoteOutcome);
 
-    fResult = fResult && (vote1.nVoteSignal == vote2.nVoteSignal);
-    if(!fResult) {
-        return false;
-    }
-    fResult = fResult && (vote1.nVoteSignal == vote2.nVoteSignal);
+//    fResult = fResult && (vote1.nVoteSignal == vote2.nVoteSignal);
+//    if(!fResult) {
+//        return false;
+//    }
+//    fResult = fResult && (vote1.nVoteSignal == vote2.nVoteSignal);
 
-    fResult = fResult && (vote1.nTime < vote2.nTime);
+//    fResult = fResult && (vote1.nTime < vote2.nTime);
 
-    return fResult;
-}
+//    return fResult;
+//}

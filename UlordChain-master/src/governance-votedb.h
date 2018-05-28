@@ -20,8 +20,8 @@
  * Note: This is a stub implementation that doesn't limit the number of votes held
  * in memory and doesn't flush to disk.
  */
-class CGovernanceObjectVoteFile
-{
+//class CGovernanceObjectVoteFile
+//{
 //public: // Types
 //    typedef std::list<CGovernanceVote> vote_l_t;
 
@@ -88,6 +88,6 @@ class CGovernanceObjectVoteFile
 //private:
 //    void RebuildIndex();
 
-};
+//};
 
 #endif

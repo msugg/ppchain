@@ -22,7 +22,7 @@
 //class CGovernanceManager;
 //class CGovernanceTriggerManager;
 class CGovernanceObject;
-class CGovernanceVote;
+//class CGovernanceVote;
 
 //static const int MAX_GOVERNANCE_OBJECT_DATA_SIZE = 16 * 1024;
 //static const int MIN_GOVERNANCE_PEER_PROTO_VERSION = 70204;

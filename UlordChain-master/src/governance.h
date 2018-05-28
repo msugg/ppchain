@@ -20,15 +20,15 @@
 #include "util.h"
 
 // popchain dont need it
-class CGovernanceManager;
+//class CGovernanceManager;
 //class CGovernanceTriggerManager;
-class CGovernanceObject;
-class CGovernanceVote;
+//class CGovernanceObject;
+//class CGovernanceVote;
 
-extern std::map<uint256, int64_t> mapAskedForGovernanceObject;
+//extern std::map<uint256, int64_t> mapAskedForGovernanceObject;
 //extern CGovernanceManager governance;
 
-typedef std::pair<CGovernanceObject, int64_t> object_time_pair_t;
+//typedef std::pair<CGovernanceObject, int64_t> object_time_pair_t;
 
 static const int RATE_BUFFER_SIZE = 5;
 
@@ -140,8 +140,8 @@ public:
 // Governance Manager : Contains all proposals for the budget
 // second stage we will upgrate centoaize vote and send vote node,node send money to address
 // popchain doesn't need this class
-class CGovernanceManager
-{
+//class CGovernanceManager
+//{
 //    friend class CGovernanceObject;
 
 //public: // Types
@@ -415,6 +415,6 @@ class CGovernanceManager
 
 //    void AddCachedTriggers();
 
-};
+//};
 
 #endif
