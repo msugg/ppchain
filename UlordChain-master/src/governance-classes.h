@@ -30,7 +30,7 @@ typedef boost::shared_ptr<CSuperblock> CSuperblock_sptr;
 //extern CGovernanceTriggerManager triggerman;
 
 // SPLIT A STRING UP - USED FOR SUPERBLOCK PAYMENTS
-std::vector<std::string> SplitBy(std::string strCommand, std::string strDelimit);
+//std::vector<std::string> SplitBy(std::string strCommand, std::string strDelimit);
 
 /**
 *   Trigger Mananger
@@ -229,7 +229,7 @@ public:
     //bool GetPayment(int nPaymentIndex, CGovernancePayment& paymentRet);
     //CAmount GetPaymentsTotalAmount();
 
-    bool IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward);
+    //bool IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward);
 };
 
 #endif

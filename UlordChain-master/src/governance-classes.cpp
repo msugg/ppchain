@@ -22,82 +22,82 @@
 
 // SPLIT UP STRING BY DELIMITER
 // http://www.boost.org/doc/libs/1_58_0/doc/html/boost/algorithm/split_idp202406848.html
-std::vector<std::string> SplitBy(std::string strCommand, std::string strDelimit)
-{
-    std::vector<std::string> vParts;
-    boost::split(vParts, strCommand, boost::is_any_of(strDelimit));
+//std::vector<std::string> SplitBy(std::string strCommand, std::string strDelimit)
+//{
+//    std::vector<std::string> vParts;
+//    boost::split(vParts, strCommand, boost::is_any_of(strDelimit));
 
-    for(int q=0; q<(int)vParts.size(); q++) {
-        if(strDelimit.find(vParts[q]) != std::string::npos) {
-            vParts.erase(vParts.begin()+q);
-            --q;
-        }
-    }
+//    for(int q=0; q<(int)vParts.size(); q++) {
+//        if(strDelimit.find(vParts[q]) != std::string::npos) {
+//            vParts.erase(vParts.begin()+q);
+//            --q;
+//        }
+//    }
 
-   return vParts;
-}
+//   return vParts;
+//}
 
-CAmount ParsePaymentAmount(const std::string& strAmount)
-{
-    DBG( cout << "ParsePaymentAmount Start: strAmount = " << strAmount << endl; );
+//CAmount ParsePaymentAmount(const std::string& strAmount)
+//{
+//    DBG( cout << "ParsePaymentAmount Start: strAmount = " << strAmount << endl; );
 
-    CAmount nAmount = 0;
-    if (strAmount.empty()) {
-        std::ostringstream ostr;
-        ostr << "ParsePaymentAmount: Amount is empty";
-        throw std::runtime_error(ostr.str());
-    }
-    if(strAmount.size() > 20) {
-        // String is much too long, the functions below impose stricter
-        // requirements
-        std::ostringstream ostr;
-        ostr << "ParsePaymentAmount: Amount string too long";
-        throw std::runtime_error(ostr.str());
-    }
-    // Make sure the string makes sense as an amount
-    // Note: No spaces allowed
-    // Also note: No scientific notation
-    size_t pos = strAmount.find_first_not_of("0123456789.");
-    if (pos != std::string::npos) {
-        std::ostringstream ostr;
-        ostr << "ParsePaymentAmount: Amount string contains invalid character";
-        throw std::runtime_error(ostr.str());
-    }
+//    CAmount nAmount = 0;
+//    if (strAmount.empty()) {
+//        std::ostringstream ostr;
+//        ostr << "ParsePaymentAmount: Amount is empty";
+//        throw std::runtime_error(ostr.str());
+//    }
+//    if(strAmount.size() > 20) {
+//        // String is much too long, the functions below impose stricter
+//        // requirements
+//        std::ostringstream ostr;
+//        ostr << "ParsePaymentAmount: Amount string too long";
+//        throw std::runtime_error(ostr.str());
+//    }
+//    // Make sure the string makes sense as an amount
+//    // Note: No spaces allowed
+//    // Also note: No scientific notation
+//    size_t pos = strAmount.find_first_not_of("0123456789.");
+//    if (pos != std::string::npos) {
+//        std::ostringstream ostr;
+//        ostr << "ParsePaymentAmount: Amount string contains invalid character";
+//        throw std::runtime_error(ostr.str());
+//    }
 
-    pos = strAmount.find(".");
-    if (pos == 0) {
-        // JSON doesn't allow values to start with a decimal point
-        std::ostringstream ostr;
-        ostr << "ParsePaymentAmount: Invalid amount string, leading decimal point not allowed";
-        throw std::runtime_error(ostr.str());
-    }
+//    pos = strAmount.find(".");
+//    if (pos == 0) {
+//        // JSON doesn't allow values to start with a decimal point
+//        std::ostringstream ostr;
+//        ostr << "ParsePaymentAmount: Invalid amount string, leading decimal point not allowed";
+//        throw std::runtime_error(ostr.str());
+//    }
 
-    // Make sure there's no more than 1 decimal point
-    if ((pos != std::string::npos) && (strAmount.find(".", pos+1) != std::string::npos)) {
-        std::ostringstream ostr;
-        ostr << "ParsePaymentAmount: Invalid amount string, too many decimal points";
-        throw std::runtime_error(ostr.str());
-    }
+//    // Make sure there's no more than 1 decimal point
+//    if ((pos != std::string::npos) && (strAmount.find(".", pos+1) != std::string::npos)) {
+//        std::ostringstream ostr;
+//        ostr << "ParsePaymentAmount: Invalid amount string, too many decimal points";
+//        throw std::runtime_error(ostr.str());
+//    }
 
-    // Note this code is taken from AmountFromValue in rpcserver.cpp
-    // which is used for parsing the amounts in createrawtransaction.
-    if (!ParseFixedPoint(strAmount, 8, &nAmount)) {
-        nAmount = 0;
-        std::ostringstream ostr;
-        ostr << "ParsePaymentAmount: ParseFixedPoint failed for string: " << strAmount;
-        throw std::runtime_error(ostr.str());
-    }
-    if (!MoneyRange(nAmount)) {
-        nAmount = 0;
-        std::ostringstream ostr;
-        ostr << "ParsePaymentAmount: Invalid amount string, value outside of valid money range";
-        throw std::runtime_error(ostr.str());
-    }
+//    // Note this code is taken from AmountFromValue in rpcserver.cpp
+//    // which is used for parsing the amounts in createrawtransaction.
+//    if (!ParseFixedPoint(strAmount, 8, &nAmount)) {
+//        nAmount = 0;
+//        std::ostringstream ostr;
+//        ostr << "ParsePaymentAmount: ParseFixedPoint failed for string: " << strAmount;
+//        throw std::runtime_error(ostr.str());
+//    }
+//    if (!MoneyRange(nAmount)) {
+//        nAmount = 0;
+//        std::ostringstream ostr;
+//        ostr << "ParsePaymentAmount: Invalid amount string, value outside of valid money range";
+//        throw std::runtime_error(ostr.str());
+//    }
 
-    DBG( cout << "ParsePaymentAmount Returning true nAmount = " << nAmount << endl; );
+//    DBG( cout << "ParsePaymentAmount Returning true nAmount = " << nAmount << endl; );
 
-    return nAmount;
-}
+//    return nAmount;
+//}
 
 /**
 *   Add Governance Object
@@ -787,7 +787,7 @@ bool CSuperblock::IsFounderValid(const CTransaction& txNew, int nBlockHeight, CA
 *
 *   - Does this transaction match the superblock?
 */
-
+/*
 bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward)
 {
     // TODO : LOCK(cs);
@@ -837,7 +837,7 @@ bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount b
 
     // founder reward check
     // it's ok to use founders address as budget address ?
-    CAmount /*foundersActual(0),*/ foundersExpected(GetFoundersReward(nBlockHeight, cp));
+    CAmount  foundersExpected(GetFoundersReward(nBlockHeight, cp));
     CAmount nBlockValue = txNew.GetValueOut();
 
     // miner should not get more than he would usually get
@@ -854,45 +854,45 @@ bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount b
     }
 
     //popchain
-    /*
-    int nVoutIndex = 0;
-    for(int i = 0; i < nPayments; i++) {
-        CGovernancePayment payment;
-        if(!GetPayment(i, payment)) {
-            // This shouldn't happen so log a warning
-            LogPrintf("CSuperblock::IsValid -- WARNING: Failed to find payment: %d of %d total payments\n", i, nPayments);
-            continue;
-        }
 
-        bool fPaymentMatch = false;
+//    int nVoutIndex = 0;
+//    for(int i = 0; i < nPayments; i++) {
+//        CGovernancePayment payment;
+//        if(!GetPayment(i, payment)) {
+//            // This shouldn't happen so log a warning
+//            LogPrintf("CSuperblock::IsValid -- WARNING: Failed to find payment: %d of %d total payments\n", i, nPayments);
+//            continue;
+//        }
 
-        for (int j = nVoutIndex; j < nOutputs; j++) {
-            // Find superblock payment
-            fPaymentMatch = ((payment.script == txNew.vout[j].scriptPubKey) &&
-                             (payment.nAmount == txNew.vout[j].nValue));
+//        bool fPaymentMatch = false;
 
-            if (fPaymentMatch) {
-                nVoutIndex = j;
-                break;
-            }
-        }
+//        for (int j = nVoutIndex; j < nOutputs; j++) {
+//            // Find superblock payment
+//            fPaymentMatch = ((payment.script == txNew.vout[j].scriptPubKey) &&
+//                             (payment.nAmount == txNew.vout[j].nValue));
 
-        if(!fPaymentMatch) {
-            // Superblock payment not found!
+//            if (fPaymentMatch) {
+//                nVoutIndex = j;
+//                break;
+//            }
+//        }
 
-            CTxDestination address1;
-            ExtractDestination(payment.script, address1);
-            CBitcoinAddress address2(address1);
-            LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid: %d payment %d to %s not found\n", i, payment.nAmount, address2.ToString());
+//        if(!fPaymentMatch) {
+//            // Superblock payment not found!
 
-            return false;
-        }
-    }
-    */
+//            CTxDestination address1;
+//            ExtractDestination(payment.script, address1);
+//            CBitcoinAddress address2(address1);
+//            LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid: %d payment %d to %s not found\n", i, payment.nAmount, address2.ToString());
+
+//            return false;
+//        }
+//    }
+
 
     return true;
 }
-
+*/
 /**
 *   Get Required Payment String
 *
