@@ -18,6 +18,7 @@
 #include "sync.h"
 #include "timedata.h"
 #include "util.h"
+#include <limits>
 
 // popchain dont need it
 //class CGovernanceManager;
