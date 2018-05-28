@@ -22,71 +22,71 @@
  */
 class CGovernanceObjectVoteFile
 {
-public: // Types
-    typedef std::list<CGovernanceVote> vote_l_t;
+//public: // Types
+//    typedef std::list<CGovernanceVote> vote_l_t;
 
-    typedef vote_l_t::iterator vote_l_it;
+//    typedef vote_l_t::iterator vote_l_it;
 
-    typedef vote_l_t::const_iterator vote_l_cit;
+//    typedef vote_l_t::const_iterator vote_l_cit;
 
-    typedef std::map<uint256,vote_l_it> vote_m_t;
+//    typedef std::map<uint256,vote_l_it> vote_m_t;
 
-    typedef vote_m_t::iterator vote_m_it;
+//    typedef vote_m_t::iterator vote_m_it;
 
-    typedef vote_m_t::const_iterator vote_m_cit;
+//    typedef vote_m_t::const_iterator vote_m_cit;
 
-private:
-    static const int MAX_MEMORY_VOTES = -1;
+//private:
+//    static const int MAX_MEMORY_VOTES = -1;
 
-    int nMemoryVotes;
+//    int nMemoryVotes;
 
-    vote_l_t listVotes;
+//    vote_l_t listVotes;
 
-    vote_m_t mapVoteIndex;
+//    vote_m_t mapVoteIndex;
 
-public:
-    CGovernanceObjectVoteFile();
+//public:
+//    CGovernanceObjectVoteFile();
 
-    CGovernanceObjectVoteFile(const CGovernanceObjectVoteFile& other);
+//    CGovernanceObjectVoteFile(const CGovernanceObjectVoteFile& other);
 
-    /**
-     * Add a vote to the file
-     */
-    void AddVote(const CGovernanceVote& vote);
+//    /**
+//     * Add a vote to the file
+//     */
+//    void AddVote(const CGovernanceVote& vote);
 
-    /**
-     * Return true if the vote with this hash is currently cached in memory
-     */
-    bool HasVote(const uint256& nHash) const;
+//    /**
+//     * Return true if the vote with this hash is currently cached in memory
+//     */
+//    bool HasVote(const uint256& nHash) const;
 
-    /**
-     * Retrieve a vote cached in memory
-     */
-    bool GetVote(const uint256& nHash, CGovernanceVote& vote) const;
+//    /**
+//     * Retrieve a vote cached in memory
+//     */
+//    bool GetVote(const uint256& nHash, CGovernanceVote& vote) const;
 
-    int GetVoteCount() {
-        return nMemoryVotes;
-    }
+//    int GetVoteCount() {
+//        return nMemoryVotes;
+//    }
 
-    std::vector<CGovernanceVote> GetVotes() const;
+//    std::vector<CGovernanceVote> GetVotes() const;
 
-    CGovernanceObjectVoteFile& operator=(const CGovernanceObjectVoteFile& other);
+//    CGovernanceObjectVoteFile& operator=(const CGovernanceObjectVoteFile& other);
 
-    void RemoveVotesFromMasternode(const CTxIn& vinMasternode);
+//    void RemoveVotesFromMasternode(const CTxIn& vinMasternode);
 
-    ADD_SERIALIZE_METHODS;
+//    ADD_SERIALIZE_METHODS;
 
-    template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
-    {
-        READWRITE(nMemoryVotes);
-        READWRITE(listVotes);
-        if(ser_action.ForRead()) {
-            RebuildIndex();
-        }
-    }
-private:
-    void RebuildIndex();
+//    template <typename Stream, typename Operation>
+//    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+//    {
+//        READWRITE(nMemoryVotes);
+//        READWRITE(listVotes);
+//        if(ser_action.ForRead()) {
+//            RebuildIndex();
+//        }
+//    }
+//private:
+//    void RebuildIndex();
 
 };
 

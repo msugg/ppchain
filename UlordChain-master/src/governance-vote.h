@@ -76,10 +76,10 @@ static const int MAX_SUPPORTED_VOTE_SIGNAL = VOTE_SIGNAL_ENDORSED;
 class CGovernanceVoting
 {
 public:
-    static vote_outcome_enum_t ConvertVoteOutcome(std::string strVoteOutcome);
-    static vote_signal_enum_t ConvertVoteSignal(std::string strVoteSignal);
-    static std::string ConvertOutcomeToString(vote_outcome_enum_t nOutcome);
-    static std::string ConvertSignalToString(vote_signal_enum_t nSignal);
+    //static vote_outcome_enum_t ConvertVoteOutcome(std::string strVoteOutcome);
+    //static vote_signal_enum_t ConvertVoteSignal(std::string strVoteSignal);
+    //static std::string ConvertOutcomeToString(vote_outcome_enum_t nOutcome);
+    //static std::string ConvertSignalToString(vote_signal_enum_t nSignal);
 };
 
 //
@@ -106,33 +106,33 @@ public:
     CGovernanceVote();
     CGovernanceVote(CTxIn vinMasternodeIn, uint256 nParentHashIn, vote_signal_enum_t eVoteSignalIn, vote_outcome_enum_t eVoteOutcomeIn);
 
-    bool IsValid() const { return fValid; }
+    //bool IsValid() const { return fValid; }
 
-    bool IsSynced() const { return fSynced; }
+    //bool IsSynced() const { return fSynced; }
 
-    int64_t GetTimestamp() const { return nTime; }
+    //int64_t GetTimestamp() const { return nTime; }
 
-    vote_signal_enum_t GetSignal() const  { return vote_signal_enum_t(nVoteSignal); }
+    //vote_signal_enum_t GetSignal() const  { return vote_signal_enum_t(nVoteSignal); }
 
-    vote_outcome_enum_t GetOutcome() const  { return vote_outcome_enum_t(nVoteOutcome); }
+    //vote_outcome_enum_t GetOutcome() const  { return vote_outcome_enum_t(nVoteOutcome); }
 
-    const uint256& GetParentHash() const { return nParentHash; }
+    //const uint256& GetParentHash() const { return nParentHash; }
 
-    void SetTime(int64_t nTimeIn) { nTime = nTimeIn; }
+    //void SetTime(int64_t nTimeIn) { nTime = nTimeIn; }
 
-    void SetSignature(const std::vector<unsigned char>& vchSigIn) { vchSig = vchSigIn; }
+    //void SetSignature(const std::vector<unsigned char>& vchSigIn) { vchSig = vchSigIn; }
 
-    bool Sign(CKey& keyMasternode, CPubKey& pubKeyMasternode);
-    bool IsValid(bool fSignatureCheck) const;
-    void Relay() const;
+    //bool Sign(CKey& keyMasternode, CPubKey& pubKeyMasternode);
+    //bool IsValid(bool fSignatureCheck) const;
+    //void Relay() const;
 
-    std::string GetVoteString() const {
-        return CGovernanceVoting::ConvertOutcomeToString(GetOutcome());
-    }
+//    std::string GetVoteString() const {
+//        return CGovernanceVoting::ConvertOutcomeToString(GetOutcome());
+//    }
 
-    CTxIn& GetVinMasternode() { return vinMasternode; }
+//    CTxIn& GetVinMasternode() { return vinMasternode; }
 
-    const CTxIn& GetVinMasternode() const { return vinMasternode; }
+//    const CTxIn& GetVinMasternode() const { return vinMasternode; }
 
     /**
     *   GetHash()
@@ -140,26 +140,26 @@ public:
     *   GET UNIQUE HASH WITH DETERMINISTIC VALUE OF THIS SPECIFIC VOTE
     */
 
-    uint256 GetHash() const
-    {
-        CHashWriter ss(SER_GETHASH, PROTOCOL_VERSION);
-        ss << vinMasternode;
-        ss << nParentHash;
-        ss << nVoteSignal;
-        ss << nVoteOutcome;
-        ss << nTime;
-        return ss.GetHash();
-    }
+//    uint256 GetHash() const
+//    {
+//        CHashWriter ss(SER_GETHASH, PROTOCOL_VERSION);
+//        ss << vinMasternode;
+//        ss << nParentHash;
+//        ss << nVoteSignal;
+//        ss << nVoteOutcome;
+//        ss << nTime;
+//        return ss.GetHash();
+//    }
 
-    std::string ToString() const
-    {
-        std::ostringstream ostr;
-        ostr << vinMasternode.ToString() << ":"
-             << nTime << ":"
-             << CGovernanceVoting::ConvertOutcomeToString(GetOutcome()) << ":"
-             << CGovernanceVoting::ConvertSignalToString(GetSignal());
-        return ostr.str();
-    }
+//    std::string ToString() const
+//    {
+//        std::ostringstream ostr;
+//        ostr << vinMasternode.ToString() << ":"
+//             << nTime << ":"
+//             << CGovernanceVoting::ConvertOutcomeToString(GetOutcome()) << ":"
+//             << CGovernanceVoting::ConvertSignalToString(GetSignal());
+//        return ostr.str();
+//    }
 
     /**
     *   GetTypeHash()
@@ -176,30 +176,30 @@ public:
     *   on funding a specific project for example.
     *   We do not include a time because it will be updated each time the vote is updated, changing the hash
     */
-    uint256 GetTypeHash() const
-    {
-        // CALCULATE HOW TO STORE VOTE IN governance.mapVotes
+//    uint256 GetTypeHash() const
+//    {
+//        // CALCULATE HOW TO STORE VOTE IN governance.mapVotes
 
-        CHashWriter ss(SER_GETHASH, PROTOCOL_VERSION);
-        ss << vinMasternode;
-        ss << nParentHash;
-        ss << nVoteSignal;
-        //  -- no outcome
-        //  -- timeless
-        return ss.GetHash();
-    }
+//        CHashWriter ss(SER_GETHASH, PROTOCOL_VERSION);
+//        ss << vinMasternode;
+//        ss << nParentHash;
+//        ss << nVoteSignal;
+//        //  -- no outcome
+//        //  -- timeless
+//        return ss.GetHash();
+//    }
 
-    ADD_SERIALIZE_METHODS;
+//    ADD_SERIALIZE_METHODS;
 
-    template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
-        READWRITE(vinMasternode);
-        READWRITE(nParentHash);
-        READWRITE(nVoteOutcome);
-        READWRITE(nVoteSignal);
-        READWRITE(nTime);
-        READWRITE(vchSig);
-    }
+//    template <typename Stream, typename Operation>
+//    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
+//        READWRITE(vinMasternode);
+//        READWRITE(nParentHash);
+//        READWRITE(nVoteOutcome);
+//        READWRITE(nVoteSignal);
+//        READWRITE(nTime);
+//        READWRITE(vchSig);
+//    }
 
 };
 
