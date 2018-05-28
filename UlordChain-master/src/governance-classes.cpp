@@ -543,28 +543,22 @@ bool CSuperblockManager::IsValid(const CTransaction& txNew, int nBlockHeight, CA
 }
 
 
-//ctestpopchain::ctestpopchain(int a):a(a){}
-
-//int ctestpopchain::bb(){return a;}
 
 
-
-
-
-CSuperblock::
-CSuperblock()
-    : //nGovObjHash(),
-      nEpochStart(0),
-      nStatus(SEEN_OBJECT_UNKNOWN)
-      //vecPayments()
-{}
+//CSuperblock::
+//CSuperblock()
+//    : nGovObjHash(),
+//      nEpochStart(0)
+//      nStatus(SEEN_OBJECT_UNKNOWN)
+//      vecPayments()
+//{}
 
 CSuperblock::
 CSuperblock(uint256& nHash)
-    : //nGovObjHash(nHash),
-      nEpochStart(0),
-      nStatus(SEEN_OBJECT_UNKNOWN)
-      //vecPayments()
+//    : nGovObjHash(nHash),
+//      nEpochStart(0)
+//      nStatus(SEEN_OBJECT_UNKNOWN)
+//      vecPayments()
 {
     DBG( cout << "CSuperblock Constructor Start" << endl; );
     //popchain
@@ -601,7 +595,7 @@ CSuperblock(uint256& nHash)
 //             nEpochStart, strAddresses, strAmounts, vecPayments.size());
 
     //popchain
-    LogPrintf("CSuperblock -- nEpochStart = %d",nEpochStart);
+    //LogPrintf("CSuperblock -- nEpochStart = %d",nEpochStart);
     LogPrintf("CSuperblock Constructor End");
 
     DBG( cout << "CSuperblock Constructor End" << endl; );
@@ -787,47 +781,43 @@ bool CSuperblock::IsFounderValid(const CTransaction& txNew, int nBlockHeight, CA
 *
 *   - Does this transaction match the superblock?
 */
-/*
-bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward)
-{
+
+//bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward)
+//{
     // TODO : LOCK(cs);
     // No reason for a lock here now since this method only accesses data
     // internal to *this and since CSuperblock's are accessed only through
     // shared pointers there's no way our object can get deleted while this
     // code is running.
-    if(!IsValidBlockHeight(nBlockHeight)) {
-        LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid, incorrect block height\n");
-        return false;
-    }
 
-    std::string strPayeesPossible = "";
+//    std::string strPayeesPossible = "";
 
     // CONFIGURE SUPERBLOCK OUTPUTS
 
-    int nOutputs = txNew.vout.size();
+//    int nOutputs = txNew.vout.size();
     //popchain
     //int nPayments = CountPayments();
     //int nMinerPayments = nOutputs - nPayments - 1;        // founders reward
-    int nMinerPayments = nOutputs - 1;
+//    int nMinerPayments = nOutputs - 1;
 
 //    LogPrint("gobject", "CSuperblock::IsValid nOutputs = %d, nPayments = %d, strData = %s\n",
 //             nOutputs, nPayments, GetGovernanceObject()->GetDataAsHex());
      //popchain
-     LogPrintf("CSuperblock::IsValid nOutputs = %d \n",nOutputs);
+//     LogPrintf("CSuperblock::IsValid nOutputs = %d \n",nOutputs);
 
     // We require an exact match (including order) between the expected
     // superblock payments and the payments actually in the block.
 
-    if(nMinerPayments < 0) {
-        // This means the block cannot have all the superblock payments
-        // so it is not valid.
-        // TODO: could that be that we just hit coinbase size limit?
-        LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid, too few superblock payments\n");
-        return false;
-    }
+//    if(nMinerPayments < 0) {
+//        // This means the block cannot have all the superblock payments
+//        // so it is not valid.
+//        // TODO: could that be that we just hit coinbase size limit?
+//        LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid, too few superblock payments\n");
+//        return false;
+//    }
 
     // payments should not exceed limit
-    const Consensus::Params& cp = Params().GetConsensus();
+//    const Consensus::Params& cp = Params().GetConsensus();
 //    CAmount budgetsActual = GetPaymentsTotalAmount();
 //    CAmount budgetLimit = GetBudget(nBlockHeight, cp);
 //    if(budgetsActual > budgetLimit) {
@@ -837,8 +827,8 @@ bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount b
 
     // founder reward check
     // it's ok to use founders address as budget address ?
-    CAmount  foundersExpected(GetFoundersReward(nBlockHeight, cp));
-    CAmount nBlockValue = txNew.GetValueOut();
+//    CAmount /*foundersActual(0),*/ foundersExpected(GetFoundersReward(nBlockHeight, cp));
+//    CAmount nBlockValue = txNew.GetValueOut();
 
     // miner should not get more than he would usually get
 //    if(nBlockValue > blockReward + budgetLimit + foundersExpected)
@@ -847,52 +837,52 @@ bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount b
 //        return false;
 //    }
 
-    if(nBlockValue > blockReward + foundersExpected)
-    {
-        LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid, block value limit exceeded: block %lld, limit %lld\n", nBlockValue, blockReward + foundersExpected);
-        return false;
-    }
-
-    //popchain
-
-//    int nVoutIndex = 0;
-//    for(int i = 0; i < nPayments; i++) {
-//        CGovernancePayment payment;
-//        if(!GetPayment(i, payment)) {
-//            // This shouldn't happen so log a warning
-//            LogPrintf("CSuperblock::IsValid -- WARNING: Failed to find payment: %d of %d total payments\n", i, nPayments);
-//            continue;
-//        }
-
-//        bool fPaymentMatch = false;
-
-//        for (int j = nVoutIndex; j < nOutputs; j++) {
-//            // Find superblock payment
-//            fPaymentMatch = ((payment.script == txNew.vout[j].scriptPubKey) &&
-//                             (payment.nAmount == txNew.vout[j].nValue));
-
-//            if (fPaymentMatch) {
-//                nVoutIndex = j;
-//                break;
-//            }
-//        }
-
-//        if(!fPaymentMatch) {
-//            // Superblock payment not found!
-
-//            CTxDestination address1;
-//            ExtractDestination(payment.script, address1);
-//            CBitcoinAddress address2(address1);
-//            LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid: %d payment %d to %s not found\n", i, payment.nAmount, address2.ToString());
-
-//            return false;
-//        }
+//    if(nBlockValue > blockReward + foundersExpected)
+//    {
+//        LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid, block value limit exceeded: block %lld, limit %lld\n", nBlockValue, blockReward + foundersExpected);
+//        return false;
 //    }
 
+    //popchain
+    /*
+    int nVoutIndex = 0;
+    for(int i = 0; i < nPayments; i++) {
+        CGovernancePayment payment;
+        if(!GetPayment(i, payment)) {
+            // This shouldn't happen so log a warning
+            LogPrintf("CSuperblock::IsValid -- WARNING: Failed to find payment: %d of %d total payments\n", i, nPayments);
+            continue;
+        }
 
-    return true;
-}
-*/
+        bool fPaymentMatch = false;
+
+        for (int j = nVoutIndex; j < nOutputs; j++) {
+            // Find superblock payment
+            fPaymentMatch = ((payment.script == txNew.vout[j].scriptPubKey) &&
+                             (payment.nAmount == txNew.vout[j].nValue));
+
+            if (fPaymentMatch) {
+                nVoutIndex = j;
+                break;
+            }
+        }
+
+        if(!fPaymentMatch) {
+            // Superblock payment not found!
+
+            CTxDestination address1;
+            ExtractDestination(payment.script, address1);
+            CBitcoinAddress address2(address1);
+            LogPrintf("CSuperblock::IsValid -- ERROR: Block invalid: %d payment %d to %s not found\n", i, payment.nAmount, address2.ToString());
+
+            return false;
+        }
+    }
+    */
+
+//    return true;
+//}
+
 /**
 *   Get Required Payment String
 *

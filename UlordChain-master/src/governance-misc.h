@@ -9,9 +9,9 @@
 #include "governance.h"
 #include "init.h"
 
-using namespace std;
+//using namespace std;
 
-class CGovernanceVote;
+//class CGovernanceVote;
 
 /**
 *	Triggers and Settings - 12.2

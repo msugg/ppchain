@@ -30,7 +30,7 @@ class CGovernanceVote;
 
 //static const double GOVERNANCE_FILTER_FP_RATE = 0.001;
 
-static const int GOVERNANCE_OBJECT_UNKNOWN = 0;
+//static const int GOVERNANCE_OBJECT_UNKNOWN = 0;
 //static const int GOVERNANCE_OBJECT_PROPOSAL = 1;
 //static const int GOVERNANCE_OBJECT_TRIGGER = 2;
 //static const int GOVERNANCE_OBJECT_WATCHDOG = 3;
@@ -46,11 +46,11 @@ static const int GOVERNANCE_OBJECT_UNKNOWN = 0;
 //static const int GOVERNANCE_TRIGGER_EXPIRATION_BLOCKS = 576;
 
 // FOR SEEN MAP ARRAYS - GOVERNANCE OBJECTS AND VOTES
-static const int SEEN_OBJECT_IS_VALID = 0;
-static const int SEEN_OBJECT_ERROR_INVALID = 1;
-static const int SEEN_OBJECT_ERROR_IMMATURE = 2;
-static const int SEEN_OBJECT_EXECUTED = 3; //used for triggers
-static const int SEEN_OBJECT_UNKNOWN = 4; // the default
+//static const int SEEN_OBJECT_IS_VALID = 0;
+//static const int SEEN_OBJECT_ERROR_INVALID = 1;
+//static const int SEEN_OBJECT_ERROR_IMMATURE = 2;
+//static const int SEEN_OBJECT_EXECUTED = 3; //used for triggers
+//static const int SEEN_OBJECT_UNKNOWN = 4; // the default
 
 //typedef std::pair<CGovernanceVote, int64_t> vote_time_pair_t;
 

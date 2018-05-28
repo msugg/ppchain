@@ -152,28 +152,14 @@ class CGovernancePayment
 *   }
 */
 
-//class ctestpopchain : public CGovernanceObject
-//{
-//private:
-//    int a;
-//public:
-//    ctestpopchain(int a);
-//    int bb();
-//};
-
-
-
-
-
-
 
 class CSuperblock : public CGovernanceObject
 {
 private:
     //uint256 nGovObjHash;
 
-    int nEpochStart;
-    int nStatus;
+    //int nEpochStart;
+    //int nStatus;
     //std::vector<CGovernancePayment> vecPayments;
 
     //void ParsePaymentSchedule(std::string& strPaymentAddresses, std::string& strPaymentAmounts);
@@ -188,13 +174,13 @@ public:
     static CAmount GetPaymentsLimit(int nBlockHeight); 
 	static bool IsFounderValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward);
 
-    int GetStatus() { return nStatus; }
-    void SetStatus(int nStatusIn) { nStatus = nStatusIn; }
+    //int GetStatus() { return nStatus; }
+    //void SetStatus(int nStatusIn) { nStatus = nStatusIn; }
 
     // IS THIS TRIGGER ALREADY EXECUTED?
-    bool IsExecuted() { return nStatus == SEEN_OBJECT_EXECUTED; }
+    //bool IsExecuted() { return nStatus == SEEN_OBJECT_EXECUTED; }
     // TELL THE ENGINE WE EXECUTED THIS EVENT
-    void SetExecuted() { nStatus = SEEN_OBJECT_EXECUTED; }
+    //void SetExecuted() { nStatus = SEEN_OBJECT_EXECUTED; }
 
 //    CGovernanceObject* GetGovernanceObject()
 //    {
@@ -203,8 +189,8 @@ public:
 //        return pObj;
 //    }
 
-    int GetBlockStart()
-    {
+//    int GetBlockStart()
+//    {
         /* // 12.1 TRIGGER EXECUTION */
         /* // NOTE : Is this over complicated? */
 
@@ -222,14 +208,15 @@ public:
         /* int nMod = (nTipBlock + nBlockDiff) % Params().GetConsensus().nSuperblockCycle; */
 
         /* return (nTipBlock + nBlockDiff)-nMod; */
-        return nEpochStart;
-    }
+//        return nEpochStart;
+//    }
 
     //int CountPayments() { return (int)vecPayments.size(); }
     //bool GetPayment(int nPaymentIndex, CGovernancePayment& paymentRet);
     //CAmount GetPaymentsTotalAmount();
 
-    //bool IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward);
+    // may use in the future
+    bool IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward);
 };
 
 #endif
