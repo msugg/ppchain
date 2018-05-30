@@ -230,6 +230,8 @@ void FillBlockPayments(CMutableTransaction& txNew, int nBlockHeight, CAmount blo
     }
 
     // FILL BLOCK PAYEE WITH MASTERNODE PAYMENT OTHERWISE
+    // popchain delete masternode payment part
+    /*
     const Consensus::Params &cp = Params().GetConsensus();
 
     if (nBlockHeight < cp.nMasternodePaymentsStartBlock)
@@ -243,6 +245,7 @@ void FillBlockPayments(CMutableTransaction& txNew, int nBlockHeight, CAmount blo
     	LogPrint("mnpayments", "FillBlockPayments -- nBlockHeight %d blockReward %lld txoutMasternodeRet %s txNew %s",
   	                    nBlockHeight, blockReward, txoutMasternodeRet.ToString(), txNew.ToString());
     }
+    */
 }
 
 std::string GetRequiredPaymentsString(int nBlockHeight)
