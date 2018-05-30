@@ -113,7 +113,7 @@ public:
         CBlockHeader::SetNull();
         vtx.clear();
 //        txoutMasternode = CTxOut();
-        voutSuperblock.clear();
+//        voutSuperblock.clear();
         fChecked = false;
     }
 
