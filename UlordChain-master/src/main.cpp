@@ -1766,46 +1766,46 @@ CAmount GetMinerSubsidy(const int height, const Consensus::Params &cp)
 
 //popchain doesn't have masternode pay
 
-CAmount GetMasternodePayment(const int height)
-{
-    const Consensus::Params cp = Params().GetConsensus();
+//CAmount GetMasternodePayment(const int height)
+//{
+//    const Consensus::Params cp = Params().GetConsensus();
 
-    const int starting = cp.nMasternodePaymentsStartBlock;
-    const int period = cp.nMasternodePaymentsIncreasePeriod;
-    const int intval = cp.nSubsidyHalvingInterval;
+//    const int starting = cp.nMasternodePaymentsStartBlock;
+//    const int period = cp.nMasternodePaymentsIncreasePeriod;
+//    const int intval = cp.nSubsidyHalvingInterval;
 
-    if (height < starting) return 0;
+//    if (height < starting) return 0;
 
-    if (height < period)			// in the first year
-    {
-  	return cp.mnReward1;
-    } 
-    else if (height < period * 2)		// in first 2 years
-    {
-        return cp.mnReward2;
-    }
-    else if (height < period * 3)		// 3rd year
-    {
-		return (cp.mnReward2 / 2) * 3;
-    }
-    else if (height < period * 4)		// 4th
-    {
-		return cp.mnReward2 * 2;
-    }
-    else						// 5th and after
-    {
-  		int halvings = (height - intval) / intval;
-		if (halvings > 63)
-		{
-   	    	return 0;
-		}
+//    if (height < period)			// in the first year
+//    {
+//  	return cp.mnReward1;
+//    }
+//    else if (height < period * 2)		// in first 2 years
+//    {
+//        return cp.mnReward2;
+//    }
+//    else if (height < period * 3)		// 3rd year
+//    {
+//		return (cp.mnReward2 / 2) * 3;
+//    }
+//    else if (height < period * 4)		// 4th
+//    {
+//		return cp.mnReward2 * 2;
+//    }
+//    else						// 5th and after
+//    {
+//  		int halvings = (height - intval) / intval;
+//		if (halvings > 63)
+//		{
+//   	    	return 0;
+//		}
 
-		return cp.mnReward5 >> halvings;
-    }
-}
+//		return cp.mnReward5 >> halvings;
+//    }
+//}
 
 
-//popchain
+// popchain doesn't have budget
 /*
 CAmount GetBudget(const int height, const Consensus::Params &cp)
 {

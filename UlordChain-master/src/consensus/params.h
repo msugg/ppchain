@@ -46,16 +46,16 @@ struct Params {
     i64 minerReward5;		// block reward to miners per block in the 2nd 4 years
 
     // masternode reward
-    i64 mnReward1;              // block reward to masternode per block in the 1st year
-    i64 mnReward2;              // block reward to masternode per block in the 2nd year
-    i64 mnReward5;              // block reward to masternode per block in the 5th year
+//    i64 mnReward1;              // block reward to masternode per block in the 1st year
+//    i64 mnReward2;              // block reward to masternode per block in the 2nd year
+//    i64 mnReward5;              // block reward to masternode per block in the 5th year
 
     // founders reward
     i64 foundersReward;         // super block reward to founders in first 4 years
 
     // budget
-    i64 bdgetReward4;           // super block reward to budget in the 1st 4 years
-    i64 bdgetReward5;           // super block reward to budget in the 5th year
+//    i64 bdgetReward4;           // super block reward to budget in the 1st 4 years
+//    i64 bdgetReward5;           // super block reward to budget in the 5th year
 
     // masternode colleteral
     i64 colleteral;
@@ -65,9 +65,9 @@ struct Params {
         return 4 * 12 * nSuperblockCycle + 1;
     }
 
-    int nMasternodePaymentsStartBlock;
-    int nMasternodePaymentsIncreaseBlock;
-    int nMasternodePaymentsIncreasePeriod; // in blocks
+//    int nMasternodePaymentsStartBlock;
+//    int nMasternodePaymentsIncreaseBlock;
+//    int nMasternodePaymentsIncreasePeriod; // in blocks
     int nInstantSendKeepLock; // in blocks
     int nBudgetPaymentsStartBlock;
     int nBudgetPaymentsCycleBlocks;

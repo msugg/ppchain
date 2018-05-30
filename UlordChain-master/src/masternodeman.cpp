@@ -765,6 +765,7 @@ CMasternode* CMasternodeMan::GetNextMasternodeInQueueForPayment(bool fFilterSigT
     return GetNextMasternodeInQueueForPayment(pCurrentBlockIndex->nHeight, fFilterSigTime, nCount);
 }
 
+// popchain
 CMasternode* CMasternodeMan::GetNextMasternodeInQueueForPayment(int nBlockHeight, bool fFilterSigTime, int& nCount)
 {
     // Need LOCK2 here to ensure consistent locking order because the GetBlockHash call below locks cs_main

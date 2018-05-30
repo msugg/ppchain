@@ -79,7 +79,7 @@ class CMasternodeBlockPayees
 {
 public:
     int nBlockHeight;
-    std::vector<CMasternodePayee> vecPayees;
+//    std::vector<CMasternodePayee> vecPayees;
 
     CMasternodeBlockPayees() :
         nBlockHeight(0),
@@ -102,7 +102,7 @@ public:
     bool GetBestPayee(CScript& payeeRet);
     bool HasPayeeWithVotes(CScript payeeIn, int nVotesReq);
 
-    bool IsTransactionValid(const CTransaction& txNew);
+//    bool IsTransactionValid(const CTransaction& txNew);
 
     std::string GetRequiredPaymentsString();
 };
@@ -202,7 +202,7 @@ public:
     void RequestLowDataPaymentBlocks(CNode* pnode);
     void CheckAndRemove();
 
-    bool GetBlockPayee(int nBlockHeight, CScript& payee);
+//    bool GetBlockPayee(int nBlockHeight, CScript& payee);
     bool IsTransactionValid(const CTransaction& txNew, int nBlockHeight);
     bool IsScheduled(CMasternode& mn, int nNotBlockHeight);
 
@@ -211,7 +211,7 @@ public:
     int GetMinMasternodePaymentsProto();
     void ProcessMessage(CNode* pfrom, std::string& strCommand, CDataStream& vRecv);
     std::string GetRequiredPaymentsString(int nBlockHeight);
-    void FillBlockPayee(CMutableTransaction& txNew, int nBlockHeight, CAmount blockReward, CTxOut& txoutMasternodeRet);
+//    void FillBlockPayee(CMutableTransaction& txNew, int nBlockHeight, CAmount blockReward, CTxOut& txoutMasternodeRet);
     std::string ToString() const;
 
     int GetBlockCount() { return mapMasternodeBlocks.size(); }
