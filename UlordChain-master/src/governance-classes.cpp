@@ -451,7 +451,7 @@ void CSuperblockManager::AppendFoundersReward(CMutableTransaction& txNewRet, int
 *   - Create the correct payment structure for a given superblock
 */
 //popchain
-void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBlockHeight, std::vector<CTxOut>& voutSuperblockRet,CTxOut&  txoutFound)
+void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBlockHeight, /*std::vector<CTxOut>& voutSuperblockRet,*/CTxOut&  txoutFound)
 {
     DBG( cout << "CSuperblockManager::CreateSuperblock Start" << endl; );
 
@@ -460,7 +460,7 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
     //LOCK(governance.cs);
 	
     // make sure it's empty, just in case
-    voutSuperblockRet.clear();
+    //voutSuperblockRet.clear();
 
     // TODO: How many payments can we add before things blow up?
     //       Consider at least following limits:

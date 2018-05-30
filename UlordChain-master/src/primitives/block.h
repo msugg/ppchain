@@ -83,8 +83,9 @@ public:
     std::vector<CTransaction> vtx;
 
     // memory only
-    mutable CTxOut txoutMasternode; 			// masternode payment
-    mutable std::vector<CTxOut> voutSuperblock; 	// superblock payment
+    // popnode doesn't have masternode payment and superblock paymnet
+//    mutable CTxOut txoutMasternode; 			// masternode payment
+//    mutable std::vector<CTxOut> voutSuperblock; 	// superblock payment
     mutable CTxOut txoutFound; 			// Found  payment
     mutable bool fChecked;
 
@@ -111,7 +112,7 @@ public:
     {
         CBlockHeader::SetNull();
         vtx.clear();
-        txoutMasternode = CTxOut();
+//        txoutMasternode = CTxOut();
         voutSuperblock.clear();
         fChecked = false;
     }

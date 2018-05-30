@@ -437,9 +437,11 @@ CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const CScript& s
         // Update coinbase transaction with additional info about masternode and governance payments,
         // get some info back to pass to getblocktemplate
         // in popchain, we dont need masternode and governance payment
-        FillBlockPayments(txNew, nHeight, blockReward, pblock->txoutMasternode, pblock->voutSuperblock,pblock->txoutFound);
-        LogPrintf("CreateNewBlock -- nBlockHeight %d blockReward %lld txoutMasternode %s txNew %s",
-                     nHeight, blockReward, pblock->txoutMasternode.ToString(), txNew.ToString());
+        FillBlockPayments(txNew, nHeight, blockReward, /*pblock->txoutMasternode, pblock->voutSuperblock,*/pblock->txoutFound);
+
+//        LogPrintf("CreateNewBlock -- nBlockHeight %d blockReward %lld txoutMasternode %s txNew %s",
+        LogPrintf("CreateNewBlock -- nBlockHeight %d blockReward %lld txNew %s",
+                     nHeight, blockReward, /*pblock->txoutMasternode.ToString(),*/ txNew.ToString());
 
         nLastBlockTx = nBlockTx;
         nLastBlockSize = nBlockSize;

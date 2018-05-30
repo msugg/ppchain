@@ -618,10 +618,19 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
     result.push_back(Pair("height", (int64_t)(pindexPrev->nHeight+1)));
     result.push_back(Pair("claimtrie", pblock->hashClaimTrie.GetHex()));
 
-    }
-    result.push_back(Pair("masternode", masternodeObj));
-    //result.push_back(Pair("masternode_payments_started", pindexPrev->nHeight + 1 > Params().GetConsensus().nMasternodePaymentsStartBlock));
-    result.push_back(Pair("masternode_payments_enforced", sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)));
+    // popchain doesn't need masternode payment
+//    UniValue masternodeObj(UniValue::VOBJ);
+//    if(pblock->txoutMasternode != CTxOut()) {
+//        CTxDestination address1;
+//        ExtractDestination(pblock->txoutMasternode.scriptPubKey, address1);
+//        CBitcoinAddress address2(address1);
+//        masternodeObj.push_back(Pair("payee", address2.ToString().c_str()));
+//        masternodeObj.push_back(Pair("script", HexStr(pblock->txoutMasternode.scriptPubKey.begin(), pblock->txoutMasternode.scriptPubKey.end())));
+//        masternodeObj.push_back(Pair("amount", pblock->txoutMasternode.nValue));
+//    }
+//    result.push_back(Pair("masternode", masternodeObj));
+//    result.push_back(Pair("masternode_payments_started", pindexPrev->nHeight + 1 > Params().GetConsensus().nMasternodePaymentsStartBlock));
+//    result.push_back(Pair("masternode_payments_enforced", sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)));
 
     UniValue FoundnodeObj(UniValue::VOBJ);
     if(pblock->txoutFound != CTxOut()) {
@@ -661,7 +670,7 @@ public:
     bool found;
     CValidationState state;
 
-    submitblock_StateCatcher(const uint256 &hashIn) : hash(hashIn), found(false), state() {};
+    submitblock_StateCatcher(const uint256 &hashIn) : hash(hashIn), found(false), state() {}
 
 protected:
     virtual void BlockChecked(const CBlock& block, const CValidationState& stateIn) {

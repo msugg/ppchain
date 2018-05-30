@@ -215,16 +215,16 @@ bool IsBlockPayeeValid(const CTransaction& txNew, int nBlockHeight, CAmount bloc
 }
 
 //popchain
-void FillBlockPayments(CMutableTransaction& txNew, int nBlockHeight, CAmount blockReward, CTxOut& txoutMasternodeRet, std::vector<CTxOut>& voutSuperblockRet,CTxOut&  txoutFound)
+void FillBlockPayments(CMutableTransaction& txNew, int nBlockHeight, CAmount blockReward,/*CTxOut& txoutMasternodeRet,std::vector<CTxOut>& voutSuperblockRet,*/ CTxOut&  txoutFound)
 {
     // only create superblocks if spork is enabled AND if superblock is actually triggered
     // (height should be validated inside)
     if(sporkManager.IsSporkActive(SPORK_9_SUPERBLOCKS_ENABLED) &&
         CSuperblockManager::IsSuperblockTriggered(nBlockHeight)) {
             LogPrint("gobject", "FillBlockPayments -- triggered superblock creation at height %d\n", nBlockHeight);
-            CSuperblockManager::CreateSuperblock(txNew, nBlockHeight, voutSuperblockRet,txoutFound);
+            CSuperblockManager::CreateSuperblock(txNew, nBlockHeight, /*voutSuperblockRet,*/txoutFound);
 
-            LogPrintf("FillBlockPayments -- voutSuperblockRet size =  %d\n", voutSuperblockRet.size());
+            //LogPrintf("FillBlockPayments -- voutSuperblockRet size =  %d\n", voutSuperblockRet.size());   // size always equals 0
 
             return;
     }
