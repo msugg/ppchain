@@ -408,7 +408,7 @@ git merge commit are mentioned.
 - #6168 `b3024f0` contrib/linearize: Support linearization of testnet blocks
 - #6098 `7708fcd` Update Windows resource files (and add one for bitcoin-tx)
 - #6159 `e1412d3` Catch errors on datadir lock and pidfile delete
-- #6186 `182686c` Fix two problems in CSuulord parsing
+- #6186 `182686c` Fix two problems in CSupop parsing
 - #6174 `df992b9` doc: add translation strings policy
 - #6210 `dfdb6dd` build: disable optional use of gmp in internal secp256k1 build
 - #6264 `94cd705` Remove translation for -help-debug options
@@ -434,7 +434,7 @@ Thanks to everyone who directly contributed to this release:
 - Chris Arnesen
 - Ciemon
 - CohibAA
-- Corinne Ulordjr
+- Corinne Popjr
 - Cory Fields
 - Cozz Lovan
 - Daira Hopwood
@@ -463,7 +463,7 @@ Thanks to everyone who directly contributed to this release:
 - jtimon
 - Julian Yap
 - Luca Venturini
-- Luke Ulordjr
+- Luke Popjr
 - Manuel Araoz
 - MarcoFalke
 - Matt Bogosian

@@ -618,14 +618,6 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
     result.push_back(Pair("height", (int64_t)(pindexPrev->nHeight+1)));
     result.push_back(Pair("claimtrie", pblock->hashClaimTrie.GetHex()));
 
-    UniValue masternodeObj(UniValue::VOBJ);
-    if(pblock->txoutMasternode != CTxOut()) {
-        CTxDestination address1;
-        ExtractDestination(pblock->txoutMasternode.scriptPubKey, address1);
-        CBitcoinAddress address2(address1);
-        masternodeObj.push_back(Pair("payee", address2.ToString().c_str()));
-        masternodeObj.push_back(Pair("script", HexStr(pblock->txoutMasternode.scriptPubKey.begin(), pblock->txoutMasternode.scriptPubKey.end())));
-        masternodeObj.push_back(Pair("amount", pblock->txoutMasternode.nValue));
     }
     result.push_back(Pair("masternode", masternodeObj));
     //result.push_back(Pair("masternode_payments_started", pindexPrev->nHeight + 1 > Params().GetConsensus().nMasternodePaymentsStartBlock));

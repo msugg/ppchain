@@ -1,6 +1,6 @@
 CentOS Build Notes
 ====================
-Some notes on how to build Ulord Core in CentOS.
+Some notes on how to build Pop Core in CentOS.
 
 As a server OS, we suggest not to bother with the GUI.
 
@@ -59,7 +59,7 @@ cd db-4.8.30.NC/build_unix/
 make install
 ```
 
-### Building Ulord Core
+### Building Pop Core
 
 Preparation:
 ```bash

@@ -1,11 +1,11 @@
-Ulord Core 0.2
+Pop Core 0.2
 =====================
 
-This is the official reference wallet for Ulord Token and comprises the backbone of the Ulord peer-to-peer network. You can [download Ulord Core](https://github.com/UlordChain) and [build it yourself](#building) using the guides below.
+This is the official reference wallet for Pop Token and comprises the backbone of the Pop peer-to-peer network. You can [download Pop Core](https://github.com/PopChain) and [build it yourself](#building) using the guides below.
 
 Running
 ---------------------
-The following are some helpful notes on how to run Ulord on your native platform.
+The following are some helpful notes on how to run Pop on your native platform.
 
 ### Unix
 
@@ -16,22 +16,22 @@ Unpack the files into a directory and run:
 
 ### Windows
 
-Unpack the files into a directory, and then run ulord-qt.exe.
+Unpack the files into a directory, and then run pop-qt.exe.
 
 ### OS X
 
-Drag Ulord-Qt to your applications folder, and then run Ulord-Qt.
+Drag Pop-Qt to your applications folder, and then run Pop-Qt.
 
 ### Need Help?
 
-* See the [Ulord documentation](https://ulordpay.atlassian.net/wiki/display/DOC)
+* See the [Pop documentation](https://poppay.atlassian.net/wiki/display/DOC)
 for help and more information.
-* Ask for help on [#ulordpay](http://webchat.freenode.net?channels=ulordpay) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net?channels=ulordpay).
-* Ask for help on the [UlordTalk](https://ulordtalk.org/) forums.
+* Ask for help on [#poppay](http://webchat.freenode.net?channels=poppay) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net?channels=poppay).
+* Ask for help on the [PopTalk](https://poptalk.org/) forums.
 
 Building
 ---------------------
-The following are developer notes on how to build Ulord Core on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build Pop Core on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
 - [OS X Build Notes](build-osx.md)
 - [Unix Build Notes](build-unix.md)
@@ -41,7 +41,7 @@ The following are developer notes on how to build Ulord Core on your native plat
 
 Development
 ---------------------
-The Ulord Core repo's [root README](/README.md) contains relevant information on the development process and automated testing.
+The Pop Core repo's [root README](/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Multiwallet Qt Development](multiwallet-qt.md)
@@ -57,8 +57,8 @@ The Ulord Core repo's [root README](/README.md) contains relevant information on
 - [Dnsseed Policy](dnsseed-policy.md)
 
 ### Resources
-* Discuss on the [UlordTalk](https://ulordtalk.org/) forums, in the Development & Technical Discussion board.
-* Discuss on [#ulordpay](http://webchat.freenode.net/?channels=ulordpay) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net/?channels=ulordpay).
+* Discuss on the [PopTalk](https://poptalk.org/) forums, in the Development & Technical Discussion board.
+* Discuss on [#poppay](http://webchat.freenode.net/?channels=poppay) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net/?channels=poppay).
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)

@@ -61,7 +61,7 @@ dansmith
 Gavin Andresen
 Gregory Maxwell
 Jeff Garzik
-Luke Ulordjr
+Luke Popjr
 Philip Kaufmann
 Pieter Wuille
 Wladimir J. van der Laan

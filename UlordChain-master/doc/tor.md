@@ -1,7 +1,7 @@
 TOR SUPPORT IN UC CORE
 =======================
 
-It is possible to run Ulord Core as a Tor hidden service, and connect to such services.
+It is possible to run Pop Core as a Tor hidden service, and connect to such services.
 
 The following directions assume you have a Tor proxy running on port 9050. Many
 distributions default to having a SOCKS proxy listening on port 9050, but others
@@ -10,10 +10,10 @@ port. See [Tor Project FAQ:TBBSocksPort](https://www.torproject.org/docs/faq.htm
 for how to properly configure Tor.
 
 
-1. Run Ulord Core behind a Tor proxy
+1. Run Pop Core behind a Tor proxy
 ----------------------------------
 
-The first step is running Ulord Core behind a Tor proxy. This will already make all
+The first step is running Pop Core behind a Tor proxy. This will already make all
 outgoing connections be anonymized, but more is possible.
 
 	-proxy=ip:port  Set the proxy server. If SOCKS5 is selected (default), this proxy
@@ -37,31 +37,31 @@ outgoing connections be anonymized, but more is possible.
 An example how to start the client if the Tor proxy is running on local host on
 port 9050 and only allows .onion nodes to connect:
 
-	./ulordd -onion=127.0.0.1:9050 -onlynet=tor -listen=0 -addnode=ssapp53tmftyjmjb.onion
+	./popd -onion=127.0.0.1:9050 -onlynet=tor -listen=0 -addnode=ssapp53tmftyjmjb.onion
 
 In a typical situation, this suffices to run behind a Tor proxy:
 
-	./ulordd -proxy=127.0.0.1:9050
+	./popd -proxy=127.0.0.1:9050
 
 
-2. Run a Ulord Core hidden server
+2. Run a Pop Core hidden server
 -------------------------------
 
 If you configure your Tor system accordingly, it is possible to make your node also
 reachable from the Tor network. Add these lines to your /etc/tor/torrc (or equivalent
 config file):
 
-	HiddenServiceDir /var/lib/tor/ulordcore-service/
+	HiddenServiceDir /var/lib/tor/popcore-service/
 	HiddenServicePort 9888 127.0.0.1:9888
 	HiddenServicePort 19888 127.0.0.1:19888
 
 The directory can be different of course, but (both) port numbers should be equal to
-your ulordd's P2P listen port (9888 by default).
+your popd's P2P listen port (9888 by default).
 
-	-externalip=X   You can tell Ulord Core about its publicly reachable address using
+	-externalip=X   You can tell Pop Core about its publicly reachable address using
 	                this option, and this can be a .onion address. Given the above
 	                configuration, you can find your onion address in
-	                /var/lib/tor/ulordcore-service/hostname. Onion addresses are given
+	                /var/lib/tor/popcore-service/hostname. Onion addresses are given
 	                preference for your node to advertise itself with, for connections
 	                coming from unroutable addresses (such as 127.0.0.1, where the
 	                Tor proxy typically runs).
@@ -78,28 +78,28 @@ your ulordd's P2P listen port (9888 by default).
 
 In a typical situation, where you're only reachable via Tor, this should suffice:
 
-	./ulordd -proxy=127.0.0.1:9050 -externalip=ssapp53tmftyjmjb.onion -listen
+	./popd -proxy=127.0.0.1:9050 -externalip=ssapp53tmftyjmjb.onion -listen
 
 (obviously, replace the Onion address with your own). It should be noted that you still
 listen on all devices and another node could establish a clearnet connection, when knowing
 your address. To mitigate this, additionally bind the address of your Tor proxy:
 
-	./ulordd ... -bind=127.0.0.1
+	./popd ... -bind=127.0.0.1
 
 If you don't care too much about hiding your node, and want to be reachable on IPv4
 as well, use `discover` instead:
 
-	./ulordd ... -discover
+	./popd ... -discover
 
 and open port 9888 on your firewall (or use -upnp).
 
 If you only want to use Tor to reach onion addresses, but not use it as a proxy
 for normal IPv4/IPv6 communication, use:
 
-	./ulordd -onion=127.0.0.1:9050 -externalip=ssapp53tmftyjmjb.onion -discover
+	./popd -onion=127.0.0.1:9050 -externalip=ssapp53tmftyjmjb.onion -discover
 
 
-3. List of known Ulord Core Tor relays
+3. List of known Pop Core Tor relays
 ------------------------------------
 
 * [darkcoinie7ghp67.onion](http://darkcoinie7ghp67.onion/)
@@ -120,14 +120,14 @@ for normal IPv4/IPv6 communication, use:
 
 Starting with Tor version 0.2.7.1 it is possible, through Tor's control socket
 API, to create and destroy 'ephemeral' hidden services programmatically.
-Ulord Core has been updated to make use of this.
+Pop Core has been updated to make use of this.
 
 This means that if Tor is running (and proper authorization is available),
-Ulord Core automatically creates a hidden service to listen on, without
+Pop Core automatically creates a hidden service to listen on, without
 manual configuration. This will positively affect the number of available
 .onion nodes.
 
-This new feature is enabled by default if Ulord Core is listening, and
+This new feature is enabled by default if Pop Core is listening, and
 a connection to Tor can be made. It can be configured with the `-listenonion`,
 `-torcontrol` and `-torpassword` settings. To show verbose debugging
 information, pass `-debug=tor`.

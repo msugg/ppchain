@@ -1,30 +1,30 @@
 0.11.2 Release notes
 ====================
 
-Ulord Core version 0.11.2 is now available from:
+Pop Core version 0.11.2 is now available from:
 
-  https://ulordpay.io/downloads
+  https://poppay.io/downloads
 
 Please report bugs using the issue tracker at github:
 
   https://github.com/darkcoin/darkcoin/issues
 
 
-Masternode enhancements
+Popnode enhancements
 -----------------------
 
-When restarting the client the masternodes will be stored in the datadir in
-*mncache.dat* file (make sure you don't have any wallet with such name or this
+When restarting the client the popnodes will be stored in the datadir in
+*pncache.dat* file (make sure you don't have any wallet with such name or this
 functionality will not be available for you)
 
 
 Mining and relay policy enhancements
 ------------------------------------
 
-Ulord Core's block templates are now for version 3 blocks only, and any
+Pop Core's block templates are now for version 3 blocks only, and any
 mining software relying on its `getblocktemplate` must be updated in parallel
 to use libblkmaker either version 0.4.2 or any version from 0.5.1 onward. If you
-are solo mining, this will affect you the moment you upgrade Ulord Core,
+are solo mining, this will affect you the moment you upgrade Pop Core,
 which must be done prior to BIP66 achieving its 951/1001 status. If you are
 mining with the stratum mining protocol: this does not affect you. If you are
 mining with the getblocktemplate protocol to a pool: this will affect you at the
@@ -35,9 +35,9 @@ pool operator's discretion, which must be no later than BIP66 achieving its
 BIP 66: strict DER encoding for signatures
 ------------------------------------------
 
-Ulord Core 0.11.2 implements BIP 66, which introduces block version 3, and a
+Pop Core 0.11.2 implements BIP 66, which introduces block version 3, and a
 new consensus rule, which prohibits non-DER signatures. Such transactions have
-been non-standard since Ulord 0.8, but were technically still permitted
+been non-standard since Pop 0.8, but were technically still permitted
 inside blocks.
 
 This change breaks the dependency on OpenSSL's signature parsing, and is
@@ -63,8 +63,8 @@ How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over /Applications/Ulord-Qt (on Mac) or
-ulordd/ulord-qt (on Linux).
+installer (on Windows) or just copy over /Applications/Pop-Qt (on Mac) or
+popd/pop-qt (on Linux).
 
 
 0.11.2 changelog
@@ -73,10 +73,10 @@ ulordd/ulord-qt (on Linux).
 - BIP 66 integration
 - Strict DER signatures
 - Bump block header version to 3 (see notes above)
-- Masternode caching
-- Masternode payment scheduler
-- Better protection from cheating masternodes
-- Extended functionality for `masternode list` RPC command
+- Popnode caching
+- Popnode payment scheduler
+- Better protection from cheating popnodes
+- Extended functionality for `popnode list` RPC command
 - Live Darksend and InstantX fee calculations in CoinControl
 - Darksend input caching
 - Open config file from within the wallet

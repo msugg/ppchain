@@ -116,7 +116,7 @@ release notes, in which this value was suggested)
 Detailed release notes follow. This overview includes changes that affect external
 behavior, not code moves, refactors or string updates.
 
-- #6186 `e4a7d51` Fix two problems in CSuulord parsing
+- #6186 `e4a7d51` Fix two problems in CSupop parsing
 - #6153 `ebd7d8d` Parameter interaction: disable upnp if -proxy set
 - #6203 `ecc96f5` Remove P2SH coinbase flag, no longer interesting
 - #6226 `181771b` json: fail read_string if string contains trailing garbage
@@ -148,7 +148,7 @@ Thanks to everyone who directly contributed to this release:
 - Gregory Maxwell
 - Jonas Schnelli
 - J Ross Nicoll
-- Luke Ulordjr
+- Luke Popjr
 - Pavel Vasin
 - Pieter Wuille
 - randy-waterhouse

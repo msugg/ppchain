@@ -65,7 +65,7 @@ struct Params {
         return 4 * 12 * nSuperblockCycle + 1;
     }
 
-    int nMasternodePaymentsStartBlock;
+//    int nMasternodePaymentsStartBlock;
     int nMasternodePaymentsIncreaseBlock;
     int nMasternodePaymentsIncreasePeriod; // in blocks
     int nInstantSendKeepLock; // in blocks

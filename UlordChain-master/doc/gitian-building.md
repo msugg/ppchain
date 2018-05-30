@@ -1,9 +1,9 @@
 Gitian building
 ================
 
-*Setup instructions for a Gitian build of Ulord Core using a Debian VM or physical system.*
+*Setup instructions for a Gitian build of Pop Core using a Debian VM or physical system.*
 
-Gitian is the deterministic build process that is used to build the Ulord
+Gitian is the deterministic build process that is used to build the Pop
 Core executables. It provides a way to be reasonably sure that the
 executables are really built from the source on GitHub. It also makes sure that
 the same, tested dependencies are used and statically built into the executable.
@@ -11,7 +11,7 @@ the same, tested dependencies are used and statically built into the executable.
 Multiple developers build the source code by following a specific descriptor
 ("recipe"), cryptographically sign the result, and upload the resulting signature.
 These results are compared and only if they match, the build is accepted and uploaded
-to ulord.org.
+to pop.org.
 
 More independent Gitian builders are needed, which is why this guide exists.
 It is preferred you follow these steps yourself instead of using someone else's
@@ -26,7 +26,7 @@ Table of Contents
 - [Installing Gitian](#installing-gitian)
 - [Setting up the Gitian image](#setting-up-the-gitian-image)
 - [Getting and building the inputs](#getting-and-building-the-inputs)
-- [Building Ulord Core](#building-ulord-core)
+- [Building Pop Core](#building-pop-core)
 - [Building an alternative repository](#building-an-alternative-repository)
 - [Signing externally](#signing-externally)
 - [Uploading signatures](#uploading-signatures)
@@ -300,11 +300,11 @@ cd ..
 
 **Note**: When sudo asks for a password, enter the password for the user *debian* not for *root*.
 
-Clone the git repositories for Ulord Core and Gitian.
+Clone the git repositories for Pop Core and Gitian.
 
 ```bash
 git clone https://github.com/devrandom/gitian-builder.git
-git clone https://github.com/ulordpay/ulord
+git clone https://github.com/poppay/pop
 ```
 
 Setting up the Gitian image
@@ -339,16 +339,16 @@ Getting and building the inputs
 --------------------------------
 
 Follow the instructions in [doc/release-process.md](release-process.md#fetch-and-build-inputs-first-time-or-when-dependency-versions-change)
-in the Ulord Core repository under 'Fetch and build inputs' to install sources which require
+in the Pop Core repository under 'Fetch and build inputs' to install sources which require
 manual intervention. Also optionally follow the next step: 'Seed the Gitian sources cache
 and offline git repositories' which will fetch the remaining files required for building
 offline.
 
-Building Ulord Core
+Building Pop Core
 ----------------
 
-To build Ulord Core (for Linux, OS X and Windows) just follow the steps under 'perform
-Gitian builds' in [doc/release-process.md](release-process.md#perform-gitian-builds) in the Ulord Core repository.
+To build Pop Core (for Linux, OS X and Windows) just follow the steps under 'perform
+Gitian builds' in [doc/release-process.md](release-process.md#perform-gitian-builds) in the Pop Core repository.
 
 This may take some time as it will build all the dependencies needed for each descriptor.
 These dependencies will be cached after a successful build to avoid rebuilding them when possible.
@@ -363,12 +363,12 @@ tail -f var/build.log
 Output from `gbuild` will look something like
 
 ```bash
-    Initialized empty Git repository in /home/debian/gitian-builder/inputs/ulord/.git/
+    Initialized empty Git repository in /home/debian/gitian-builder/inputs/pop/.git/
     remote: Counting objects: 57959, done.
     remote: Total 57959 (delta 0), reused 0 (delta 0), pack-reused 57958
     Receiving objects: 100% (57959/57959), 53.76 MiB | 484.00 KiB/s, done.
     Resolving deltas: 100% (41590/41590), done.
-    From https://github.com/ulordpay/ulord
+    From https://github.com/poppay/pop
     ... (new tags, new branch etc)
     --- Building for precise amd64 ---
     Stopping target if it is up
@@ -394,18 +394,18 @@ and inputs.
 
 For example:
 ```bash
-URL=https://github.com/crowning-/ulord.git
+URL=https://github.com/crowning-/pop.git
 COMMIT=b616fb8ef0d49a919b72b0388b091aaec5849b96
-./bin/gbuild --commit ulord=${COMMIT} --url ulord=${URL} ../ulord/contrib/gitian-descriptors/gitian-linux.yml
-./bin/gbuild --commit ulord=${COMMIT} --url ulord=${URL} ../ulord/contrib/gitian-descriptors/gitian-win.yml
-./bin/gbuild --commit ulord=${COMMIT} --url ulord=${URL} ../ulord/contrib/gitian-descriptors/gitian-osx.yml
+./bin/gbuild --commit pop=${COMMIT} --url pop=${URL} ../pop/contrib/gitian-descriptors/gitian-linux.yml
+./bin/gbuild --commit pop=${COMMIT} --url pop=${URL} ../pop/contrib/gitian-descriptors/gitian-win.yml
+./bin/gbuild --commit pop=${COMMIT} --url pop=${URL} ../pop/contrib/gitian-descriptors/gitian-osx.yml
 ```
 
 Building fully offline
 -----------------------
 
 For building fully offline including attaching signatures to unsigned builds, the detached-sigs repository
-and the ulord git repository with the desired tag must both be available locally, and then gbuild must be
+and the pop git repository with the desired tag must both be available locally, and then gbuild must be
 told where to find them. It also requires an apt-cacher-ng which is fully-populated but set to offline mode, or
 manually disabling gitian-builder's use of apt-get to update the VM build environment.
 
@@ -424,7 +424,7 @@ cd /path/to/gitian-builder
 LXC_ARCH=amd64 LXC_SUITE=precise on-target -u root apt-get update
 LXC_ARCH=amd64 LXC_SUITE=precise on-target -u root \
   -e DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends -y install \
-  $( sed -ne '/^packages:/,/[^-] .*/ {/^- .*/{s/"//g;s/- //;p}}' ../ulord/contrib/gitian-descriptors/*|sort|uniq )
+  $( sed -ne '/^packages:/,/[^-] .*/ {/^- .*/{s/"//g;s/- //;p}}' ../pop/contrib/gitian-descriptors/*|sort|uniq )
 LXC_ARCH=amd64 LXC_SUITE=precise on-target -u root apt-get -q -y purge grub
 LXC_ARCH=amd64 LXC_SUITE=precise on-target -u root -e DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade
 ```
@@ -444,12 +444,12 @@ Then when building, override the remote URLs that gbuild would otherwise pull fr
 ```bash
 
 cd /some/root/path/
-git clone https://github.com/ulordpay/ulord-detached-sigs.git
+git clone https://github.com/poppay/pop-detached-sigs.git
 
-UCPATH=/some/root/path/ulord.git
-SIGPATH=/some/root/path/ulord-detached-sigs.git
+UCPATH=/some/root/path/pop.git
+SIGPATH=/some/root/path/pop-detached-sigs.git
 
-./bin/gbuild --url ulord=${UCPATH},signature=${SIGPATH} ../ulord/contrib/gitian-descriptors/gitian-win-signer.yml
+./bin/gbuild --url pop=${UCPATH},signature=${SIGPATH} ../pop/contrib/gitian-descriptors/gitian-win-signer.yml
 ```
 
 Signing externally
@@ -464,9 +464,9 @@ When you execute `gsign` you will get an error from GPG, which can be ignored. C
 in `gitian.sigs` to your signing machine and do
 
 ```bash
-    gpg --detach-sign ${VERSION}-linux/${SIGNER}/ulord-linux-build.assert
-    gpg --detach-sign ${VERSION}-win/${SIGNER}/ulord-win-build.assert
-    gpg --detach-sign ${VERSION}-osx-unsigned/${SIGNER}/ulord-osx-build.assert
+    gpg --detach-sign ${VERSION}-linux/${SIGNER}/pop-linux-build.assert
+    gpg --detach-sign ${VERSION}-win/${SIGNER}/pop-win-build.assert
+    gpg --detach-sign ${VERSION}-osx-unsigned/${SIGNER}/pop-osx-build.assert
 ```
 
 This will create the `.sig` files that can be committed together with the `.assert` files to assert your
@@ -476,6 +476,6 @@ Uploading signatures (not yet implemented)
 ---------------------
 
 In the future it will be possible to push your signatures (both the `.assert` and `.assert.sig` files) to the
-[ulord/gitian.sigs](https://github.com/ulordpay/gitian.sigs/) repository, or if that's not possible to create a pull
+[pop/gitian.sigs](https://github.com/poppay/gitian.sigs/) repository, or if that's not possible to create a pull
 request.
 There will be an official announcement when this repository is online.

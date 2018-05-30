@@ -1,6 +1,6 @@
 Mac OS X Build Instructions and Notes
 ====================================
-This guide will show you how to build ulordd (headless client) for OSX.
+This guide will show you how to build popd (headless client) for OSX.
 
 Notes
 -----
@@ -36,15 +36,15 @@ Instructions: Homebrew
 
 NOTE: Building with Qt4 is still supported, however, could result in a broken UI. As such, building with Qt5 is recommended.
 
-### Building Ulord Core
+### Building Pop Core
 
 1. Clone the GitHub tree to get the source code and go into the directory.
 
-        git clone https://github.com/UlordChain/UlordChain.git
-        cd ulord
+        git clone https://github.com/PopChain/PopChain.git
+        cd pop
 
-2.  Build Ulord Core:
-    This will configure and build the headless ulord binaries as well as the gui (if Qt is found).
+2.  Build Pop Core:
+    This will configure and build the headless pop binaries as well as the gui (if Qt is found).
     You can disable the gui build by passing `--without-gui` to configure.
 
         ./autogen.sh
@@ -55,7 +55,7 @@ NOTE: Building with Qt4 is still supported, however, could result in a broken UI
 
         make check
 
-4.  (Optional) You can also install ulordd to your path:
+4.  (Optional) You can also install popd to your path:
 
         make install
 
@@ -67,7 +67,7 @@ Download Qt Creator from https://www.qt.io/download/. Download the "community ed
 1. Make sure you installed everything through Homebrew mentioned above
 2. Do a proper ./configure --enable-debug
 3. In Qt Creator do "New Project" -> Import Project -> Import Existing Project
-4. Enter "ulord-qt" as project name, enter src/qt as location
+4. Enter "pop-qt" as project name, enter src/qt as location
 5. Leave the file selection as it is
 6. Confirm the "summary page"
 7. In the "Projects" tab select "Manage Kits..."
@@ -77,11 +77,11 @@ Download Qt Creator from https://www.qt.io/download/. Download the "community ed
 
 Creating a release build
 ------------------------
-You can ignore this section if you are building `ulordd` for your own use.
+You can ignore this section if you are building `popd` for your own use.
 
-ulordd/ulord-cli binaries are not included in the Ulord-Qt.app bundle.
+popd/pop-cli binaries are not included in the Pop-Qt.app bundle.
 
-If you are building `ulordd` or `Ulord Core` for others, your build machine should be set up
+If you are building `popd` or `Pop Core` for others, your build machine should be set up
 as follows for maximum compatibility:
 
 All dependencies should be compiled with these flags:
@@ -90,30 +90,30 @@ All dependencies should be compiled with these flags:
  -arch x86_64
  -isysroot $(xcode-select --print-path)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk
 
-Once dependencies are compiled, see [doc/release-process.md](release-process.md) for how the Ulord Core
+Once dependencies are compiled, see [doc/release-process.md](release-process.md) for how the Pop Core
 bundle is packaged and signed to create the .dmg disk image that is distributed.
 
 Running
 -------
 
-It's now available at `./ulordd`, provided that you are still in the `src`
+It's now available at `./popd`, provided that you are still in the `src`
 directory. We have to first create the RPC configuration file, though.
 
-Run `./ulordd` to get the filename where it should be put, or just try these
+Run `./popd` to get the filename where it should be put, or just try these
 commands:
 
-    echo -e "rpcuser=ulordrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/UlordCore/ulord.conf"
-    chmod 600 "/Users/${USER}/Library/Application Support/UlordCore/ulord.conf"
+    echo -e "rpcuser=poprpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/PopCore/pop.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/PopCore/pop.conf"
 
 The next time you run it, it will start downloading the blockchain, but it won't
 output anything while it's doing this. This process may take several hours;
 you can monitor its process by looking at the debug.log file, like this:
 
-    tail -f $HOME/Library/Application\ Support/UlordCore/debug.log
+    tail -f $HOME/Library/Application\ Support/PopCore/debug.log
 
 Other commands:
 -------
 
-    ./ulordd -daemon # to start the ulord daemon.
-    ./ulord-cli --help  # for a list of command-line options.
-    ./ulord-cli help    # When the daemon is running, to get a list of RPC commands
+    ./popd -daemon # to start the pop daemon.
+    ./pop-cli --help  # for a list of command-line options.
+    ./pop-cli help    # When the daemon is running, to get a list of RPC commands

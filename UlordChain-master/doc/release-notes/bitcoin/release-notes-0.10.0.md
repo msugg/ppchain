@@ -108,9 +108,9 @@ estimate.
 RPC access control changes
 --------------------------
 
-Suulord matching for the purpose of access control is now done
+Supop matching for the purpose of access control is now done
 by matching the binary network address, instead of with string wildcard matching.
-For the user this means that `-rpcallowip` takes a suulord specification, which can be
+For the user this means that `-rpcallowip` takes a supop specification, which can be
 
 - a single IP address (e.g. `1.2.3.4` or `fe80::0012:3456:789a:bcde`)
 - a network/CIDR (e.g. `1.2.3.0/24` or `fe80::0000/64`)
@@ -130,7 +130,7 @@ For example:
 
 Using wildcards will result in the rule being rejected with the following error in debug.log:
 
-    Error: Invalid -rpcallowip suulord specification: *. Valid are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24).
+    Error: Invalid -rpcallowip supop specification: *. Valid are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24).
 
 
 REST interface
@@ -714,7 +714,7 @@ Thanks to everyone who contributed to this release:
 - kiwigb
 - Kosta Zertsekel
 - LongShao007
-- Luke Ulordjr
+- Luke Popjr
 - Mark Friedenbach
 - Mathy Vanvoorden
 - Matt Corallo

@@ -1,5 +1,5 @@
 
-* banlist.dat: stores the IPs/Suulords of banned nodes
+* banlist.dat: stores the IPs/Supops of banned nodes
 * bitcoin.conf: contains configuration settings for bitcoind or bitcoin-qt
 * bitcoind.pid: stores the process id of bitcoind while running
 * blocks/blk000??.dat: block data (custom, 128 MiB per file); since 0.8.0
