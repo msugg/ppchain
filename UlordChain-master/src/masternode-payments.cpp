@@ -284,7 +284,7 @@ bool CMasternodePayments::CanVote(COutPoint outMasternode, int nBlockHeight)
 *
 *   Fill Masternode ONLY payment block
 */
-/*
+
 void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, int nBlockHeight, CAmount blockReward, CTxOut& txoutMasternodeRet)
 {
     // make sure it's not filled yet
