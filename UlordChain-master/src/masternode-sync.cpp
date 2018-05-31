@@ -283,9 +283,9 @@ void CMasternodeSync::ProcessTick()
     if(!pCurrentBlockIndex) return;
 
     //the actual count of masternodes we have currently
-    int nMnCount = mnodeman.CountMasternodes();
+//    int nMnCount = mnodeman.CountMasternodes();
 
-    if(fDebug) LogPrintf("CMasternodeSync::ProcessTick -- nTick %d nMnCount %d\n", nTick, nMnCount);
+//    if(fDebug) LogPrintf("CMasternodeSync::ProcessTick -- nTick %d nMnCount %d\n", nTick, nMnCount);
 
     // RESET SYNCING INCASE OF FAILURE
     {
@@ -419,7 +419,7 @@ void CMasternodeSync::ProcessTick()
                 if(netfulfilledman.HasFulfilledRequest(pnode->addr, "masternode-list-sync")) continue;
                 netfulfilledman.AddFulfilledRequest(pnode->addr, "masternode-list-sync");
 
-                if (pnode->nVersion < mnpayments.GetMinMasternodePaymentsProto()) continue;
+//                if (pnode->nVersion < mnpayments.GetMinMasternodePaymentsProto()) continue;
                 nRequestedMasternodeAttempt++;
 
                 mnodeman.DsegUpdate(pnode);
@@ -430,50 +430,50 @@ void CMasternodeSync::ProcessTick()
 
             // MNW : SYNC MASTERNODE PAYMENT VOTES FROM OTHER CONNECTED CLIENTS
 
-            if(nRequestedMasternodeAssets == MASTERNODE_SYNC_MNW) {
-                LogPrint("mnpayments", "CMasternodeSync::ProcessTick -- nTick %d nRequestedMasternodeAssets %d nTimeLastPaymentVote %lld GetTime() %lld diff %lld\n", nTick, nRequestedMasternodeAssets, nTimeLastPaymentVote, GetTime(), GetTime() - nTimeLastPaymentVote);
-                // check for timeout first
-                // This might take a lot longer than MASTERNODE_SYNC_TIMEOUT_SECONDS minutes due to new blocks,
-                // but that should be OK and it should timeout eventually.
-                if(nTimeLastPaymentVote < GetTime() - MASTERNODE_SYNC_TIMEOUT_SECONDS) {
-                    LogPrintf("CMasternodeSync::ProcessTick -- nTick %d nRequestedMasternodeAssets %d -- timeout\n", nTick, nRequestedMasternodeAssets);
-                    if (nRequestedMasternodeAttempt == 0) {
-                        LogPrintf("CMasternodeSync::ProcessTick -- ERROR: failed to sync %s\n", GetAssetName());
-                        // probably not a good idea to proceed without winner list
-                        Fail();
-                        ReleaseNodes(vNodesCopy);
-                        return;
-                    }
-                    SwitchToNextAsset();
-                    ReleaseNodes(vNodesCopy);
-                    return;
-                }
+//            if(nRequestedMasternodeAssets == MASTERNODE_SYNC_MNW) {
+//                LogPrint("mnpayments", "CMasternodeSync::ProcessTick -- nTick %d nRequestedMasternodeAssets %d nTimeLastPaymentVote %lld GetTime() %lld diff %lld\n", nTick, nRequestedMasternodeAssets, nTimeLastPaymentVote, GetTime(), GetTime() - nTimeLastPaymentVote);
+//                // check for timeout first
+//                // This might take a lot longer than MASTERNODE_SYNC_TIMEOUT_SECONDS minutes due to new blocks,
+//                // but that should be OK and it should timeout eventually.
+//                if(nTimeLastPaymentVote < GetTime() - MASTERNODE_SYNC_TIMEOUT_SECONDS) {
+//                    LogPrintf("CMasternodeSync::ProcessTick -- nTick %d nRequestedMasternodeAssets %d -- timeout\n", nTick, nRequestedMasternodeAssets);
+//                    if (nRequestedMasternodeAttempt == 0) {
+//                        LogPrintf("CMasternodeSync::ProcessTick -- ERROR: failed to sync %s\n", GetAssetName());
+//                        // probably not a good idea to proceed without winner list
+//                        Fail();
+//                        ReleaseNodes(vNodesCopy);
+//                        return;
+//                    }
+//                    SwitchToNextAsset();
+//                    ReleaseNodes(vNodesCopy);
+//                    return;
+//                }
 
-                // check for data
-                // if mnpayments already has enough blocks and votes, switch to the next asset
-                // try to fetch data from at least two peers though
-                if(nRequestedMasternodeAttempt > 1 && mnpayments.IsEnoughData()) {
-                    LogPrintf("CMasternodeSync::ProcessTick -- nTick %d nRequestedMasternodeAssets %d -- found enough data\n", nTick, nRequestedMasternodeAssets);
-                    SwitchToNextAsset();
-                    ReleaseNodes(vNodesCopy);
-                    return;
-                }
+//                // check for data
+//                // if mnpayments already has enough blocks and votes, switch to the next asset
+//                // try to fetch data from at least two peers though
+//                if(nRequestedMasternodeAttempt > 1 && mnpayments.IsEnoughData()) {
+//                    LogPrintf("CMasternodeSync::ProcessTick -- nTick %d nRequestedMasternodeAssets %d -- found enough data\n", nTick, nRequestedMasternodeAssets);
+//                    SwitchToNextAsset();
+//                    ReleaseNodes(vNodesCopy);
+//                    return;
+//                }
 
-                // only request once from each peer
-                if(netfulfilledman.HasFulfilledRequest(pnode->addr, "masternode-payment-sync")) continue;
-                netfulfilledman.AddFulfilledRequest(pnode->addr, "masternode-payment-sync");
+//                // only request once from each peer
+//                if(netfulfilledman.HasFulfilledRequest(pnode->addr, "masternode-payment-sync")) continue;
+//                netfulfilledman.AddFulfilledRequest(pnode->addr, "masternode-payment-sync");
 
-                if(pnode->nVersion < mnpayments.GetMinMasternodePaymentsProto()) continue;
-                nRequestedMasternodeAttempt++;
+//                if(pnode->nVersion < mnpayments.GetMinMasternodePaymentsProto()) continue;
+//                nRequestedMasternodeAttempt++;
 
-                // ask node for all payment votes it has (new nodes will only return votes for future payments)
-                pnode->PushMessage(NetMsgType::MASTERNODEPAYMENTSYNC, mnpayments.GetStorageLimit());
-                // ask node for missing pieces only (old nodes will not be asked)
-                mnpayments.RequestLowDataPaymentBlocks(pnode);
+//                // ask node for all payment votes it has (new nodes will only return votes for future payments)
+//                pnode->PushMessage(NetMsgType::MASTERNODEPAYMENTSYNC, mnpayments.GetStorageLimit());
+//                // ask node for missing pieces only (old nodes will not be asked)
+//                mnpayments.RequestLowDataPaymentBlocks(pnode);
 
-                ReleaseNodes(vNodesCopy);
-                return; //this will cause each peer to get one request each six seconds for the various assets we need
-            }
+//                ReleaseNodes(vNodesCopy);
+//                return; //this will cause each peer to get one request each six seconds for the various assets we need
+//            }
 
             // GOVOBJ : SYNC GOVERNANCE ITEMS FROM OUR PEERS
 

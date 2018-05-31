@@ -2493,7 +2493,7 @@ void ThreadCheckDarkSendPool()
             if(nTick % 60 == 0) {
                 mnodeman.ProcessMasternodeConnections();
                 mnodeman.CheckAndRemove();
-                mnpayments.CheckAndRemove();
+                //mnpayments.CheckAndRemove();
                 instantsend.CheckAndRemove();
             }
 

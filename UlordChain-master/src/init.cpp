@@ -229,8 +229,8 @@ void PrepareShutdown()
     // STORE DATA CACHES INTO SERIALIZED DAT FILES
     CFlatDB<CMasternodeMan> flatdb1("mncache.dat", "magicMasternodeCache");
     flatdb1.Dump(mnodeman);
-    CFlatDB<CMasternodePayments> flatdb2("mnpayments.dat", "magicMasternodePaymentsCache");
-    flatdb2.Dump(mnpayments);
+//    CFlatDB<CMasternodePayments> flatdb2("mnpayments.dat", "magicMasternodePaymentsCache");
+//    flatdb2.Dump(mnpayments);
     // popchain
     //CFlatDB<CGovernanceManager> flatdb3("governance.dat", "magicGovernanceCache");
     //flatdb3.Dump(governance);
@@ -1906,11 +1906,11 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     }
 
     if(mnodeman.size()) {
-        uiInterface.InitMessage(_("Loading masternode payment cache..."));
-        CFlatDB<CMasternodePayments> flatdb2("mnpayments.dat", "magicMasternodePaymentsCache");
-        if(!flatdb2.Load(mnpayments)) {
-            return InitError("Failed to load masternode payments cache from mnpayments.dat");
-        }
+//        uiInterface.InitMessage(_("Loading masternode payment cache..."));
+//        CFlatDB<CMasternodePayments> flatdb2("mnpayments.dat", "magicMasternodePaymentsCache");
+//        if(!flatdb2.Load(mnpayments)) {
+//            return InitError("Failed to load masternode payments cache from mnpayments.dat");
+//        }
         // popchain doesn't need governance part
 
 //        uiInterface.InitMessage(_("Loading governance cache..."));
@@ -1938,7 +1938,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     // GetMainSignals().UpdatedBlockTip(chainActive.Tip());
     mnodeman.UpdatedBlockTip(chainActive.Tip());
     darkSendPool.UpdatedBlockTip(chainActive.Tip());
-    mnpayments.UpdatedBlockTip(chainActive.Tip());
+    //mnpayments.UpdatedBlockTip(chainActive.Tip());
     masternodeSync.UpdatedBlockTip(chainActive.Tip());
     // popchain
     //governance.UpdatedBlockTip(chainActive.Tip());

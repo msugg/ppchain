@@ -5451,34 +5451,34 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                     }
                 }
 
-                if (!pushed && inv.type == MSG_MASTERNODE_PAYMENT_VOTE) {
-                    if(mnpayments.HasVerifiedPaymentVote(inv.hash)) {
-                        CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
-                        ss.reserve(1000);
-                        ss << mnpayments.mapMasternodePaymentVotes[inv.hash];
-                        pfrom->PushMessage(NetMsgType::MASTERNODEPAYMENTVOTE, ss);
-                        pushed = true;
-                    }
-                }
+//                if (!pushed && inv.type == MSG_MASTERNODE_PAYMENT_VOTE) {
+//                    if(mnpayments.HasVerifiedPaymentVote(inv.hash)) {
+//                        CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
+//                        ss.reserve(1000);
+//                        ss << mnpayments.mapMasternodePaymentVotes[inv.hash];
+//                        pfrom->PushMessage(NetMsgType::MASTERNODEPAYMENTVOTE, ss);
+//                        pushed = true;
+//                    }
+//                }
 
-                if (!pushed && inv.type == MSG_MASTERNODE_PAYMENT_BLOCK) {
-                    BlockMap::iterator mi = mapBlockIndex.find(inv.hash);
-                    LOCK(cs_mapMasternodeBlocks);
-                    if (mi != mapBlockIndex.end() && mnpayments.mapMasternodeBlocks.count(mi->second->nHeight)) {
-                        BOOST_FOREACH(CMasternodePayee& payee, mnpayments.mapMasternodeBlocks[mi->second->nHeight].vecPayees) {
-                            std::vector<uint256> vecVoteHashes = payee.GetVoteHashes();
-                            BOOST_FOREACH(uint256& hash, vecVoteHashes) {
-                                if(mnpayments.HasVerifiedPaymentVote(hash)) {
-                                    CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
-                                    ss.reserve(1000);
-                                    ss << mnpayments.mapMasternodePaymentVotes[hash];
-                                    pfrom->PushMessage(NetMsgType::MASTERNODEPAYMENTVOTE, ss);
-                                }
-                            }
-                        }
-                        pushed = true;
-                    }
-                }
+//                if (!pushed && inv.type == MSG_MASTERNODE_PAYMENT_BLOCK) {
+//                    BlockMap::iterator mi = mapBlockIndex.find(inv.hash);
+//                    LOCK(cs_mapMasternodeBlocks);
+//                    if (mi != mapBlockIndex.end() && mnpayments.mapMasternodeBlocks.count(mi->second->nHeight)) {
+//                        BOOST_FOREACH(CMasternodePayee& payee, mnpayments.mapMasternodeBlocks[mi->second->nHeight].vecPayees) {
+//                            std::vector<uint256> vecVoteHashes = payee.GetVoteHashes();
+//                            BOOST_FOREACH(uint256& hash, vecVoteHashes) {
+//                                if(mnpayments.HasVerifiedPaymentVote(hash)) {
+//                                    CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
+//                                    ss.reserve(1000);
+//                                    ss << mnpayments.mapMasternodePaymentVotes[hash];
+//                                    pfrom->PushMessage(NetMsgType::MASTERNODEPAYMENTVOTE, ss);
+//                                }
+//                            }
+//                        }
+//                        pushed = true;
+//                    }
+//                }
 
                 if (!pushed && inv.type == MSG_MASTERNODE_ANNOUNCE) {
                     if(mnodeman.mapSeenMasternodeBroadcast.count(inv.hash)){
@@ -6647,7 +6647,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             //probably one the extensions
             darkSendPool.ProcessMessage(pfrom, strCommand, vRecv);
             mnodeman.ProcessMessage(pfrom, strCommand, vRecv);
-            mnpayments.ProcessMessage(pfrom, strCommand, vRecv);
+            //mnpayments.ProcessMessage(pfrom, strCommand, vRecv);
             instantsend.ProcessMessage(pfrom, strCommand, vRecv);
             sporkManager.ProcessSpork(pfrom, strCommand, vRecv);
             masternodeSync.ProcessMessage(pfrom, strCommand, vRecv);

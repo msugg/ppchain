@@ -227,7 +227,7 @@ public:
 
     /// Count Masternodes filtered by nProtocolVersion.
     /// Masternode nProtocolVersion should match or be above the one specified in param here.
-    int CountMasternodes(int nProtocolVersion = -1);
+//    int CountMasternodes(int nProtocolVersion = -1);
     /// Count enabled Masternodes filtered by nProtocolVersion.
     /// Masternode nProtocolVersion should match or be above the one specified in param here.
     int CountEnabled(int nProtocolVersion = -1);
@@ -296,9 +296,9 @@ public:
     masternode_info_t GetMasternodeInfo(const CPubKey& pubKeyMasternode);
 
     /// Find an entry in the masternode list that is next to be paid
-    CMasternode* GetNextMasternodeInQueueForPayment(int nBlockHeight, bool fFilterSigTime, int& nCount);
+//    CMasternode* GetNextMasternodeInQueueForPayment(int nBlockHeight, bool fFilterSigTime, int& nCount);
     /// Same as above but use current block height
-    CMasternode* GetNextMasternodeInQueueForPayment(bool fFilterSigTime, int& nCount);
+//    CMasternode* GetNextMasternodeInQueueForPayment(bool fFilterSigTime, int& nCount);
 
     /// Find a random entry
     CMasternode* FindRandomNotInVec(const std::vector<CTxIn> &vecToExclude, int nProtocolVersion = -1);
@@ -332,7 +332,7 @@ public:
     bool CheckMnbAndUpdateMasternodeList(CNode* pfrom, CMasternodeBroadcast mnb, int& nDos);
     bool IsMnbRecoveryRequested(const uint256& hash) { return mMnbRecoveryRequests.count(hash); }
 
-    void UpdateLastPaid();
+//    void UpdateLastPaid();
 
     void CheckAndRebuildMasternodeIndex();
 

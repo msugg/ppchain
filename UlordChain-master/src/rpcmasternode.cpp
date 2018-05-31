@@ -100,7 +100,7 @@ UniValue masternode(const UniValue& params, bool fHelp)
     if (fHelp  ||
         (strCommand != "start" && strCommand != "start-alias" && strCommand != "start-all" && strCommand != "start-missing" &&
          strCommand != "start-disabled" && strCommand != "list" && strCommand != "list-conf" && strCommand != "count" &&
-         strCommand != "debug" && strCommand != "current" && strCommand != "winner" && strCommand != "winners" && strCommand != "genkey" &&
+         strCommand != "debug" && /*strCommand != "current" && strCommand != "winner" && strCommand != "winners" &&*/ strCommand != "genkey" &&
          strCommand != "connect" && strCommand != "outputs" && strCommand != "status"))
             throw std::runtime_error(
                 "masternode \"command\"... ( \"passphrase\" )\n"
@@ -109,8 +109,9 @@ UniValue masternode(const UniValue& params, bool fHelp)
                 "1. \"command\"        (string or set of strings, required) The command to execute\n"
                 "2. \"passphrase\"     (string, optional) The wallet passphrase\n"
                 "\nAvailable commands:\n"
-                "  count        - Print number of all known masternodes (optional: 'ps', 'enabled', 'all', 'qualify')\n"
-                "  current      - Print info on current masternode winner to be paid the next block (calculated locally)\n"
+                "  count        - Print number of all known masternodes (optional: 'ps')\n"
+//                "  count        - Print number of all known masternodes (optional: 'ps', 'enabled', 'all', 'qualify')\n"
+//                "  current      - Print info on current masternode winner to be paid the next block (calculated locally)\n"
                 "  debug        - Print masternode status\n"
                 "  genkey       - Generate new masternodeprivkey\n"
                 "  outputs      - Print masternode compatible outputs\n"
@@ -166,44 +167,44 @@ UniValue masternode(const UniValue& params, bool fHelp)
         if (strMode == "enabled")
             return mnodeman.CountEnabled();
 
-        int nCount;
-        mnodeman.GetNextMasternodeInQueueForPayment(true, nCount);
+//        int nCount;
+//        mnodeman.GetNextMasternodeInQueueForPayment(true, nCount);
 
-        if (strMode == "qualify")
-            return nCount;
+//        if (strMode == "qualify")
+//            return nCount;
 
-        if (strMode == "all")
-            return strprintf("Total: %d (PS Compatible: %d / Enabled: %d / Qualify: %d)",
-                mnodeman.size(), mnodeman.CountEnabled(MIN_PRIVATESEND_PEER_PROTO_VERSION),
-                mnodeman.CountEnabled(), nCount);
+//        if (strMode == "all")
+//            return strprintf("Total: %d (PS Compatible: %d / Enabled: %d / Qualify: %d)",
+//                mnodeman.size(), mnodeman.CountEnabled(MIN_PRIVATESEND_PEER_PROTO_VERSION),
+//                mnodeman.CountEnabled(), nCount);
     }
 
-    if (strCommand == "current" || strCommand == "winner")
-    {
-        int nCount;
-        int nHeight;
-        CMasternode* winner = NULL;
-        {
-            LOCK(cs_main);
-            nHeight = chainActive.Height() + (strCommand == "current" ? 1 : 10);
-        }
-        mnodeman.UpdateLastPaid();
-        winner = mnodeman.GetNextMasternodeInQueueForPayment(nHeight, true, nCount);
-        if(!winner) return "unknown";
+//    if (strCommand == "current" || strCommand == "winner")
+//    {
+//        int nCount;
+//        int nHeight;
+//        CMasternode* winner = NULL;
+//        {
+//            LOCK(cs_main);
+//            nHeight = chainActive.Height() + (strCommand == "current" ? 1 : 10);
+//        }
+//        mnodeman.UpdateLastPaid();
+//        winner = mnodeman.GetNextMasternodeInQueueForPayment(nHeight, true, nCount);
+//        if(!winner) return "unknown";
 
-        UniValue obj(UniValue::VOBJ);
+//        UniValue obj(UniValue::VOBJ);
 
-        obj.push_back(Pair("height",        nHeight));
-        obj.push_back(Pair("IP:port",       winner->addr.ToString()));
-        obj.push_back(Pair("protocol",      (int64_t)winner->nProtocolVersion));
-        obj.push_back(Pair("vin",           winner->vin.prevout.ToStringShort()));
-        obj.push_back(Pair("payee",         CBitcoinAddress(winner->pubKeyCollateralAddress.GetID()).ToString()));
-        obj.push_back(Pair("lastseen",      (winner->lastPing == CMasternodePing()) ? winner->sigTime :
-                                                    winner->lastPing.sigTime));
-        obj.push_back(Pair("activeseconds", (winner->lastPing == CMasternodePing()) ? 0 :
-                                                    (winner->lastPing.sigTime - winner->sigTime)));
-        return obj;
-    }
+//        obj.push_back(Pair("height",        nHeight));
+//        obj.push_back(Pair("IP:port",       winner->addr.ToString()));
+//        obj.push_back(Pair("protocol",      (int64_t)winner->nProtocolVersion));
+//        obj.push_back(Pair("vin",           winner->vin.prevout.ToStringShort()));
+//        obj.push_back(Pair("payee",         CBitcoinAddress(winner->pubKeyCollateralAddress.GetID()).ToString()));
+//        obj.push_back(Pair("lastseen",      (winner->lastPing == CMasternodePing()) ? winner->sigTime :
+//                                                    winner->lastPing.sigTime));
+//        obj.push_back(Pair("activeseconds", (winner->lastPing == CMasternodePing()) ? 0 :
+//                                                    (winner->lastPing.sigTime - winner->sigTime)));
+//        return obj;
+//    }
 
     if (strCommand == "debug")
     {
@@ -448,9 +449,9 @@ UniValue masternodelist(const UniValue& params, bool fHelp)
     if (params.size() == 2) strFilter = params[1].get_str();
 
     if (fHelp || (
-                strMode != "activeseconds" && strMode != "addr" && strMode != "full" &&
-                strMode != "lastseen" && strMode != "lastpaidtime" && strMode != "lastpaidblock" &&
-                strMode != "protocol" && strMode != "payee" && strMode != "rank" && strMode != "status"))
+                strMode != "activeseconds" && strMode != "addr" && /*strMode != "full" &&*/
+                strMode != "lastseen" && /*strMode != "lastpaidtime" && strMode != "lastpaidblock" &&*/
+                strMode != "protocol" && /*strMode != "payee" &&*/ strMode != "rank" && strMode != "status"))
     {
         throw std::runtime_error(
                 "masternodelist ( \"mode\" \"filter\" )\n"
@@ -463,13 +464,13 @@ UniValue masternodelist(const UniValue& params, bool fHelp)
                 "  activeseconds  - Print number of seconds masternode recognized by the network as enabled\n"
                 "                   (since latest issued \"masternode start/start-many/start-alias\")\n"
                 "  addr           - Print ip address associated with a masternode (can be additionally filtered, partial match)\n"
-                "  full           - Print info in format 'status protocol payee lastseen activeseconds lastpaidtime lastpaidblock IP'\n"
-                "                   (can be additionally filtered, partial match)\n"
-                "  lastpaidblock  - Print the last block height a node was paid on the network\n"
-                "  lastpaidtime   - Print the last time a node was paid on the network\n"
+//                "  full           - Print info in format 'status protocol payee lastseen activeseconds lastpaidtime lastpaidblock IP'\n"
+//                "                   (can be additionally filtered, partial match)\n"
+//                "  lastpaidblock  - Print the last block height a node was paid on the network\n"
+//                "  lastpaidtime   - Print the last time a node was paid on the network\n"
                 "  lastseen       - Print timestamp of when a masternode was last seen on the network\n"
-                "  payee          - Print Ulord address associated with a masternode (can be additionally filtered,\n"
-                "                   partial match)\n"
+//                "  payee          - Print Ulord address associated with a masternode (can be additionally filtered,\n"
+//                "                   partial match)\n"
                 "  protocol       - Print protocol of a masternode (can be additionally filtered, exact match))\n"
                 "  rank           - Print rank of a masternode based on current block\n"
                 "  status         - Print masternode status: PRE_ENABLED / ENABLED / EXPIRED / WATCHDOG_EXPIRED / NEW_START_REQUIRED /\n"
@@ -477,9 +478,9 @@ UniValue masternodelist(const UniValue& params, bool fHelp)
                 );
     }
 
-    if (strMode == "full" || strMode == "lastpaidtime" || strMode == "lastpaidblock") {
-        mnodeman.UpdateLastPaid();
-    }
+//    if (strMode == "full" || strMode == "lastpaidtime" || strMode == "lastpaidblock") {
+//        mnodeman.UpdateLastPaid();
+//    }
 
     UniValue obj(UniValue::VOBJ);
     if (strMode == "rank") {
@@ -501,7 +502,8 @@ UniValue masternodelist(const UniValue& params, bool fHelp)
                 if (strFilter !="" && strAddress.find(strFilter) == std::string::npos &&
                     strOutpoint.find(strFilter) == std::string::npos) continue;
                 obj.push_back(Pair(strOutpoint, strAddress));
-            } else if (strMode == "full") {
+            }
+            /*else if (strMode == "full") {
                 std::ostringstream streamFull;
                 streamFull << std::setw(18) <<
                                mn.GetStatus() << " " <<
@@ -522,16 +524,19 @@ UniValue masternodelist(const UniValue& params, bool fHelp)
             } else if (strMode == "lastpaidtime") {
                 if (strFilter !="" && strOutpoint.find(strFilter) == std::string::npos) continue;
                 obj.push_back(Pair(strOutpoint, mn.GetLastPaidTime()));
-            } else if (strMode == "lastseen") {
+            }*/
+            else if (strMode == "lastseen") {
                 if (strFilter !="" && strOutpoint.find(strFilter) == std::string::npos) continue;
                 obj.push_back(Pair(strOutpoint, (int64_t)mn.lastPing.sigTime));
-            } else if (strMode == "payee") {
-                CBitcoinAddress address(mn.pubKeyCollateralAddress.GetID());
-                std::string strPayee = address.ToString();
-                if (strFilter !="" && strPayee.find(strFilter) == std::string::npos &&
-                    strOutpoint.find(strFilter) == std::string::npos) continue;
-                obj.push_back(Pair(strOutpoint, strPayee));
-            } else if (strMode == "protocol") {
+            }
+//            else if (strMode == "payee") {
+//                CBitcoinAddress address(mn.pubKeyCollateralAddress.GetID());
+//                std::string strPayee = address.ToString();
+//                if (strFilter !="" && strPayee.find(strFilter) == std::string::npos &&
+//                    strOutpoint.find(strFilter) == std::string::npos) continue;
+//                obj.push_back(Pair(strOutpoint, strPayee));
+//            }
+            else if (strMode == "protocol") {
                 if (strFilter !="" && strFilter != strprintf("%d", mn.nProtocolVersion) &&
                     strOutpoint.find(strFilter) == std::string::npos) continue;
                 obj.push_back(Pair(strOutpoint, (int64_t)mn.nProtocolVersion));

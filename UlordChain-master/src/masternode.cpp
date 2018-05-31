@@ -216,7 +216,8 @@ void CMasternode::Check(bool fForce)
     bool fOurMasternode = fMasterNode && activeMasternode.pubKeyMasternode == pubKeyMasternode;
 
                    // masternode doesn't meet payment protocol requirements ...
-    bool fRequireUpdate = nProtocolVersion < mnpayments.GetMinMasternodePaymentsProto() ||
+    //popchain
+    bool fRequireUpdate = /*nProtocolVersion < mnpayments.GetMinMasternodePaymentsProto() ||*/
                    // or it's our own node and we just updated it to the new protocol but we are still waiting for activation ...
                    (fOurMasternode && nProtocolVersion < PROTOCOL_VERSION);
 
@@ -395,44 +396,44 @@ int CMasternode::GetCollateralAge()
     return nHeight - nCacheCollateralBlock;
 }
 
-void CMasternode::UpdateLastPaid(const CBlockIndex *pindex, int nMaxBlocksToScanBack)
-{
-    if(!pindex) return;
+//void CMasternode::UpdateLastPaid(const CBlockIndex *pindex, int nMaxBlocksToScanBack)
+//{
+//    if(!pindex) return;
 
-    const CBlockIndex *BlockReading = pindex;
+//    const CBlockIndex *BlockReading = pindex;
 
-    CScript mnpayee = GetScriptForDestination(pubKeyCollateralAddress.GetID());
-    // LogPrint("masternode", "CMasternode::UpdateLastPaidBlock -- searching for block with payment to %s\n", vin.prevout.ToStringShort());
+//    CScript mnpayee = GetScriptForDestination(pubKeyCollateralAddress.GetID());
+//    // LogPrint("masternode", "CMasternode::UpdateLastPaidBlock -- searching for block with payment to %s\n", vin.prevout.ToStringShort());
 
-    LOCK(cs_mapMasternodeBlocks);
+//    LOCK(cs_mapMasternodeBlocks);
 
-    for (int i = 0; BlockReading && BlockReading->nHeight > nBlockLastPaid && i < nMaxBlocksToScanBack; i++) {
-        if(mnpayments.mapMasternodeBlocks.count(BlockReading->nHeight) &&
-            mnpayments.mapMasternodeBlocks[BlockReading->nHeight].HasPayeeWithVotes(mnpayee, 2))
-        {
-            CBlock block;
-            if(!ReadBlockFromDisk(block, BlockReading, Params().GetConsensus())) // shouldn't really happen
-                continue;
+//    for (int i = 0; BlockReading && BlockReading->nHeight > nBlockLastPaid && i < nMaxBlocksToScanBack; i++) {
+//        if(mnpayments.mapMasternodeBlocks.count(BlockReading->nHeight) &&
+//            mnpayments.mapMasternodeBlocks[BlockReading->nHeight].HasPayeeWithVotes(mnpayee, 2))
+//        {
+//            CBlock block;
+//            if(!ReadBlockFromDisk(block, BlockReading, Params().GetConsensus())) // shouldn't really happen
+//                continue;
 
-            CAmount nMasternodePayment = GetMasternodePayment(BlockReading->nHeight);
+//            CAmount nMasternodePayment = GetMasternodePayment(BlockReading->nHeight);
 
-            BOOST_FOREACH(CTxOut txout, block.vtx[0].vout)
-                if(mnpayee == txout.scriptPubKey && nMasternodePayment == txout.nValue) {
-                    nBlockLastPaid = BlockReading->nHeight;
-                    nTimeLastPaid = BlockReading->nTime;
-                    LogPrint("masternode", "CMasternode::UpdateLastPaidBlock -- searching for block with payment to %s -- found new %d\n", vin.prevout.ToStringShort(), nBlockLastPaid);
-                    return;
-                }
-        }
+//            BOOST_FOREACH(CTxOut txout, block.vtx[0].vout)
+//                if(mnpayee == txout.scriptPubKey && nMasternodePayment == txout.nValue) {
+//                    nBlockLastPaid = BlockReading->nHeight;
+//                    nTimeLastPaid = BlockReading->nTime;
+//                    LogPrint("masternode", "CMasternode::UpdateLastPaidBlock -- searching for block with payment to %s -- found new %d\n", vin.prevout.ToStringShort(), nBlockLastPaid);
+//                    return;
+//                }
+//        }
 
-        if (BlockReading->pprev == NULL) { assert(BlockReading); break; }
-        BlockReading = BlockReading->pprev;
-    }
+//        if (BlockReading->pprev == NULL) { assert(BlockReading); break; }
+//        BlockReading = BlockReading->pprev;
+//    }
 
-    // Last payment for this masternode wasn't found in latest mnpayments blocks
-    // or it was found in mnpayments blocks but wasn't found in the blockchain.
-    // LogPrint("masternode", "CMasternode::UpdateLastPaidBlock -- searching for block with payment to %s -- keeping old %d\n", vin.prevout.ToStringShort(), nBlockLastPaid);
-}
+//    // Last payment for this masternode wasn't found in latest mnpayments blocks
+//    // or it was found in mnpayments blocks but wasn't found in the blockchain.
+//    // LogPrint("masternode", "CMasternode::UpdateLastPaidBlock -- searching for block with payment to %s -- keeping old %d\n", vin.prevout.ToStringShort(), nBlockLastPaid);
+//}
 
 bool CMasternodeBroadcast::Create(std::string strService, std::string strKeyMasternode, std::string strTxHash, std::string strOutputIndex, std::string& strErrorRet, CMasternodeBroadcast &mnbRet, bool fOffline)
 {
@@ -540,10 +541,10 @@ bool CMasternodeBroadcast::SimpleCheck(int& nDos)
         nActiveState = MASTERNODE_EXPIRED;
     }
 
-    if(nProtocolVersion < mnpayments.GetMinMasternodePaymentsProto()) {
-        LogPrintf("CMasternodeBroadcast::SimpleCheck -- ignoring outdated Masternode: masternode=%s  nProtocolVersion=%d\n", vin.prevout.ToStringShort(), nProtocolVersion);
-        return false;
-    }
+//    if(nProtocolVersion < mnpayments.GetMinMasternodePaymentsProto()) {
+//        LogPrintf("CMasternodeBroadcast::SimpleCheck -- ignoring outdated Masternode: masternode=%s  nProtocolVersion=%d\n", vin.prevout.ToStringShort(), nProtocolVersion);
+//        return false;
+//    }
 
     CScript pubkeyScript;
     pubkeyScript = GetScriptForDestination(pubKeyCollateralAddress.GetID());
