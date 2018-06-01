@@ -1871,13 +1871,13 @@ void CMasternodeMan::UpdatedBlockTip(const CBlockIndex *pindex)
 void CMasternodeMan::NotifyMasternodeUpdates()
 {
     // Avoid double locking
-    bool fMasternodesAddedLocal = false;
-    bool fMasternodesRemovedLocal = false;
-    {
-        LOCK(cs);
-        fMasternodesAddedLocal = fMasternodesAdded;
-        fMasternodesRemovedLocal = fMasternodesRemoved;
-    }
+//    bool fMasternodesAddedLocal = false;
+//    bool fMasternodesRemovedLocal = false;
+//    {
+//        LOCK(cs);
+//        fMasternodesAddedLocal = fMasternodesAdded;
+//        fMasternodesRemovedLocal = fMasternodesRemoved;
+//    }
 
 //    if(fMasternodesAddedLocal) {
 //        governance.CheckMasternodeOrphanObjects();
