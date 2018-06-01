@@ -5266,14 +5266,14 @@ bool static AlreadyHave(const CInv& inv) EXCLUSIVE_LOCKS_REQUIRED(cs_main)
     case MSG_SPORK:
         return mapSporks.count(inv.hash);
 
-    case MSG_MASTERNODE_PAYMENT_VOTE:
-        return mnpayments.mapMasternodePaymentVotes.count(inv.hash);
+//    case MSG_MASTERNODE_PAYMENT_VOTE:
+//        return mnpayments.mapMasternodePaymentVotes.count(inv.hash);
 
-    case MSG_MASTERNODE_PAYMENT_BLOCK:
-        {
-            BlockMap::iterator mi = mapBlockIndex.find(inv.hash);
-            return mi != mapBlockIndex.end() && mnpayments.mapMasternodeBlocks.find(mi->second->nHeight) != mnpayments.mapMasternodeBlocks.end();
-        }
+//    case MSG_MASTERNODE_PAYMENT_BLOCK:
+//        {
+//            BlockMap::iterator mi = mapBlockIndex.find(inv.hash);
+//            return mi != mapBlockIndex.end() && mnpayments.mapMasternodeBlocks.find(mi->second->nHeight) != mnpayments.mapMasternodeBlocks.end();
+//        }
 
     case MSG_MASTERNODE_ANNOUNCE:
         return mnodeman.mapSeenMasternodeBroadcast.count(inv.hash) && !mnodeman.IsMnbRecoveryRequested(inv.hash);

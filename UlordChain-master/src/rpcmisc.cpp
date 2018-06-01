@@ -157,7 +157,7 @@ UniValue mnsync(const UniValue& params, bool fHelp)
         objStatus.push_back(Pair("Attempt", masternodeSync.GetAttempt()));
         objStatus.push_back(Pair("IsBlockchainSynced", masternodeSync.IsBlockchainSynced()));
         objStatus.push_back(Pair("IsMasternodeListSynced", masternodeSync.IsMasternodeListSynced()));
-        objStatus.push_back(Pair("IsWinnersListSynced", masternodeSync.IsWinnersListSynced()));
+//        objStatus.push_back(Pair("IsWinnersListSynced", masternodeSync.IsWinnersListSynced()));
         objStatus.push_back(Pair("IsSynced", masternodeSync.IsSynced()));
         objStatus.push_back(Pair("IsFailed", masternodeSync.IsFailed()));
         return objStatus;
