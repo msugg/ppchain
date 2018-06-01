@@ -1,9 +1,4 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2017 The Dash Core developers
-// Copyright (c) 2016-2018 Ulord Foundation Ltd.
-// Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
 
 #if defined(HAVE_CONFIG_H)
 #include "config/ulord-config.h"
@@ -78,7 +73,7 @@
 #include <boost/interprocess/sync/file_lock.hpp>
 #include <boost/thread.hpp>
 #include <openssl/crypto.h>
-//popchain
+
 #include <boost/lexical_cast.hpp>
 
 #if ENABLE_ZMQ
@@ -229,11 +224,6 @@ void PrepareShutdown()
     // STORE DATA CACHES INTO SERIALIZED DAT FILES
     CFlatDB<CMasternodeMan> flatdb1("mncache.dat", "magicMasternodeCache");
     flatdb1.Dump(mnodeman);
-//    CFlatDB<CMasternodePayments> flatdb2("mnpayments.dat", "magicMasternodePaymentsCache");
-//    flatdb2.Dump(mnpayments);
-    // popchain
-    //CFlatDB<CGovernanceManager> flatdb3("governance.dat", "magicGovernanceCache");
-    //flatdb3.Dump(governance);
     CFlatDB<CNetFulfilledRequestManager> flatdb4("netfulfilled.dat", "magicFulfilledCache");
     flatdb4.Dump(netfulfilledman);
 
@@ -565,8 +555,7 @@ std::string HelpMessage(HelpMessageMode mode)
     }
     strUsage += HelpMessageOpt("-shrinkdebugfile", _("Shrink debug.log file on client startup (default: 1 when no -debug)"));
     AppendParamsHelpMessages(strUsage, showDebug);
-    //popchain
-    //strUsage += HelpMessageOpt("-litemode=<n>", strprintf(_("Disable all Ulord specific functionality (Masternodes, PrivateSend, InstantSend, Governance) (0-1, default: %u)"), 0));
+    
     strUsage += HelpMessageOpt("-litemode=<n>", strprintf(_("Disable all Ulord specific functionality (Masternodes, PrivateSend, InstantSend) (0-1, default: %u)"), 0));
 
     strUsage += HelpMessageGroup(_("Masternode options:"));
@@ -1905,24 +1894,10 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
         return InitError("Failed to load masternode cache from mncache.dat");
     }
 
-    if(mnodeman.size()) {
-//        uiInterface.InitMessage(_("Loading masternode payment cache..."));
-//        CFlatDB<CMasternodePayments> flatdb2("mnpayments.dat", "magicMasternodePaymentsCache");
-//        if(!flatdb2.Load(mnpayments)) {
-//            return InitError("Failed to load masternode payments cache from mnpayments.dat");
-//        }
-        // popchain doesn't need governance part
-
-//        uiInterface.InitMessage(_("Loading governance cache..."));
-//        CFlatDB<CGovernanceManager> flatdb3("governance.dat", "magicGovernanceCache");
-//        if(!flatdb3.Load(governance)) {
-//            return InitError("Failed to load governance cache from governance.dat");
-//        }
-//        governance.InitOnLoad();
+    if(!mnodeman.size()) {
+		uiInterface.InitMessage(_("Masternode cache is empty, skipping payments cache..."));
     }
-    else {
-        //uiInterface.InitMessage(_("Masternode cache is empty, skipping payments and governance cache..."));
-        uiInterface.InitMessage(_("Masternode cache is empty, skipping payments cache..."));
+        
     }
 
     uiInterface.InitMessage(_("Loading fullfiled requests cache..."));
@@ -1938,10 +1913,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     // GetMainSignals().UpdatedBlockTip(chainActive.Tip());
     mnodeman.UpdatedBlockTip(chainActive.Tip());
     darkSendPool.UpdatedBlockTip(chainActive.Tip());
-    //mnpayments.UpdatedBlockTip(chainActive.Tip());
     masternodeSync.UpdatedBlockTip(chainActive.Tip());
-    // popchain
-    //governance.UpdatedBlockTip(chainActive.Tip());
 
     // ********************************************************* Step 11d: start ulord-privatesend thread
 

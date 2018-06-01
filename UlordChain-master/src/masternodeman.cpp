@@ -1,6 +1,4 @@
-// Copyright (c) 2014-2017 The Dash Core developers
-// Distributed under the MIT/X11 software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
 
 #include "activemasternode.h"
 #include "addrman.h"
@@ -211,7 +209,6 @@ CMasternodeMan::CMasternodeMan()
   fIndexRebuilt(false),
   fMasternodesAdded(false),
   fMasternodesRemoved(false),
-  //vecDirtyGovernanceObjectHashes(),
   nLastWatchdogVoteTime(0),
   mapSeenMasternodeBroadcast(),
   mapSeenMasternodePing(),
@@ -393,6 +390,7 @@ void CMasternodeMan::Check()
     }
 }
 
+// Popchain DevTeam
 void CMasternodeMan::CheckAndRemove()
 {
     if(!masternodeSync.IsMasternodeListSynced()) return;
@@ -423,7 +421,6 @@ void CMasternodeMan::CheckAndRemove()
                 mWeAskedForMasternodeListEntry.erase((*it).vin.prevout);
 
                 // and finally remove it from the list
-                //it->FlagGovernanceItemsAsDirty();
                 it = vMasternodes.erase(it);
                 fMasternodesRemoved = true;
             } else {
@@ -596,28 +593,15 @@ void CMasternodeMan::Clear()
     indexMasternodesOld.Clear();
 }
 
-//int CMasternodeMan::CountMasternodes(int nProtocolVersion)
-//{
-//    LOCK(cs);
-//    int nCount = 0;
-//    nProtocolVersion = nProtocolVersion == -1 ? mnpayments.GetMinMasternodePaymentsProto() : nProtocolVersion;
 
-//    BOOST_FOREACH(CMasternode& mn, vMasternodes) {
-//        if(mn.nProtocolVersion < nProtocolVersion) continue;
-//        nCount++;
-//    }
-
-//    return nCount;
-//}
-
+// Popchain DevTeam
 int CMasternodeMan::CountEnabled(int nProtocolVersion)
 {
     LOCK(cs);
     int nCount = 0;
-    //nProtocolVersion = nProtocolVersion == -1 ? mnpayments.GetMinMasternodePaymentsProto() : nProtocolVersion;
 
     BOOST_FOREACH(CMasternode& mn, vMasternodes) {
-        if(/*mn.nProtocolVersion < nProtocolVersion ||*/ !mn.IsEnabled()) continue;
+        if(!mn.IsEnabled()) continue;
         nCount++;
     }
 
@@ -753,88 +737,11 @@ bool CMasternodeMan::Has(const CTxIn& vin)
     return (pMN != NULL);
 }
 
-//
-// Deterministically select the oldest/best masternode to pay on the network
-//
-//CMasternode* CMasternodeMan::GetNextMasternodeInQueueForPayment(bool fFilterSigTime, int& nCount)
-//{
-//    if(!pCurrentBlockIndex) {
-//        nCount = 0;
-//        return NULL;
-//    }
-//    return GetNextMasternodeInQueueForPayment(pCurrentBlockIndex->nHeight, fFilterSigTime, nCount);
-//}
 
-//// popchain
-//CMasternode* CMasternodeMan::GetNextMasternodeInQueueForPayment(int nBlockHeight, bool fFilterSigTime, int& nCount)
-//{
-//    // Need LOCK2 here to ensure consistent locking order because the GetBlockHash call below locks cs_main
-//    LOCK2(cs_main,cs);
-
-//    CMasternode *pBestMasternode = NULL;
-//    std::vector<std::pair<int, CMasternode*> > vecMasternodeLastPaid;
-
-//    /*
-//        Make a vector with all of the last paid times
-//    */
-
-//    int nMnCount = CountEnabled();
-//    BOOST_FOREACH(CMasternode &mn, vMasternodes)
-//    {
-//        if(!mn.IsValidForPayment()) continue;
-
-//        // //check protocol version
-//        //if(mn.nProtocolVersion < mnpayments.GetMinMasternodePaymentsProto()) continue;
-
-//        //it's in the list (up to 8 entries ahead of current block to allow propagation) -- so let's skip it
-//        //if(mnpayments.IsScheduled(mn, nBlockHeight)) continue;
-
-//        //it's too new, wait for a cycle
-//        if(fFilterSigTime && mn.sigTime + (nMnCount*2.6*60) > GetAdjustedTime()) continue;
-
-//        //make sure it has at least as many confirmations as there are masternodes
-//        if(mn.GetCollateralAge() < nMnCount) continue;
-
-//        vecMasternodeLastPaid.push_back(std::make_pair(mn.GetLastPaidBlock(), &mn));
-//    }
-
-//    nCount = (int)vecMasternodeLastPaid.size();
-
-//    //when the network is in the process of upgrading, don't penalize nodes that recently restarted
-//    if(fFilterSigTime && nCount < nMnCount/3) return GetNextMasternodeInQueueForPayment(nBlockHeight, false, nCount);
-
-//    // Sort them low to high
-//    sort(vecMasternodeLastPaid.begin(), vecMasternodeLastPaid.end(), CompareLastPaidBlock());
-
-//    uint256 blockHash;
-//    if(!GetBlockHash(blockHash, nBlockHeight - 101)) {
-//        LogPrintf("CMasternode::GetNextMasternodeInQueueForPayment -- ERROR: GetBlockHash() failed at nBlockHeight %d\n", nBlockHeight - 101);
-//        return NULL;
-//    }
-//    // Look at 1/10 of the oldest nodes (by last payment), calculate their scores and pay the best one
-//    //  -- This doesn't look at who is being paid in the +8-10 blocks, allowing for double payments very rarely
-//    //  -- 1/100 payments should be a double payment on mainnet - (1/(3000/10))*2
-//    //  -- (chance per block * chances before IsScheduled will fire)
-//    int nTenthNetwork = nMnCount/10;
-//    int nCountTenth = 0;
-//    arith_uint256 nHighest = 0;
-//    BOOST_FOREACH (PAIRTYPE(int, CMasternode*)& s, vecMasternodeLastPaid){
-//        arith_uint256 nScore = s.second->CalculateScore(blockHash);
-//        if(nScore > nHighest){
-//            nHighest = nScore;
-//            pBestMasternode = s.second;
-//        }
-//        nCountTenth++;
-//        if(nCountTenth >= nTenthNetwork) break;
-//    }
-//    return pBestMasternode;
-//}
-
+// Popchain DevTeam
 CMasternode* CMasternodeMan::FindRandomNotInVec(const std::vector<CTxIn> &vecToExclude, int nProtocolVersion)
 {
     LOCK(cs);
-
-    //nProtocolVersion = nProtocolVersion == -1 ? mnpayments.GetMinMasternodePaymentsProto() : nProtocolVersion;
 
     int nCountEnabled = CountEnabled(nProtocolVersion);
     int nCountNotExcluded = nCountEnabled - vecToExclude.size();
@@ -1702,29 +1609,6 @@ bool CMasternodeMan::CheckMnbAndUpdateMasternodeList(CNode* pfrom, CMasternodeBr
     return true;
 }
 
-//void CMasternodeMan::UpdateLastPaid()
-//{
-//    LOCK(cs);
-
-//    if(fLiteMode) return;
-//    if(!pCurrentBlockIndex) return;
-
-//    static bool IsFirstRun = true;
-//    // Do full scan on first run or if we are not a masternode
-//    // (MNs should update this info on every block, so limited scan should be enough for them)
-//    int nMaxBlocksToScanBack = (IsFirstRun || !fMasterNode) ? mnpayments.GetStorageLimit() : LAST_PAID_SCAN_BLOCKS;
-
-//    // LogPrint("mnpayments", "CMasternodeMan::UpdateLastPaid -- nHeight=%d, nMaxBlocksToScanBack=%d, IsFirstRun=%s\n",
-//    //                         pCurrentBlockIndex->nHeight, nMaxBlocksToScanBack, IsFirstRun ? "true" : "false");
-
-//    BOOST_FOREACH(CMasternode& mn, vMasternodes) {
-//        mn.UpdateLastPaid(pCurrentBlockIndex, nMaxBlocksToScanBack);
-//    }
-
-//    // every time is like the first time if winners list is not synced
-//    IsFirstRun = !masternodeSync.IsWinnersListSynced();
-//}
-
 void CMasternodeMan::CheckAndRebuildMasternodeIndex()
 {
     LOCK(cs);
@@ -1768,24 +1652,6 @@ bool CMasternodeMan::IsWatchdogActive()
     // Check if any masternodes have voted recently, otherwise return false
     return (GetTime() - nLastWatchdogVoteTime) <= MASTERNODE_WATCHDOG_MAX_SECONDS;
 }
-
-//void CMasternodeMan::AddGovernanceVote(const CTxIn& vin, uint256 nGovernanceObjectHash)
-//{
-//    LOCK(cs);
-//    CMasternode* pMN = Find(vin);
-//    if(!pMN)  {
-//        return;
-//    }
-//    pMN->AddGovernanceVote(nGovernanceObjectHash);
-//}
-
-//void CMasternodeMan::RemoveGovernanceObject(uint256 nGovernanceObjectHash)
-//{
-//    LOCK(cs);
-//    BOOST_FOREACH(CMasternode& mn, vMasternodes) {
-//        mn.RemoveGovernanceObject(nGovernanceObjectHash);
-//    }
-//}
 
 void CMasternodeMan::CheckMasternode(const CTxIn& vin, bool fForce)
 {
@@ -1854,6 +1720,7 @@ void CMasternodeMan::SetMasternodeLastPing(const CTxIn& vin, const CMasternodePi
     }
 }
 
+// Popchain DevTeam
 void CMasternodeMan::UpdatedBlockTip(const CBlockIndex *pindex)
 {
     pCurrentBlockIndex = pindex;
@@ -1863,30 +1730,12 @@ void CMasternodeMan::UpdatedBlockTip(const CBlockIndex *pindex)
 
     if(fMasterNode) {
         DoFullVerificationStep();
-        // normal wallet does not need to update this every block, doing update on rpc call should be enough
-        //UpdateLastPaid();
     }
 }
 
+// Popchain DevTeam
 void CMasternodeMan::NotifyMasternodeUpdates()
 {
-    // Avoid double locking
-//    bool fMasternodesAddedLocal = false;
-//    bool fMasternodesRemovedLocal = false;
-//    {
-//        LOCK(cs);
-//        fMasternodesAddedLocal = fMasternodesAdded;
-//        fMasternodesRemovedLocal = fMasternodesRemoved;
-//    }
-
-//    if(fMasternodesAddedLocal) {
-//        governance.CheckMasternodeOrphanObjects();
-//        governance.CheckMasternodeOrphanVotes();
-//    }
-//    if(fMasternodesRemovedLocal) {
-//        governance.UpdateCachesAndClean();
-//    }
-
     LOCK(cs);
     fMasternodesAdded = false;
     fMasternodesRemoved = false;

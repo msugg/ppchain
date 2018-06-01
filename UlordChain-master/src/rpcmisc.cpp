@@ -1,8 +1,4 @@
-// Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2017 The Dash Core developers
-// Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
 
 #include "base58.h"
 #include "clientversion.h"
@@ -140,6 +136,7 @@ UniValue debug(const UniValue& params, bool fHelp)
     return "Debug mode: " + (fDebug ? strMode : "off");
 }
 
+// Popchain DevTeam
 UniValue mnsync(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
@@ -157,7 +154,6 @@ UniValue mnsync(const UniValue& params, bool fHelp)
         objStatus.push_back(Pair("Attempt", masternodeSync.GetAttempt()));
         objStatus.push_back(Pair("IsBlockchainSynced", masternodeSync.IsBlockchainSynced()));
         objStatus.push_back(Pair("IsMasternodeListSynced", masternodeSync.IsMasternodeListSynced()));
-//        objStatus.push_back(Pair("IsWinnersListSynced", masternodeSync.IsWinnersListSynced()));
         objStatus.push_back(Pair("IsSynced", masternodeSync.IsSynced()));
         objStatus.push_back(Pair("IsFailed", masternodeSync.IsFailed()));
         return objStatus;

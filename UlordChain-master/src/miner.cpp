@@ -1,9 +1,5 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2017 The Dash Core developers
-// Copyright (c) 2016-2018 Ulord Foundation Ltd.
-// Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// // Copyright (c) 2017-2018 The Popchain Core Developers
+
 
 #include "miner.h"
 
@@ -436,10 +432,9 @@ CBlockTemplate* CreateNewBlock(const CChainParams& chainparams, const CScript& s
 
         // Update coinbase transaction with additional info about masternode and governance payments,
         // get some info back to pass to getblocktemplate
-        // in popchain, we dont need masternode and governance payment
-        FillBlockPayments(txNew, nHeight, blockReward, /*pblock->txoutMasternode, pblock->voutSuperblock,*/pblock->txoutFound);
+        // Popchain DevTeam
+        FillBlockPayments(txNew, nHeight, blockReward, pblock->txoutFound);
 
-//        LogPrintf("CreateNewBlock -- nBlockHeight %d blockReward %lld txoutMasternode %s txNew %s",
         LogPrintf("CreateNewBlock -- nBlockHeight %d blockReward %lld txNew %s",
                      nHeight, blockReward, /*pblock->txoutMasternode.ToString(),*/ txNew.ToString());
 

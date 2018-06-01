@@ -1,6 +1,5 @@
-// Copyright (c) 2014-2017 The Dash Core developers
-// Distributed under the MIT/X11 software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
+
 #ifndef MASTERNODE_SYNC_H
 #define MASTERNODE_SYNC_H
 
@@ -15,10 +14,6 @@ static const int MASTERNODE_SYNC_FAILED          = -1;
 static const int MASTERNODE_SYNC_INITIAL         = 0;
 static const int MASTERNODE_SYNC_SPORKS          = 1;
 static const int MASTERNODE_SYNC_LIST            = 2;
-//static const int MASTERNODE_SYNC_MNW             = 3;
-//static const int MASTERNODE_SYNC_GOVERNANCE      = 4;
-//static const int MASTERNODE_SYNC_GOVOBJ          = 10;
-//static const int MASTERNODE_SYNC_GOVOBJ_VOTE     = 11;
 static const int MASTERNODE_SYNC_FINISHED        = 999;
 
 static const int MASTERNODE_SYNC_TICK_SECONDS    = 6;
@@ -67,12 +62,9 @@ public:
     void AddedPaymentVote() { nTimeLastPaymentVote = GetTime(); }
     void AddedGovernanceItem() { nTimeLastGovernanceItem = GetTime(); }
 
-//    void SendGovernanceSyncRequest(CNode* pnode);
-
     bool IsFailed() { return nRequestedMasternodeAssets == MASTERNODE_SYNC_FAILED; }
     bool IsBlockchainSynced(bool fBlockAccepted = false);
     bool IsMasternodeListSynced() { return nRequestedMasternodeAssets > MASTERNODE_SYNC_LIST; }
-//    bool IsWinnersListSynced() { return nRequestedMasternodeAssets > MASTERNODE_SYNC_MNW; }
     bool IsSynced();/* { return nRequestedMasternodeAssets == MASTERNODE_SYNC_FINISHED; } */
 
     int GetAssetID() { return nRequestedMasternodeAssets; }

@@ -1,9 +1,4 @@
-// Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2017 The Dash Core developers
-// Copyright (c) 2016-2018 Ulord Foundation Ltd.
-// Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
 
 #include "claimtrie.h"
 #include "rpcserver.h"
@@ -254,6 +249,7 @@ UniValue stop(const UniValue& params, bool fHelp)
 
 /**
  * Call Table
+ * Popchain DevTeam
  */
 static const CRPCCommand vRPCCommands[] =
 { //  category              name                      actor (function)         okSafeMode
@@ -348,10 +344,6 @@ static const CRPCCommand vRPCCommands[] =
     { "ulord",               "masternode",             &masternode,             true  },
     { "ulord",               "masternodelist",         &masternodelist,         true  },
     { "ulord",               "masternodebroadcast",    &masternodebroadcast,    true  },
-//    { "ulord",               "gobject",                &gobject,                true  },
-//    { "ulord",               "getgovernanceinfo",      &getgovernanceinfo,      true  },
-//    { "ulord",               "getsuperblockbudget",    &getsuperblockbudget,    true  },
-//    { "ulord",               "voteraw",                &voteraw,                true  },
     { "ulord",               "mnsync",                 &mnsync,                 true  },
     { "ulord",               "spork",                  &spork,                  true  },
     { "ulord",               "getpoolinfo",            &getpoolinfo,            true  },

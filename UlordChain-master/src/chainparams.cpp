@@ -1,9 +1,4 @@
-// Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin Core developers
-// Copyright (c) 2014-2017 The Dash Core developers
-// Copyright (c) 2016-2018 Ulord Foundation Ltd.
-// Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
 
 #include "base58.h"
 #include "chainparams.h"
@@ -172,14 +167,9 @@ static CBlock CreateGenesisBlock1(uint32_t nTime, uint256 nNonce, uint32_t nBits
 
 /**
  * Main network
+ * Popchain DevTeam
  */
-/**
- * What makes a good checkpoint block?
- * + Is surrounded by blocks with reasonable timestamps
- *   (no blocks before with a timestamp after, none after with
- *    timestamp before)
- * + Contains no strange transactions
- */
+
 
 class CMainParams : public CChainParams {
 public:
@@ -191,26 +181,13 @@ public:
         consensus.genesisReward = int64_t(1 * COIN);                        // genesis
         consensus.minerReward4 = int64_t(112.966 * COIN);                   // miners
         consensus.minerReward5 = int64_t(133.775 * COIN);
-//        consensus.mnReward1 = int64_t(52.411 * COIN);                       // masternodes
-//        consensus.mnReward2 = int64_t(76.104 * COIN);
-//        consensus.mnReward5 = int64_t(133.775 * COIN);
         consensus.foundersReward = int64_t(4166666.667 * COIN);             // founders
-//        consensus.bdgetReward4 = int64_t(520833.333 * COIN);                // budget
-//        consensus.bdgetReward5 = int64_t(520833.333 * COIN);
         consensus.colleteral = int64_t(1e4 * COIN);                         // masternode colleteral
 
         consensus.nSubsidyHalvingInterval = 840960;                     // 4 years, 24 * 60 / 2.5 * 365 * 4 
-//        consensus.nMasternodePaymentsStartBlock = 57600;                // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
-//        consensus.nMasternodePaymentsIncreaseBlock = 576 * 365;         //576 * 365
-//        consensus.nMasternodePaymentsIncreasePeriod = 576 * 365;        // 17280 - actual historical value
         consensus.nInstantSendKeepLock = 24;
-//        consensus.nBudgetPaymentsStartBlock = 2;                        // actual historical value
-//        consensus.nBudgetPaymentsCycleBlocks = 576 * 30;                // ~(60*24*30)/2.6, actual number of blocks per month is 200700 / 12 = 16725
-//        consensus.nBudgetPaymentsWindowBlocks = 100;
-//        consensus.nBudgetProposalEstablishingTime = 60*60*24;
         consensus.nSuperblockStartBlock = 100;                          // The block at which 12.1 goes live (end of final 12.0 budget cycle)
         consensus.nSuperblockCycle = 576 * 30; 				            // ~(60*24*30)/2.6, actual number of blocks per month is 200700 / 12 = 16725
-//        consensus.nGovernanceMinQuorum = 10;
         consensus.nGovernanceFilterElements = 20000;
         consensus.nMasternodeMinimumConfirmations = 15;
         consensus.nMajorityEnforceBlockUpgrade = 750;
@@ -313,6 +290,7 @@ static CMainParams mainParams;
 
 /**
  * Testnet (v3)
+ * Popchain DevTeam
  */
 class CTestNetParams : public CChainParams {
 public:
@@ -324,26 +302,14 @@ public:
         consensus.genesisReward = int64_t(1 * COIN);                        // genesis                                                           
         consensus.minerReward4 = int64_t(112.966 * COIN);                   // miners
         consensus.minerReward5 = int64_t(535.103 * COIN);
-//        consensus.mnReward1 = int64_t(52.411 * COIN);                       // masternodes
-//        consensus.mnReward2 = int64_t(76.104 * COIN);
-//        consensus.mnReward5 = int64_t(535.103 * COIN);
         consensus.foundersReward = int64_t(4166666.667 * COIN);             // founders
-//        consensus.bdgetReward4 = int64_t(520833.333 * COIN);                // budget
-//        consensus.bdgetReward5 = int64_t(2083333.333 * COIN);
+
         consensus.colleteral = int64_t(1e4 * COIN);                         // masternode colleteral
 
         consensus.nSubsidyHalvingInterval = 840960;
-//        consensus.nMasternodePaymentsStartBlock = 100; 		        // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
-//        consensus.nMasternodePaymentsIncreaseBlock = 46000;
-//        consensus.nMasternodePaymentsIncreasePeriod = 576;
         consensus.nInstantSendKeepLock = 6;
-//        consensus.nBudgetPaymentsStartBlock = 300;
-//        consensus.nBudgetPaymentsCycleBlocks = 50;
-//        consensus.nBudgetPaymentsWindowBlocks = 10;
-//        consensus.nBudgetProposalEstablishingTime = 60*20;
         consensus.nSuperblockStartBlock = 10; 				 // NOTE: Should satisfy nSuperblockStartBlock > nBudgetPeymentsStartBlock
         consensus.nSuperblockCycle = 13; 				 // Superblocks can be issued hourly on testnet
-//        consensus.nGovernanceMinQuorum = 2;
         consensus.nGovernanceFilterElements = 500;
         consensus.nMasternodeMinimumConfirmations = 2;
         consensus.nMajorityEnforceBlockUpgrade = 51;
@@ -443,6 +409,7 @@ static CTestNetParams testNetParams;
 
 /**
  * Regression test
+ * Popchain DevTeam
  */
 class CRegTestParams : public CChainParams {
 public:
@@ -453,25 +420,12 @@ public:
         consensus.genesisReward = int64_t(1 * COIN);                        // genesis
         consensus.minerReward4 = int64_t(112.966 * COIN);                   // miners
         consensus.minerReward5 = int64_t(535.103 * COIN);
-//        consensus.mnReward1 = int64_t(52.411 * COIN);                       // masternodes
-//        consensus.mnReward2 = int64_t(76.104 * COIN);
-//        consensus.mnReward5 = int64_t(535.103 * COIN);
         consensus.foundersReward = int64_t(4166666.667 * COIN);             // founders
-//        consensus.bdgetReward4 = int64_t(520833.333 * COIN);                // budget
-//        consensus.bdgetReward5 = int64_t(2083333.333 * COIN);
         consensus.colleteral = int64_t(1e4 * COIN);                         // masternode colleteral
         consensus.nSubsidyHalvingInterval = 150;
-//        consensus.nMasternodePaymentsStartBlock = 240;
-//        consensus.nMasternodePaymentsIncreaseBlock = 350;
-//        consensus.nMasternodePaymentsIncreasePeriod = 10;
         consensus.nInstantSendKeepLock = 6;
-//        consensus.nBudgetPaymentsStartBlock = 1000;
-//        consensus.nBudgetPaymentsCycleBlocks = 50;
-//        consensus.nBudgetPaymentsWindowBlocks = 10;
-//        consensus.nBudgetProposalEstablishingTime = 60*20;
         consensus.nSuperblockStartBlock = 1500;
         consensus.nSuperblockCycle = 10;
-//        consensus.nGovernanceMinQuorum = 1;
         consensus.nGovernanceFilterElements = 100;
         consensus.nMasternodeMinimumConfirmations = 1;
         consensus.nMajorityEnforceBlockUpgrade = 750;

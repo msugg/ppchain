@@ -1,9 +1,4 @@
-// Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2017 The Dash Core developers
-// Copyright (c) 2016-2018 Ulord Foundation Ltd.
-// Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
 
 #include "amount.h"
 #include "rpcserver.h"
@@ -330,6 +325,7 @@ static UniValue BIP22ValidationResult(const CValidationState& state)
     return "valid?";
 }
 
+// Popchain DevTeam
 UniValue getblocktemplate(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() > 1)
@@ -618,20 +614,6 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
     result.push_back(Pair("height", (int64_t)(pindexPrev->nHeight+1)));
     result.push_back(Pair("claimtrie", pblock->hashClaimTrie.GetHex()));
 
-    // popchain doesn't need masternode payment
-//    UniValue masternodeObj(UniValue::VOBJ);
-//    if(pblock->txoutMasternode != CTxOut()) {
-//        CTxDestination address1;
-//        ExtractDestination(pblock->txoutMasternode.scriptPubKey, address1);
-//        CBitcoinAddress address2(address1);
-//        masternodeObj.push_back(Pair("payee", address2.ToString().c_str()));
-//        masternodeObj.push_back(Pair("script", HexStr(pblock->txoutMasternode.scriptPubKey.begin(), pblock->txoutMasternode.scriptPubKey.end())));
-//        masternodeObj.push_back(Pair("amount", pblock->txoutMasternode.nValue));
-//    }
-//    result.push_back(Pair("masternode", masternodeObj));
-//    result.push_back(Pair("masternode_payments_started", pindexPrev->nHeight + 1 > Params().GetConsensus().nMasternodePaymentsStartBlock));
-//    result.push_back(Pair("masternode_payments_enforced", sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)));
-
     UniValue FoundnodeObj(UniValue::VOBJ);
     if(pblock->txoutFound != CTxOut()) {
         CTxDestination address1;
@@ -642,23 +624,6 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
         FoundnodeObj.push_back(Pair("foundamount", pblock->txoutFound.nValue));
     }	
 	result.push_back(Pair("Foundnode", FoundnodeObj));
-
-//    UniValue superblockObjArray(UniValue::VARR);
-//    if(pblock->voutSuperblock.size()) {
-//        BOOST_FOREACH (const CTxOut& txout, pblock->voutSuperblock) {
-//            UniValue entry(UniValue::VOBJ);
-//            CTxDestination address1;
-//            ExtractDestination(txout.scriptPubKey, address1);
-//            CBitcoinAddress address2(address1);
-//            entry.push_back(Pair("payee", address2.ToString().c_str()));
-//            entry.push_back(Pair("script", HexStr(txout.scriptPubKey.begin(), txout.scriptPubKey.end())));
-//            entry.push_back(Pair("amount", txout.nValue));
-//            superblockObjArray.push_back(entry);
-//        }
-//    }
-//    result.push_back(Pair("superblock", superblockObjArray));
-//    result.push_back(Pair("superblocks_started", pindexPrev->nHeight + 1 > Params().GetConsensus().nSuperblockStartBlock));
-//    result.push_back(Pair("superblocks_enabled", sporkManager.IsSporkActive(SPORK_9_SUPERBLOCKS_ENABLED)));
 
     return result;
 }

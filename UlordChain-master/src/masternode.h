@@ -1,6 +1,5 @@
-// Copyright (c) 2014-2017 The Dash Core developers
-// Distributed under the MIT/X11 software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
+
 
 #ifndef MASTERNODE_H
 #define MASTERNODE_H
@@ -313,14 +312,6 @@ public:
 
     int GetLastPaidTime() { return nTimeLastPaid; }
     int GetLastPaidBlock() { return nBlockLastPaid; }
-//    void UpdateLastPaid(const CBlockIndex *pindex, int nMaxBlocksToScanBack);
-
-    // KEEP TRACK OF EACH GOVERNANCE ITEM INCASE THIS NODE GOES OFFLINE, SO WE CAN RECALC THEIR STATUS
-    //void AddGovernanceVote(uint256 nGovernanceObjectHash);
-    // RECALCULATE CACHED STATUS FLAGS FOR ALL AFFECTED OBJECTS
-    //void FlagGovernanceItemsAsDirty();
-
-    //void RemoveGovernanceObject(uint256 nGovernanceObjectHash);
 
     void UpdateWatchdogVoteTime();
 

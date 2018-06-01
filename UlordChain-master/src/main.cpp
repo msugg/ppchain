@@ -1,9 +1,4 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2017 The Dash Core developers
-// Copyright (c) 2016-2018 Ulord Foundation Ltd.
-// Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
 
 #include "main.h"
 
@@ -1764,74 +1759,6 @@ CAmount GetMinerSubsidy(const int height, const Consensus::Params &cp)
     }
 }
 
-//popchain doesn't have masternode pay
-
-//CAmount GetMasternodePayment(const int height)
-//{
-//    const Consensus::Params cp = Params().GetConsensus();
-
-//    const int starting = cp.nMasternodePaymentsStartBlock;
-//    const int period = cp.nMasternodePaymentsIncreasePeriod;
-//    const int intval = cp.nSubsidyHalvingInterval;
-
-//    if (height < starting) return 0;
-
-//    if (height < period)			// in the first year
-//    {
-//  	return cp.mnReward1;
-//    }
-//    else if (height < period * 2)		// in first 2 years
-//    {
-//        return cp.mnReward2;
-//    }
-//    else if (height < period * 3)		// 3rd year
-//    {
-//		return (cp.mnReward2 / 2) * 3;
-//    }
-//    else if (height < period * 4)		// 4th
-//    {
-//		return cp.mnReward2 * 2;
-//    }
-//    else						// 5th and after
-//    {
-//  		int halvings = (height - intval) / intval;
-//		if (halvings > 63)
-//		{
-//   	    	return 0;
-//		}
-
-//		return cp.mnReward5 >> halvings;
-//    }
-//}
-
-
-// popchain doesn't have budget
-/*
-CAmount GetBudget(const int height, const Consensus::Params &cp)
-{
-    const int beg = cp.nSuperblockStartBlock;
-    const int intval = cp.nSubsidyHalvingInterval;
-	
-    if (height < beg)		     // before starting
-    {
-  	return 0;
-    }
-    else if (height < intval)        // first 4 years
-    {
-  	return cp.bdgetReward4;
-    }
-    else                             // 5th year and thereafter
-    {
-        int halvings = (height - intval) / intval;
-	if (halvings > 63)
-	{
-	    return 0;
-	}
-	return cp.bdgetReward5 >> halvings;
-    }
-}
-*/
-
 CAmount GetFoundersReward(const int height, const Consensus::Params &cp)
 {
     const int beg = cp.nSuperblockStartBlock;
@@ -1846,9 +1773,7 @@ CAmount GetFoundersReward(const int height, const Consensus::Params &cp)
 // return all subsidy
 CAmount GetBlockSubsidy(const int height, const Consensus::Params &cp)
 {
-    return //GetBudget(height, cp) +
-           //GetMasternodePayment(height) +
-           GetMinerSubsidy(height, cp) +
+    return GetMinerSubsidy(height, cp) +
            GetFoundersReward(height, cp);
 }
 
@@ -5266,15 +5191,6 @@ bool static AlreadyHave(const CInv& inv) EXCLUSIVE_LOCKS_REQUIRED(cs_main)
     case MSG_SPORK:
         return mapSporks.count(inv.hash);
 
-//    case MSG_MASTERNODE_PAYMENT_VOTE:
-//        return mnpayments.mapMasternodePaymentVotes.count(inv.hash);
-
-//    case MSG_MASTERNODE_PAYMENT_BLOCK:
-//        {
-//            BlockMap::iterator mi = mapBlockIndex.find(inv.hash);
-//            return mi != mapBlockIndex.end() && mnpayments.mapMasternodeBlocks.find(mi->second->nHeight) != mnpayments.mapMasternodeBlocks.end();
-//        }
-
     case MSG_MASTERNODE_ANNOUNCE:
         return mnodeman.mapSeenMasternodeBroadcast.count(inv.hash) && !mnodeman.IsMnbRecoveryRequested(inv.hash);
 
@@ -5283,10 +5199,6 @@ bool static AlreadyHave(const CInv& inv) EXCLUSIVE_LOCKS_REQUIRED(cs_main)
 
     case MSG_DSTX:
         return mapDarksendBroadcastTxes.count(inv.hash);
-
-//    case MSG_GOVERNANCE_OBJECT:
-//    case MSG_GOVERNANCE_OBJECT_VOTE:
-//        return ! governance.ConfirmInventoryRequest(inv);
 
     case MSG_MASTERNODE_VERIFY:
         return mnodeman.mapSeenMasternodeVerification.count(inv.hash);
@@ -5451,34 +5363,6 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                     }
                 }
 
-//                if (!pushed && inv.type == MSG_MASTERNODE_PAYMENT_VOTE) {
-//                    if(mnpayments.HasVerifiedPaymentVote(inv.hash)) {
-//                        CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
-//                        ss.reserve(1000);
-//                        ss << mnpayments.mapMasternodePaymentVotes[inv.hash];
-//                        pfrom->PushMessage(NetMsgType::MASTERNODEPAYMENTVOTE, ss);
-//                        pushed = true;
-//                    }
-//                }
-
-//                if (!pushed && inv.type == MSG_MASTERNODE_PAYMENT_BLOCK) {
-//                    BlockMap::iterator mi = mapBlockIndex.find(inv.hash);
-//                    LOCK(cs_mapMasternodeBlocks);
-//                    if (mi != mapBlockIndex.end() && mnpayments.mapMasternodeBlocks.count(mi->second->nHeight)) {
-//                        BOOST_FOREACH(CMasternodePayee& payee, mnpayments.mapMasternodeBlocks[mi->second->nHeight].vecPayees) {
-//                            std::vector<uint256> vecVoteHashes = payee.GetVoteHashes();
-//                            BOOST_FOREACH(uint256& hash, vecVoteHashes) {
-//                                if(mnpayments.HasVerifiedPaymentVote(hash)) {
-//                                    CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
-//                                    ss.reserve(1000);
-//                                    ss << mnpayments.mapMasternodePaymentVotes[hash];
-//                                    pfrom->PushMessage(NetMsgType::MASTERNODEPAYMENTVOTE, ss);
-//                                }
-//                            }
-//                        }
-//                        pushed = true;
-//                    }
-//                }
 
                 if (!pushed && inv.type == MSG_MASTERNODE_ANNOUNCE) {
                     if(mnodeman.mapSeenMasternodeBroadcast.count(inv.hash)){
@@ -5514,42 +5398,6 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                     }
                 }
 
-//                if (!pushed && inv.type == MSG_GOVERNANCE_OBJECT) {
-//                    LogPrint("net", "ProcessGetData -- MSG_GOVERNANCE_OBJECT: inv = %s\n", inv.ToString());
-//                    CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
-//                    bool topush = false;
-//                    {
-//                        if(governance.HaveObjectForHash(inv.hash)) {
-//                            ss.reserve(1000);
-//                            if(governance.SerializeObjectForHash(inv.hash, ss)) {
-//                                topush = true;
-//                            }
-//                        }
-//                    }
-//                    LogPrint("net", "ProcessGetData -- MSG_GOVERNANCE_OBJECT: topush = %d, inv = %s\n", topush, inv.ToString());
-//                    if(topush) {
-//                        pfrom->PushMessage(NetMsgType::MNGOVERNANCEOBJECT, ss);
-//                        pushed = true;
-//                    }
-//                }
-
-//                if (!pushed && inv.type == MSG_GOVERNANCE_OBJECT_VOTE) {
-//                    CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
-//                    bool topush = false;
-//                    {
-//                        if(governance.HaveVoteForHash(inv.hash)) {
-//                            ss.reserve(1000);
-//                            if(governance.SerializeVoteForHash(inv.hash, ss)) {
-//                                topush = true;
-//                            }
-//                        }
-//                    }
-//                    if(topush) {
-//                        LogPrint("net", "ProcessGetData -- pushing: inv = %s\n", inv.ToString());
-//                        pfrom->PushMessage(NetMsgType::MNGOVERNANCEOBJECTVOTE, ss);
-//                        pushed = true;
-//                    }
-//                }
 
                 if (!pushed && inv.type == MSG_MASTERNODE_VERIFY) {
                     if(mnodeman.mapSeenMasternodeVerification.count(inv.hash)) {
@@ -6647,11 +6495,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             //probably one the extensions
             darkSendPool.ProcessMessage(pfrom, strCommand, vRecv);
             mnodeman.ProcessMessage(pfrom, strCommand, vRecv);
-            //mnpayments.ProcessMessage(pfrom, strCommand, vRecv);
             instantsend.ProcessMessage(pfrom, strCommand, vRecv);
             sporkManager.ProcessSpork(pfrom, strCommand, vRecv);
             masternodeSync.ProcessMessage(pfrom, strCommand, vRecv);
-            //governance.ProcessMessage(pfrom, strCommand, vRecv);
         }
         else
         {

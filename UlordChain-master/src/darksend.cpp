@@ -1,8 +1,4 @@
-// Copyright (c) 2014-2017 The Dash Core developers
-// Copyright (c) 2016-2018 Ulord Foundation Ltd.
-// Distributed under the MIT/X11 software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
-
+// Copyright (c) 2017-2018 The Popchain Core Developers
 #include "activemasternode.h"
 #include "coincontrol.h"
 #include "consensus/validation.h"
@@ -2456,7 +2452,7 @@ void CDarksendPool::UpdatedBlockTip(const CBlockIndex *pindex)
     }
 }
 
-//TODO: Rename/move to core
+// Popchain DevTeam
 void ThreadCheckDarkSendPool()
 {
     if(fLiteMode) return; // disable all Ulord specific functionality
@@ -2493,7 +2489,6 @@ void ThreadCheckDarkSendPool()
             if(nTick % 60 == 0) {
                 mnodeman.ProcessMasternodeConnections();
                 mnodeman.CheckAndRemove();
-                //mnpayments.CheckAndRemove();
                 instantsend.CheckAndRemove();
             }
 

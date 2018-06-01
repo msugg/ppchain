@@ -1,6 +1,5 @@
-// Copyright (c) 2014-2017 The Dash Core developers
-// Distributed under the MIT/X11 software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
+
 
 #include "activemasternode.h"
 #include "consensus/validation.h"
@@ -166,6 +165,7 @@ arith_uint256 CMasternode::CalculateScore(const uint256& blockHash)
     return (hash3 > hash2 ? hash3 - hash2 : hash2 - hash3);
 }
 
+// Popchain DevTeam
 void CMasternode::Check(bool fForce)
 {
     LOCK(cs);
@@ -215,11 +215,7 @@ void CMasternode::Check(bool fForce)
     int nActiveStatePrev = nActiveState;
     bool fOurMasternode = fMasterNode && activeMasternode.pubKeyMasternode == pubKeyMasternode;
 
-                   // masternode doesn't meet payment protocol requirements ...
-    //popchain
-    bool fRequireUpdate = /*nProtocolVersion < mnpayments.GetMinMasternodePaymentsProto() ||*/
-                   // or it's our own node and we just updated it to the new protocol but we are still waiting for activation ...
-                   (fOurMasternode && nProtocolVersion < PROTOCOL_VERSION);
+    bool fRequireUpdate = (fOurMasternode && nProtocolVersion < PROTOCOL_VERSION);
 
     if(fRequireUpdate) {
         nActiveState = MASTERNODE_UPDATE_REQUIRED;
@@ -396,44 +392,6 @@ int CMasternode::GetCollateralAge()
     return nHeight - nCacheCollateralBlock;
 }
 
-//void CMasternode::UpdateLastPaid(const CBlockIndex *pindex, int nMaxBlocksToScanBack)
-//{
-//    if(!pindex) return;
-
-//    const CBlockIndex *BlockReading = pindex;
-
-//    CScript mnpayee = GetScriptForDestination(pubKeyCollateralAddress.GetID());
-//    // LogPrint("masternode", "CMasternode::UpdateLastPaidBlock -- searching for block with payment to %s\n", vin.prevout.ToStringShort());
-
-//    LOCK(cs_mapMasternodeBlocks);
-
-//    for (int i = 0; BlockReading && BlockReading->nHeight > nBlockLastPaid && i < nMaxBlocksToScanBack; i++) {
-//        if(mnpayments.mapMasternodeBlocks.count(BlockReading->nHeight) &&
-//            mnpayments.mapMasternodeBlocks[BlockReading->nHeight].HasPayeeWithVotes(mnpayee, 2))
-//        {
-//            CBlock block;
-//            if(!ReadBlockFromDisk(block, BlockReading, Params().GetConsensus())) // shouldn't really happen
-//                continue;
-
-//            CAmount nMasternodePayment = GetMasternodePayment(BlockReading->nHeight);
-
-//            BOOST_FOREACH(CTxOut txout, block.vtx[0].vout)
-//                if(mnpayee == txout.scriptPubKey && nMasternodePayment == txout.nValue) {
-//                    nBlockLastPaid = BlockReading->nHeight;
-//                    nTimeLastPaid = BlockReading->nTime;
-//                    LogPrint("masternode", "CMasternode::UpdateLastPaidBlock -- searching for block with payment to %s -- found new %d\n", vin.prevout.ToStringShort(), nBlockLastPaid);
-//                    return;
-//                }
-//        }
-
-//        if (BlockReading->pprev == NULL) { assert(BlockReading); break; }
-//        BlockReading = BlockReading->pprev;
-//    }
-
-//    // Last payment for this masternode wasn't found in latest mnpayments blocks
-//    // or it was found in mnpayments blocks but wasn't found in the blockchain.
-//    // LogPrint("masternode", "CMasternode::UpdateLastPaidBlock -- searching for block with payment to %s -- keeping old %d\n", vin.prevout.ToStringShort(), nBlockLastPaid);
-//}
 
 bool CMasternodeBroadcast::Create(std::string strService, std::string strKeyMasternode, std::string strTxHash, std::string strOutputIndex, std::string& strErrorRet, CMasternodeBroadcast &mnbRet, bool fOffline)
 {
@@ -517,6 +475,7 @@ bool CMasternodeBroadcast::Create(CTxIn txin, CService service, CKey keyCollater
     return true;
 }
 
+// Popchain DevTeam
 bool CMasternodeBroadcast::SimpleCheck(int& nDos)
 {
     nDos = 0;
@@ -541,10 +500,6 @@ bool CMasternodeBroadcast::SimpleCheck(int& nDos)
         nActiveState = MASTERNODE_EXPIRED;
     }
 
-//    if(nProtocolVersion < mnpayments.GetMinMasternodePaymentsProto()) {
-//        LogPrintf("CMasternodeBroadcast::SimpleCheck -- ignoring outdated Masternode: masternode=%s  nProtocolVersion=%d\n", vin.prevout.ToStringShort(), nProtocolVersion);
-//        return false;
-//    }
 
     CScript pubkeyScript;
     pubkeyScript = GetScriptForDestination(pubKeyCollateralAddress.GetID());
@@ -954,49 +909,8 @@ void CMasternodePing::Relay()
 }
 
 
-// popchain
-//void CMasternode::AddGovernanceVote(uint256 nGovernanceObjectHash)
-//{
-//    if(mapGovernanceObjectsVotedOn.count(nGovernanceObjectHash)) {
-//        mapGovernanceObjectsVotedOn[nGovernanceObjectHash]++;
-//    } else {
-//        mapGovernanceObjectsVotedOn.insert(std::make_pair(nGovernanceObjectHash, 1));
-//    }
-//}
-
-//void CMasternode::RemoveGovernanceObject(uint256 nGovernanceObjectHash)
-//{
-//    std::map<uint256, int>::iterator it = mapGovernanceObjectsVotedOn.find(nGovernanceObjectHash);
-//    if(it == mapGovernanceObjectsVotedOn.end()) {
-//        return;
-//    }
-//    mapGovernanceObjectsVotedOn.erase(it);
-//}
-
 void CMasternode::UpdateWatchdogVoteTime()
 {
     LOCK(cs);
     nTimeLastWatchdogVote = GetTime();
 }
-
-/**
-*   FLAG GOVERNANCE ITEMS AS DIRTY
-*
-*   - When masternode come and go on the network, we must flag the items they voted on to recalc it's cached flags
-*
-*/
-//popchain
-//void CMasternode::FlagGovernanceItemsAsDirty()
-//{
-//    std::vector<uint256> vecDirty;
-//    {
-//        std::map<uint256, int>::iterator it = mapGovernanceObjectsVotedOn.begin();
-//        while(it != mapGovernanceObjectsVotedOn.end()) {
-//            vecDirty.push_back(it->first);
-//            ++it;
-//        }
-//    }
-//    for(size_t i = 0; i < vecDirty.size(); ++i) {
-//        mnodeman.AddDirtyGovernanceObjectHash(vecDirty[i]);
-//    }
-//}

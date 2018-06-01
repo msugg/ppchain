@@ -1,7 +1,4 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
-// Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
 
 #ifndef __cplusplus
 #error This header can only be compiled as C++.
@@ -240,12 +237,10 @@ extern const char *DSTX;
 extern const char *DSQUEUE;
 extern const char *DSEG;
 extern const char *SYNCSTATUSCOUNT;
-//popchain
-//extern const char *MNGOVERNANCESYNC;
 extern const char *MNGOVERNANCEOBJECT;
 extern const char *MNGOVERNANCEOBJECTVOTE;
 extern const char *MNVERIFY;
-}
+};
 
 /* Get a vector of all valid message types (see above) */
 const std::vector<std::string> &getAllNetMessageTypes();
@@ -308,6 +303,7 @@ public:
 };
 
 /** inv message data */
+// Popchain DevTeam
 class CInv
 {
 public:
@@ -347,19 +343,11 @@ enum {
     MSG_TXLOCK_REQUEST,
     MSG_TXLOCK_VOTE,
     MSG_SPORK,
-//    MSG_MASTERNODE_PAYMENT_VOTE,
-//    MSG_MASTERNODE_PAYMENT_BLOCK, // reusing, was MSG_MASTERNODE_SCANNING_ERROR previousely, was NOT used in 12.0
-//    MSG_BUDGET_VOTE, // depreciated since 12.1
-//    MSG_BUDGET_PROPOSAL, // depreciated since 12.1
-//    MSG_BUDGET_FINALIZED, // depreciated since 12.1
-//    MSG_BUDGET_FINALIZED_VOTE, // depreciated since 12.1
     MSG_MASTERNODE_QUORUM, // not implemented
     MSG_MASTERNODE_ANNOUNCE,
     MSG_MASTERNODE_PING,
     MSG_DSTX,
-//    MSG_GOVERNANCE_OBJECT,
-//    MSG_GOVERNANCE_OBJECT_VOTE,
-    MSG_MASTERNODE_VERIFY,
+    MSG_MASTERNODE_VERIFY
 };
 
 #endif // BITCOIN_PROTOCOL_H

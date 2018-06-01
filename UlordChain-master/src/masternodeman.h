@@ -1,6 +1,4 @@
-// Copyright (c) 2014-2017 The Dash Core developers
-// Distributed under the MIT/X11 software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
 
 #ifndef MASTERNODEMAN_H
 #define MASTERNODEMAN_H
@@ -153,8 +151,6 @@ private:
     /// Set when masternodes are removed, cleared when CGovernanceManager is notified
     bool fMasternodesRemoved;
 
-    //std::vector<uint256> vecDirtyGovernanceObjectHashes;
-
     int64_t nLastWatchdogVoteTime;
 
     friend class CMasternodeSync;
@@ -224,10 +220,7 @@ public:
 
     /// Clear Masternode vector
     void Clear();
-
-    /// Count Masternodes filtered by nProtocolVersion.
-    /// Masternode nProtocolVersion should match or be above the one specified in param here.
-//    int CountMasternodes(int nProtocolVersion = -1);
+	
     /// Count enabled Masternodes filtered by nProtocolVersion.
     /// Masternode nProtocolVersion should match or be above the one specified in param here.
     int CountEnabled(int nProtocolVersion = -1);
@@ -295,10 +288,6 @@ public:
 
     masternode_info_t GetMasternodeInfo(const CPubKey& pubKeyMasternode);
 
-    /// Find an entry in the masternode list that is next to be paid
-//    CMasternode* GetNextMasternodeInQueueForPayment(int nBlockHeight, bool fFilterSigTime, int& nCount);
-    /// Same as above but use current block height
-//    CMasternode* GetNextMasternodeInQueueForPayment(bool fFilterSigTime, int& nCount);
 
     /// Find a random entry
     CMasternode* FindRandomNotInVec(const std::vector<CTxIn> &vecToExclude, int nProtocolVersion = -1);
@@ -332,28 +321,12 @@ public:
     bool CheckMnbAndUpdateMasternodeList(CNode* pfrom, CMasternodeBroadcast mnb, int& nDos);
     bool IsMnbRecoveryRequested(const uint256& hash) { return mMnbRecoveryRequests.count(hash); }
 
-//    void UpdateLastPaid();
 
     void CheckAndRebuildMasternodeIndex();
 
-//    void AddDirtyGovernanceObjectHash(const uint256& nHash)
-//    {
-//        LOCK(cs);
-//        vecDirtyGovernanceObjectHashes.push_back(nHash);
-//    }
-
-//    std::vector<uint256> GetAndClearDirtyGovernanceObjectHashes()
-//    {
-//        LOCK(cs);
-//        std::vector<uint256> vecTmp = vecDirtyGovernanceObjectHashes;
-//        vecDirtyGovernanceObjectHashes.clear();
-//        return vecTmp;;
-//    }
 
     bool IsWatchdogActive();
     void UpdateWatchdogVoteTime(const CTxIn& vin);
-    //void AddGovernanceVote(const CTxIn& vin, uint256 nGovernanceObjectHash);
-    //void RemoveGovernanceObject(uint256 nGovernanceObjectHash);
 
     void CheckMasternode(const CTxIn& vin, bool fForce = false);
     void CheckMasternode(const CPubKey& pubKeyMasternode, bool fForce = false);

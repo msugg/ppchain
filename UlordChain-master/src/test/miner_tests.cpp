@@ -1,6 +1,4 @@
-// Copyright (c) 2011-2015 The Bitcoin Core developers
-// Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
 
 #include "chainparams.h"
 #include "coins.h"
@@ -63,6 +61,7 @@ bool TestSequenceLocks(const CTransaction &tx, int flags)
 }
 
 // NOTE: These tests rely on CreateNewBlock doing its own self-validation!
+// Popchain DevTeam
 BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
 {
     const CChainParams& chainparams = Params(CBaseChainParams::TESTNET);
@@ -80,7 +79,6 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
     fCheckpointsEnabled = false;
 
     // force UpdatedBlockTip to initialize pCurrentBlockIndex
-//    mnpayments.UpdatedBlockTip(chainActive.Tip());
 
     // Simple block creation, nothing special yet:
     BOOST_CHECK(pblocktemplate = CreateNewBlock(chainparams, scriptPubKey));

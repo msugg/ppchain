@@ -1,7 +1,4 @@
-// Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
-// Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
 
 #ifndef BITCOIN_RPCSERVER_H
 #define BITCOIN_RPCSERVER_H
@@ -276,10 +273,6 @@ extern UniValue spork(const UniValue& params, bool fHelp);
 extern UniValue masternode(const UniValue& params, bool fHelp);
 extern UniValue masternodelist(const UniValue& params, bool fHelp);
 extern UniValue masternodebroadcast(const UniValue& params, bool fHelp);
-//extern UniValue gobject(const UniValue& params, bool fHelp);
-//extern UniValue getgovernanceinfo(const UniValue& params, bool fHelp);
-//extern UniValue getsuperblockbudget(const UniValue& params, bool fHelp);
-//extern UniValue voteraw(const UniValue& params, bool fHelp);
 extern UniValue mnsync(const UniValue& params, bool fHelp);
 
 extern UniValue getblockcount(const UniValue& params, bool fHelp); // in rpcblockchain.cpp

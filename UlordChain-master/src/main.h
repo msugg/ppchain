@@ -1,9 +1,4 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2017 The Dash Core developers
-// Copyright (c) 2016-2018 Ulord Foundation Ltd.
-// Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// Copyright (c) 2017-2018 The Popchain Core Developers
 
 #ifndef BITCOIN_MAIN_H
 #define BITCOIN_MAIN_H
@@ -258,8 +253,6 @@ bool GetTransaction(const uint256 &hash, CTransaction &tx, const Consensus::Para
 bool ActivateBestChain(CValidationState& state, const CChainParams& chainparams, const CBlock* pblock = NULL);
 
 CAmount GetMinerSubsidy(const int height, const Consensus::Params &cp);
-//popchain dont need this
-//CAmount GetMasternodePayment(const int height);
 CAmount GetBudget(const int height, const Consensus::Params &cp);
 CAmount GetFoundersReward(const int height, const Consensus::Params &cp);
 CAmount GetBlockSubsidy(const int height, const Consensus::Params &cp);
