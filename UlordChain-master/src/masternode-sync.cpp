@@ -166,7 +166,7 @@ std::string CMasternodeSync::GetAssetName()
         case(MASTERNODE_SYNC_INITIAL):      return "MASTERNODE_SYNC_INITIAL";
         case(MASTERNODE_SYNC_SPORKS):       return "MASTERNODE_SYNC_SPORKS";
         case(MASTERNODE_SYNC_LIST):         return "MASTERNODE_SYNC_LIST";
-        case(MASTERNODE_SYNC_MNW):          return "MASTERNODE_SYNC_MNW";
+//        case(MASTERNODE_SYNC_MNW):          return "MASTERNODE_SYNC_MNW";
 //        case(MASTERNODE_SYNC_GOVERNANCE):   return "MASTERNODE_SYNC_GOVERNANCE";
         case(MASTERNODE_SYNC_FAILED):       return "MASTERNODE_SYNC_FAILED";
         case MASTERNODE_SYNC_FINISHED:      return "MASTERNODE_SYNC_FINISHED";
@@ -193,13 +193,8 @@ void CMasternodeSync::SwitchToNextAsset()
             break;
         case(MASTERNODE_SYNC_LIST):
             nTimeLastPaymentVote = GetTime();
-            nRequestedMasternodeAssets = MASTERNODE_SYNC_MNW;
-            LogPrintf("CMasternodeSync::SwitchToNextAsset -- Starting %s\n", GetAssetName());
-            break;
-        case(MASTERNODE_SYNC_MNW):
-            nTimeLastGovernanceItem = GetTime();
-            //nRequestedMasternodeAssets = MASTERNODE_SYNC_GOVERNANCE;
-            //LogPrintf("CMasternodeSync::SwitchToNextAsset -- Starting %s\n", GetAssetName());
+//            nRequestedMasternodeAssets = MASTERNODE_SYNC_MNW;
+//            LogPrintf("CMasternodeSync::SwitchToNextAsset -- Starting %s\n", GetAssetName());
             LogPrintf("CMasternodeSync::SwitchToNextAsset -- Sync has finished\n");
             nRequestedMasternodeAssets = MASTERNODE_SYNC_FINISHED;
             uiInterface.NotifyAdditionalDataSyncProgressChanged(1);
@@ -211,6 +206,22 @@ void CMasternodeSync::SwitchToNextAsset()
                 netfulfilledman.AddFulfilledRequest(pnode->addr, "full-sync");
             }
             break;
+
+//        case(MASTERNODE_SYNC_MNW):
+//            nTimeLastGovernanceItem = GetTime();
+//            //nRequestedMasternodeAssets = MASTERNODE_SYNC_GOVERNANCE;
+//            //LogPrintf("CMasternodeSync::SwitchToNextAsset -- Starting %s\n", GetAssetName());
+//            LogPrintf("CMasternodeSync::SwitchToNextAsset -- Sync has finished\n");
+//            nRequestedMasternodeAssets = MASTERNODE_SYNC_FINISHED;
+//            uiInterface.NotifyAdditionalDataSyncProgressChanged(1);
+//            activeMasternode.ManageState();
+//            TRY_LOCK(cs_vNodes, lockRecv);
+//            if(!lockRecv) return;
+
+//            BOOST_FOREACH(CNode* pnode, vNodes) {
+//                netfulfilledman.AddFulfilledRequest(pnode->addr, "full-sync");
+//            }
+//            break;
 
 //        case(MASTERNODE_SYNC_GOVERNANCE):
 //            LogPrintf("CMasternodeSync::SwitchToNextAsset -- Sync has finished\n");
@@ -238,8 +249,8 @@ std::string CMasternodeSync::GetSyncStatus()
         case MASTERNODE_SYNC_INITIAL:       return _("Synchronization pending...");
         case MASTERNODE_SYNC_SPORKS:        return _("Synchronizing sporks...");
         case MASTERNODE_SYNC_LIST:          return _("Synchronizing masternodes...");
-        case MASTERNODE_SYNC_MNW:           return _("Synchronizing masternode payments...");
-        //case MASTERNODE_SYNC_GOVERNANCE:    return _("Synchronizing governance objects...");
+//        case MASTERNODE_SYNC_MNW:           return _("Synchronizing masternode payments...");
+//        case MASTERNODE_SYNC_GOVERNANCE:    return _("Synchronizing governance objects...");
         case MASTERNODE_SYNC_FAILED:        return _("Synchronization failed");
         case MASTERNODE_SYNC_FINISHED:      return _("Synchronization finished");
         default:                            return "";
