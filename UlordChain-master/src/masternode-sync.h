@@ -72,7 +72,7 @@ public:
     bool IsFailed() { return nRequestedMasternodeAssets == MASTERNODE_SYNC_FAILED; }
     bool IsBlockchainSynced(bool fBlockAccepted = false);
     bool IsMasternodeListSynced() { return nRequestedMasternodeAssets > MASTERNODE_SYNC_LIST; }
-    bool IsWinnersListSynced() { return nRequestedMasternodeAssets > MASTERNODE_SYNC_MNW; }
+//    bool IsWinnersListSynced() { return nRequestedMasternodeAssets > MASTERNODE_SYNC_MNW; }
     bool IsSynced();/* { return nRequestedMasternodeAssets == MASTERNODE_SYNC_FINISHED; } */
 
     int GetAssetID() { return nRequestedMasternodeAssets; }
