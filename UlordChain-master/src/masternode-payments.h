@@ -12,6 +12,7 @@
 #include "masternode.h"
 #include "utilstrencodings.h"
 
+
 //class CMasternodePayments;
 //class CMasternodePaymentVote;
 //class CMasternodeBlockPayees;
