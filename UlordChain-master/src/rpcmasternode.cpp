@@ -121,8 +121,8 @@ UniValue masternode(const UniValue& params, bool fHelp)
                 "  status       - Print masternode status information\n"
                 "  list         - Print list of all known masternodes (see masternodelist for more info)\n"
                 "  list-conf    - Print masternode.conf in JSON format\n"
-                "  winner       - Print info on next masternode winner to vote for\n"
-                "  winners      - Print list of masternode winners\n"
+//                "  winner       - Print info on next masternode winner to vote for\n"
+//                "  winners      - Print list of masternode winners\n"
                 );
 
     if (strCommand == "list")
@@ -401,41 +401,41 @@ UniValue masternode(const UniValue& params, bool fHelp)
         return mnObj;
     }
 
-    if (strCommand == "winners")
-    {
-        int nHeight;
-        {
-            LOCK(cs_main);
-            CBlockIndex* pindex = chainActive.Tip();
-            if(!pindex) return NullUniValue;
+//    if (strCommand == "winners")
+//    {
+//        int nHeight;
+//        {
+//            LOCK(cs_main);
+//            CBlockIndex* pindex = chainActive.Tip();
+//            if(!pindex) return NullUniValue;
 
-            nHeight = pindex->nHeight;
-        }
+//            nHeight = pindex->nHeight;
+//        }
 
-        int nLast = 10;
-        std::string strFilter = "";
+//        int nLast = 10;
+//        std::string strFilter = "";
 
-        if (params.size() >= 2) {
-            nLast = atoi(params[1].get_str());
-        }
+//        if (params.size() >= 2) {
+//            nLast = atoi(params[1].get_str());
+//        }
 
-        if (params.size() == 3) {
-            strFilter = params[2].get_str();
-        }
+//        if (params.size() == 3) {
+//            strFilter = params[2].get_str();
+//        }
 
-        if (params.size() > 3)
-            throw JSONRPCError(RPC_INVALID_PARAMETER, "Correct usage is 'masternode winners ( \"count\" \"filter\" )'");
+//        if (params.size() > 3)
+//            throw JSONRPCError(RPC_INVALID_PARAMETER, "Correct usage is 'masternode winners ( \"count\" \"filter\" )'");
 
-        UniValue obj(UniValue::VOBJ);
+//        UniValue obj(UniValue::VOBJ);
 
-        for(int i = nHeight - nLast; i < nHeight + 20; i++) {
-            std::string strPayment = GetRequiredPaymentsString(i);
-            if (strFilter !="" && strPayment.find(strFilter) == std::string::npos) continue;
-            obj.push_back(Pair(strprintf("%d", i), strPayment));
-        }
+//        for(int i = nHeight - nLast; i < nHeight + 20; i++) {
+//            std::string strPayment = GetRequiredPaymentsString(i);
+//            if (strFilter !="" && strPayment.find(strFilter) == std::string::npos) continue;
+//            obj.push_back(Pair(strprintf("%d", i), strPayment));
+//        }
 
-        return obj;
-    }
+//        return obj;
+//    }
 
     return NullUniValue;
 }

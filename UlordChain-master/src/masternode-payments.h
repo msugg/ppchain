@@ -12,7 +12,6 @@
 #include "masternode.h"
 #include "utilstrencodings.h"
 
-
 //class CMasternodePayments;
 //class CMasternodePaymentVote;
 //class CMasternodeBlockPayees;
@@ -39,7 +38,7 @@ bool IsBlockPayeeValid(const CTransaction& txNew, int nBlockHeight, CAmount bloc
 
 // popchain
 void FillBlockPayments(CMutableTransaction& txNew, int nBlockHeight, CAmount blockReward, /*CTxOut& txoutMasternodeRet, std::vector<CTxOut>& voutSuperblockRet,*/CTxOut&  txoutFound);
-std::string GetRequiredPaymentsString(int nBlockHeight);
+//std::string GetRequiredPaymentsString(int nBlockHeight);
 
 class CMasternodePayee
 {

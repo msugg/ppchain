@@ -204,10 +204,10 @@ public:
 //        consensus.nMasternodePaymentsIncreaseBlock = 576 * 365;         //576 * 365
 //        consensus.nMasternodePaymentsIncreasePeriod = 576 * 365;        // 17280 - actual historical value
         consensus.nInstantSendKeepLock = 24;
-        consensus.nBudgetPaymentsStartBlock = 2;                        // actual historical value
-        consensus.nBudgetPaymentsCycleBlocks = 576 * 30;                // ~(60*24*30)/2.6, actual number of blocks per month is 200700 / 12 = 16725
-        consensus.nBudgetPaymentsWindowBlocks = 100;
-        consensus.nBudgetProposalEstablishingTime = 60*60*24;
+//        consensus.nBudgetPaymentsStartBlock = 2;                        // actual historical value
+//        consensus.nBudgetPaymentsCycleBlocks = 576 * 30;                // ~(60*24*30)/2.6, actual number of blocks per month is 200700 / 12 = 16725
+//        consensus.nBudgetPaymentsWindowBlocks = 100;
+//        consensus.nBudgetProposalEstablishingTime = 60*60*24;
         consensus.nSuperblockStartBlock = 100;                          // The block at which 12.1 goes live (end of final 12.0 budget cycle)
         consensus.nSuperblockCycle = 576 * 30; 				            // ~(60*24*30)/2.6, actual number of blocks per month is 200700 / 12 = 16725
 //        consensus.nGovernanceMinQuorum = 10;
@@ -337,10 +337,10 @@ public:
 //        consensus.nMasternodePaymentsIncreaseBlock = 46000;
 //        consensus.nMasternodePaymentsIncreasePeriod = 576;
         consensus.nInstantSendKeepLock = 6;
-        consensus.nBudgetPaymentsStartBlock = 300;
-        consensus.nBudgetPaymentsCycleBlocks = 50;
-        consensus.nBudgetPaymentsWindowBlocks = 10;
-        consensus.nBudgetProposalEstablishingTime = 60*20;
+//        consensus.nBudgetPaymentsStartBlock = 300;
+//        consensus.nBudgetPaymentsCycleBlocks = 50;
+//        consensus.nBudgetPaymentsWindowBlocks = 10;
+//        consensus.nBudgetProposalEstablishingTime = 60*20;
         consensus.nSuperblockStartBlock = 10; 				 // NOTE: Should satisfy nSuperblockStartBlock > nBudgetPeymentsStartBlock
         consensus.nSuperblockCycle = 13; 				 // Superblocks can be issued hourly on testnet
 //        consensus.nGovernanceMinQuorum = 2;
@@ -465,10 +465,10 @@ public:
 //        consensus.nMasternodePaymentsIncreaseBlock = 350;
 //        consensus.nMasternodePaymentsIncreasePeriod = 10;
         consensus.nInstantSendKeepLock = 6;
-        consensus.nBudgetPaymentsStartBlock = 1000;
-        consensus.nBudgetPaymentsCycleBlocks = 50;
-        consensus.nBudgetPaymentsWindowBlocks = 10;
-        consensus.nBudgetProposalEstablishingTime = 60*20;
+//        consensus.nBudgetPaymentsStartBlock = 1000;
+//        consensus.nBudgetPaymentsCycleBlocks = 50;
+//        consensus.nBudgetPaymentsWindowBlocks = 10;
+//        consensus.nBudgetProposalEstablishingTime = 60*20;
         consensus.nSuperblockStartBlock = 1500;
         consensus.nSuperblockCycle = 10;
 //        consensus.nGovernanceMinQuorum = 1;
