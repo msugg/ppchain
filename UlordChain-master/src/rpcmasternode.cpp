@@ -160,6 +160,7 @@ UniValue masternode(const UniValue& params, bool fHelp)
 
         if (strMode == "enabled")
             return mnodeman.CountEnabled();
+    }
 
 
     if (strCommand == "debug")
