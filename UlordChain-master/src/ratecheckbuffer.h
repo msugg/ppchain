@@ -1,7 +1,7 @@
 // Copyright (c) 2017-2018 The Popchain Core Developers
 
-#ifndef GOVERNANCE_H
-#define GOVERNANCE_H
+#ifndef RATECHECKBUFFER_H
+#define RATECHECKBUFFER_H
 
 //#define ENABLE_UC_DEBUG
 

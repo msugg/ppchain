@@ -1,12 +1,11 @@
 // Copyright (c) 2017-2018 The Popchain Core Developers
 
-#ifndef GOVERNANCE_CLASSES_H
-#define GOVERNANCE_CLASSES_H
+#ifndef SUPERBLOCK_H
+#define SUPERBLOCK_H
 
 //#define ENABLE_UC_DEBUG
 
 #include "base58.h"
-#include "governance.h"
 #include "key.h"
 #include "script/standard.h"
 #include "util.h"

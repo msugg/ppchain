@@ -3,7 +3,7 @@
 
 #include "activemasternode.h"
 #include "darksend.h"
-#include "governance-classes.h"
+#include "superblock.h"
 #include "masternode-payments.h"
 #include "masternode-sync.h"
 #include "masternodeman.h"

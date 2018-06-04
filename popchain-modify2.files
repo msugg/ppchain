@@ -5,6 +5,9 @@ UlordChain-master/README.md
 UlordChain-master/autogen.sh
 UlordChain-master/configure.ac
 UlordChain-master/libbitcoinconsensus.pc.in
+UlordChain-master/src/ratecheckbuffer.h
+UlordChain-master/src/superblock.cpp
+UlordChain-master/src/superblock.h
 UlordChain-master/ulord-docs/protocol-documentation.md
 UlordChain-master/src/activemasternode.cpp
 UlordChain-master/src/activemasternode.h
@@ -56,9 +59,6 @@ UlordChain-master/src/dbwrapper.h
 UlordChain-master/src/dsnotificationinterface.cpp
 UlordChain-master/src/dsnotificationinterface.h
 UlordChain-master/src/flat-database.h
-UlordChain-master/src/governance-classes.cpp
-UlordChain-master/src/governance-classes.h
-UlordChain-master/src/governance.h
 UlordChain-master/src/hash.cpp
 UlordChain-master/src/hash.h
 UlordChain-master/src/hdchain.cpp

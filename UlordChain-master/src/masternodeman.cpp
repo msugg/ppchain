@@ -3,7 +3,6 @@
 #include "activemasternode.h"
 #include "addrman.h"
 #include "darksend.h"
-//include "governance.h"
 #include "masternode-payments.h"
 #include "masternode-sync.h"
 #include "masternodeman.h"

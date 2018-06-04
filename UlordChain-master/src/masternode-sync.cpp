@@ -3,7 +3,6 @@
 
 #include "activemasternode.h"
 #include "checkpoints.h"
-//#include "governance.h"
 #include "main.h"
 #include "masternode.h"
 #include "masternode-payments.h"
@@ -241,7 +240,6 @@ void CMasternodeSync::ClearFulfilledRequests()
     {
         netfulfilledman.RemoveFulfilledRequest(pnode->addr, "spork-sync");
         netfulfilledman.RemoveFulfilledRequest(pnode->addr, "masternode-list-sync");
-        //netfulfilledman.RemoveFulfilledRequest(pnode->addr, "masternode-payment-sync");
         netfulfilledman.RemoveFulfilledRequest(pnode->addr, "governance-sync");
         netfulfilledman.RemoveFulfilledRequest(pnode->addr, "full-sync");
     }

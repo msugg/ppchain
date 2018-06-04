@@ -3,7 +3,7 @@
 //#define ENABLE_UC_DEBUG
 
 #include "core_io.h"
-#include "governance-classes.h"
+#include "superblock.h"
 #include "init.h"
 #include "main.h"
 #include "chainparams.h"

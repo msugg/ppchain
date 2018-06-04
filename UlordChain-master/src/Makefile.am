@@ -104,8 +104,8 @@ BITCOIN_CORE_H = \
   darksend.h \
   dsnotificationinterface.h \
   darksend-relay.h \
-  governance.h \
-  governance-classes.h \
+  ratecheckbuffer.h \
+  superblock.h \
   flat-database.h \
   hash.h \
   httprpc.h \
@@ -206,7 +206,7 @@ libbitcoin_server_a_SOURCES = \
   httpserver.cpp \
   init.cpp \
   dbwrapper.cpp \
-  governance-classes.cpp \
+  superblock.cpp \
   main.cpp \
   merkleblock.cpp \
   claimtrie.cpp \
@@ -262,7 +262,7 @@ libbitcoin_wallet_a_SOURCES = \
   masternode-sync.cpp \
   masternodeconfig.cpp \
   masternodeman.cpp \
-  governance-classes.cpp \
+  superblock.cpp \
   netfulfilledman.cpp \
   keepass.cpp \
   wallet/crypter.cpp \
