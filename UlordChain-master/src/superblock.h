@@ -29,16 +29,16 @@ typedef boost::shared_ptr<CSuperblock> CSuperblock_sptr;
 class CSuperblockManager
 {
 private:
-    static bool GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int nBlockHeight);
+//    static bool GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int nBlockHeight);
 
 public:
 
     static bool IsSuperblockTriggered(int nBlockHeight);
-    static bool IsSuperblockVoteTriggered(int nBlockHeight);
+//    static bool IsSuperblockVoteTriggered(int nBlockHeight);
     static void AppendFoundersReward(CMutableTransaction &txNewRet, int nBlockHeight,CTxOut&  txoutFound);
     static void CreateSuperblock(CMutableTransaction& txNewRet, int nBlockHeight, CTxOut&  txoutFound);
 
-    static bool IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward);
+//    static bool IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward);
 };
 
 

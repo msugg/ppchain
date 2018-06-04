@@ -25,25 +25,25 @@ bool CSuperblockManager::IsSuperblockTriggered(int nBlockHeight)
     if (!CSuperblock::IsValidBlockHeight(nBlockHeight)) {
         return false;
     }
-    else LogPrintf("SuperBlockHeight right %d\n",nBlockHeight);
+    else LogPrintf("SuperBlockHeight check right %d\n",nBlockHeight);
     return true;
 }
 
 // Popchain DevTeam
-bool CSuperblockManager::IsSuperblockVoteTriggered(int nBlockHeight)
-{
-    if (CSuperblockManager::IsSuperblockTriggered(nBlockHeight)){
-        return false;
-    }
-    return false;
-}
+//bool CSuperblockManager::IsSuperblockVoteTriggered(int nBlockHeight)
+//{
+//    if (CSuperblockManager::IsSuperblockTriggered(nBlockHeight)){
+//        return false;
+//    }
+//    return false;
+//}
 
 
 // Popchain DevTeam
-bool CSuperblockManager::GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int nBlockHeight)
-{
-    return false;
-}
+//bool CSuperblockManager::GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int nBlockHeight)
+//{
+//    return false;
+//}
 
 
 /**
@@ -93,18 +93,18 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
         AppendFoundersReward(txNewRet, nBlockHeight,txoutFound);
     }
 	
-    if(!IsSuperblockVoteTriggered(nBlockHeight))
-    {
-        LogPrintf("CSuperblockManager::IsSuperblockVoteTriggered -- Can't get vote at height %d\n", nBlockHeight);
-        return;
-    }
+//    if(!IsSuperblockVoteTriggered(nBlockHeight))
+//    {
+//        LogPrintf("CSuperblockManager::IsSuperblockVoteTriggered -- Can't get vote at height %d\n", nBlockHeight);
+//        return;
+//    }
 }
 
 // Popchain DevTeam
-bool CSuperblockManager::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward)
-{
-    return false;
-}
+//bool CSuperblockManager::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward)
+//{
+//    return false;
+//}
 
 
 CSuperblock::
