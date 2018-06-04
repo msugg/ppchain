@@ -1,5 +1,5 @@
-// Copyright (c) 2014-2017 The Dash Core developers
-// Distributed under the MIT software license, see the accompanying
+// Copyright (c) 2017-2018 The Popchain Core Developers
+
 #ifndef DASH_HDCHAIN_H
 #define DASH_HDCHAIN_H
 

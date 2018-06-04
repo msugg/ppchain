@@ -1,4 +1,5 @@
 // Copyright (c) 2017-2018 The Popchain Core Developers
+
 #include "activemasternode.h"
 #include "coincontrol.h"
 #include "consensus/validation.h"

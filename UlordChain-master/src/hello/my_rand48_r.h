@@ -1,4 +1,5 @@
-// Copyright (c) 2016-2018 Ulord Foundation Ltd.
+// Copyright (c) 2017-2018 The Popchain Core Developers
+
 #ifndef MY_RAND48_R_H
 #define MY_RAND48_R_H
 

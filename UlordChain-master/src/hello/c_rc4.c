@@ -1,4 +1,5 @@
-// Copyright (c) 2016-2018 Ulord Foundation Ltd.
+// Copyright (c) 2017-2018 The Popchain Core Developers
+
 #include "c_rc4.h"
 
 #include <stdio.h>

@@ -1,5 +1,6 @@
-// Copyright (c) 2016-2018 Ulord Foundation Ltd.
+// Copyright (c) 2017-2018 The Popchain Core Developers
 //  Windows
+
 #ifdef _WIN32
 
 #include <windows.h>
