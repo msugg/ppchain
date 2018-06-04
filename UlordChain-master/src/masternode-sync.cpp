@@ -3,7 +3,7 @@
 
 #include "activemasternode.h"
 #include "checkpoints.h"
-#include "governance.h"
+//#include "governance.h"
 #include "main.h"
 #include "masternode.h"
 #include "masternode-payments.h"
@@ -152,8 +152,6 @@ void CMasternodeSync::Reset()
     nRequestedMasternodeAttempt = 0;
     nTimeAssetSyncStarted = GetTime();
     nTimeLastMasternodeList = GetTime();
-    nTimeLastPaymentVote = GetTime();
-    nTimeLastGovernanceItem = GetTime();
     nTimeLastFailure = 0;
     nCountFailures = 0;
 }
@@ -191,7 +189,6 @@ void CMasternodeSync::SwitchToNextAsset()
             LogPrintf("CMasternodeSync::SwitchToNextAsset -- Starting %s\n", GetAssetName());
             break;
         case(MASTERNODE_SYNC_LIST):
-            nTimeLastPaymentVote = GetTime();
             LogPrintf("CMasternodeSync::SwitchToNextAsset -- Sync has finished\n");
             nRequestedMasternodeAssets = MASTERNODE_SYNC_FINISHED;
             uiInterface.NotifyAdditionalDataSyncProgressChanged(1);
@@ -244,7 +241,7 @@ void CMasternodeSync::ClearFulfilledRequests()
     {
         netfulfilledman.RemoveFulfilledRequest(pnode->addr, "spork-sync");
         netfulfilledman.RemoveFulfilledRequest(pnode->addr, "masternode-list-sync");
-        netfulfilledman.RemoveFulfilledRequest(pnode->addr, "masternode-payment-sync");
+        //netfulfilledman.RemoveFulfilledRequest(pnode->addr, "masternode-payment-sync");
         netfulfilledman.RemoveFulfilledRequest(pnode->addr, "governance-sync");
         netfulfilledman.RemoveFulfilledRequest(pnode->addr, "full-sync");
     }
@@ -283,8 +280,6 @@ void CMasternodeSync::ProcessTick()
     {
         LogPrintf("CMasternodeSync::ProcessTick -- nTick %d nRequestedMasternodeAssets %d nRequestedMasternodeAttempt %d -- blockchain is not synced yet\n", nTick, nRequestedMasternodeAssets, nRequestedMasternodeAttempt);
         nTimeLastMasternodeList = GetTime();
-        nTimeLastPaymentVote = GetTime();
-        nTimeLastGovernanceItem = GetTime();
         return;
     }
 

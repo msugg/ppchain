@@ -43,25 +43,6 @@ public:
 };
 
 
-
-/**
-*   Trigger : Superblock
-*
-*   - Create payments on the network
-*
-*   object structure:
-*   {
-*       "governance_object_id" : last_id,
-*       "type" : govtypes.trigger,
-*       "subtype" : "superblock",
-*       "superblock_name" : superblock_name,
-*       "start_epoch" : start_epoch,
-*       "payment_addresses" : "addr1|addr2|addr3",
-*       "payment_amounts"   : "amount1|amount2|amount3"
-*   }
-*/
-
-
 // Popchain DevTeam
 class CSuperblock
 {

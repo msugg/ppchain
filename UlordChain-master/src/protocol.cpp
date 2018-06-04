@@ -62,8 +62,6 @@ const char *DSQUEUE="dsq";
 const char *DSEG="dseg";
 const char *SYNCSTATUSCOUNT="ssc";
 const char *MNGOVERNANCESYNC="govsync";
-const char *MNGOVERNANCEOBJECT="govobj";
-const char *MNGOVERNANCEOBJECTVOTE="govobjvote";
 const char *MNVERIFY="mnv";
 };
 
@@ -88,8 +86,6 @@ static const char* ppszTypeName[] =
     NetMsgType::MNANNOUNCE,
     NetMsgType::MNPING,
     NetMsgType::DSTX,
-    NetMsgType::MNGOVERNANCEOBJECT,
-    NetMsgType::MNGOVERNANCEOBJECTVOTE,
     NetMsgType::MNVERIFY,
 };
 
@@ -141,8 +137,6 @@ const static std::string allNetMessageTypes[] = {
     NetMsgType::DSEG,
     NetMsgType::SYNCSTATUSCOUNT,
     NetMsgType::MNGOVERNANCESYNC,
-    NetMsgType::MNGOVERNANCEOBJECT,
-    NetMsgType::MNGOVERNANCEOBJECTVOTE,
     NetMsgType::MNVERIFY,
 };
 const static std::vector<std::string> allNetMessageTypesVec(allNetMessageTypes, allNetMessageTypes+ARRAYLEN(allNetMessageTypes));

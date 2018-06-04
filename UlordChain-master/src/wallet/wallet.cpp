@@ -27,7 +27,7 @@
 #include "utilmoneystr.h"
 
 #include "darksend.h"
-#include "governance.h"
+//#include "governance.h"
 #include "instantx.h"
 #include "keepass.h"
 #include "spork.h"

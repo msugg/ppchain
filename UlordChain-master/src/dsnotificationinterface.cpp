@@ -3,7 +3,6 @@
 #include "dsnotificationinterface.h"
 #include "darksend.h"
 #include "instantx.h"
-#include "governance.h"
 #include "masternodeman.h"
 #include "masternode-payments.h"
 #include "masternode-sync.h"

@@ -41,7 +41,6 @@ private:
     // Last time when we received some masternode asset ...
     int64_t nTimeLastMasternodeList;
     int64_t nTimeLastPaymentVote;
-    int64_t nTimeLastGovernanceItem;
     // ... or failed
     int64_t nTimeLastFailure;
 
@@ -59,8 +58,6 @@ public:
     CMasternodeSync() { Reset(); }
 
     void AddedMasternodeList() { nTimeLastMasternodeList = GetTime(); }
-    void AddedPaymentVote() { nTimeLastPaymentVote = GetTime(); }
-    void AddedGovernanceItem() { nTimeLastGovernanceItem = GetTime(); }
 
     bool IsFailed() { return nRequestedMasternodeAssets == MASTERNODE_SYNC_FAILED; }
     bool IsBlockchainSynced(bool fBlockAccepted = false);

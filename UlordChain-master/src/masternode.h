@@ -177,7 +177,7 @@ public:
     bool fUnitTest;
 
     // KEEP TRACK OF GOVERNANCE ITEMS EACH MASTERNODE HAS VOTE UPON FOR RECALCULATION
-    std::map<uint256, int> mapGovernanceObjectsVotedOn;
+    //std::map<uint256, int> mapGovernanceObjectsVotedOn;
 
     CMasternode();
     CMasternode(const CMasternode& other);
@@ -209,7 +209,7 @@ public:
         READWRITE(nPoSeBanHeight);
         READWRITE(fAllowMixingTx);
         READWRITE(fUnitTest);
-        READWRITE(mapGovernanceObjectsVotedOn);
+        //READWRITE(mapGovernanceObjectsVotedOn);
     }
 
     void swap(CMasternode& first, CMasternode& second) // nothrow
@@ -239,7 +239,7 @@ public:
         swap(first.nPoSeBanHeight, second.nPoSeBanHeight);
         swap(first.fAllowMixingTx, second.fAllowMixingTx);
         swap(first.fUnitTest, second.fUnitTest);
-        swap(first.mapGovernanceObjectsVotedOn, second.mapGovernanceObjectsVotedOn);
+        //swap(first.mapGovernanceObjectsVotedOn, second.mapGovernanceObjectsVotedOn);
     }
 
     // CALCULATE A RANK AGAINST OF GIVEN BLOCK

@@ -59,7 +59,6 @@ struct Params {
 
     int nSuperblockStartBlock;
     int nSuperblockCycle; // in blocks
-    int nGovernanceFilterElements;
     int nMasternodeMinimumConfirmations;
     /** Used to check majorities for block version upgrade */
     int nMajorityEnforceBlockUpgrade;
