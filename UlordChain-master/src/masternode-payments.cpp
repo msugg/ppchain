@@ -68,19 +68,6 @@ bool IsBlockValueValid(const CBlock& block, int nBlockHeight, CAmount blockRewar
     // we are synced, let's try to check as much data as we can
 
     if(sporkManager.IsSporkActive(SPORK_9_SUPERBLOCKS_ENABLED)) {
-//        if(CSuperblockManager::IsSuperblockVoteTriggered(nBlockHeight)) {
-//            if(CSuperblockManager::IsValid(block.vtx[0], nBlockHeight, blockReward)) {
-//                LogPrint("gobject", "IsBlockValueValid -- Valid superblock at height %d: %s", nBlockHeight, block.vtx[0].ToString());
-//                // all checks are done in CSuperblock::IsValid, nothing to do here
-//                return true;
-//            }
-
-//            // triggered but invalid? that's weird
-//            LogPrintf("IsBlockValueValid -- ERROR: Invalid superblock detected at height %d: %s", nBlockHeight, block.vtx[0].ToString());
-//            // should NOT allow invalid superblocks, when superblocks are enabled
-//            strErrorRet = strprintf("invalid superblock detected at height %d", nBlockHeight);
-//            return false;
-//        }
         LogPrint("gobject", "IsBlockValueValid -- No triggered superblock detected at height %d\n", nBlockHeight);
         if(!isBlockRewardValueMet) {
             strErrorRet = strprintf("coinbase pays too much at height %d (actual=%d vs limit=%d), exceeded block reward, no triggered superblock detected",
@@ -118,17 +105,6 @@ bool IsBlockPayeeValid(const CTransaction& txNew, int nBlockHeight, CAmount bloc
     // SEE IF THIS IS A VALID SUPERBLOCK
 
     if(sporkManager.IsSporkActive(SPORK_9_SUPERBLOCKS_ENABLED)) {
-//        if(CSuperblockManager::IsSuperblockVoteTriggered(nBlockHeight)) {
-//            if(CSuperblockManager::IsValid(txNew, nBlockHeight, blockReward)) {
-//                LogPrint("gobject", "IsBlockPayeeValid -- Valid superblock at height %d: %s", nBlockHeight, txNew.ToString());
-//                return true;
-//            }
-
-//            LogPrintf("IsBlockPayeeValid -- ERROR: Invalid superblock detected at height %d: %s", nBlockHeight, txNew.ToString());
-//            // should NOT allow such superblocks, when superblocks are enabled
-//            return false;
-//        }
-        // continue validation, should pay MN
         LogPrint("gobject", "IsBlockPayeeValid -- No triggered superblock detected at height %d\n", nBlockHeight);
     } else {
         // should NOT allow superblocks at all, when superblocks are disabled
@@ -149,5 +125,3 @@ void FillBlockPayments(CMutableTransaction& txNew, int nBlockHeight, CAmount blo
             return;
     }
 }
-
-

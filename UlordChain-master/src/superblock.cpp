@@ -29,22 +29,6 @@ bool CSuperblockManager::IsSuperblockTriggered(int nBlockHeight)
     return true;
 }
 
-// Popchain DevTeam
-//bool CSuperblockManager::IsSuperblockVoteTriggered(int nBlockHeight)
-//{
-//    if (CSuperblockManager::IsSuperblockTriggered(nBlockHeight)){
-//        return false;
-//    }
-//    return false;
-//}
-
-
-// Popchain DevTeam
-//bool CSuperblockManager::GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int nBlockHeight)
-//{
-//    return false;
-//}
-
 
 /**
 *    Append Founders reward
@@ -92,19 +76,8 @@ void CSuperblockManager::CreateSuperblock(CMutableTransaction& txNewRet, int nBl
     {
         AppendFoundersReward(txNewRet, nBlockHeight,txoutFound);
     }
-	
-//    if(!IsSuperblockVoteTriggered(nBlockHeight))
-//    {
-//        LogPrintf("CSuperblockManager::IsSuperblockVoteTriggered -- Can't get vote at height %d\n", nBlockHeight);
-//        return;
-//    }
 }
 
-// Popchain DevTeam
-//bool CSuperblockManager::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount blockReward)
-//{
-//    return false;
-//}
 
 
 CSuperblock::
