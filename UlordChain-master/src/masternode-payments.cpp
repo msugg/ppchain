@@ -118,7 +118,7 @@ bool IsBlockPayeeValid(const CTransaction& txNew, int nBlockHeight, CAmount bloc
     // SEE IF THIS IS A VALID SUPERBLOCK
 
     if(sporkManager.IsSporkActive(SPORK_9_SUPERBLOCKS_ENABLED)) {
-        if(CSuperblockManager::IsSuperblockVoteTriggered(nBlockHeight)) {
+//        if(CSuperblockManager::IsSuperblockVoteTriggered(nBlockHeight)) {
 //            if(CSuperblockManager::IsValid(txNew, nBlockHeight, blockReward)) {
 //                LogPrint("gobject", "IsBlockPayeeValid -- Valid superblock at height %d: %s", nBlockHeight, txNew.ToString());
 //                return true;
