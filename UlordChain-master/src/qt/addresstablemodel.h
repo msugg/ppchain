@@ -1,5 +1,5 @@
 // Copyright (c) 2017-2018 The Popchain Core Developers
-s
+
 #ifndef BITCOIN_QT_ADDRESSTABLEMODEL_H
 #define BITCOIN_QT_ADDRESSTABLEMODEL_H
 
