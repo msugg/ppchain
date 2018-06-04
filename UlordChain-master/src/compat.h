@@ -1,5 +1,6 @@
 // Copyright (c) 2017-2018 The Popchain Core Developers
 
+#ifndef BITCOIN_COMPAT_H
 #define BITCOIN_COMPAT_H
 
 #if defined(HAVE_CONFIG_H)
