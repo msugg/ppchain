@@ -314,7 +314,7 @@ public:
         consensus.nMajorityRejectBlockOutdated = 75;
         consensus.nMajorityWindow = 100;
         consensus.BIP34Height = 0;
-        consensus.BIP34Hash = uint256S("0x01");
+        consensus.BIP34Hash = uint256S("00065185c3ffa77ff797ea3141fba9b1ab76a0f336863dec1199042ca5560fc4");
         consensus.powLimit = uint256S("0x000fffffff000000000000000000000000000000000000000000000000000000");
         consensus.nPowAveragingWindow = 17;
         consensus.nPowMaxAdjustDown = 32;                               // 32% adjustment down
@@ -345,15 +345,15 @@ public:
         nPruneAfterHeight = 1000;
 	    
    		arith_uint256 nTempBit =  UintToArith256( consensus.powLimit); 
-        genesis = CreateGenesisBlock(1528217388, uint256S("0x01"), nTempBit.GetCompact(), 1,  1 * COIN);
+        genesis = CreateGenesisBlock(1528217388, uint256S("0000948b0d877924f6371e52adde4649caa367821c2c8473b3ec31b7aa370016"), nTempBit.GetCompact(), 1,  1 * COIN);
 #ifdef GENESIS_GENERATION
         arith_uint256 a("0x000fffffff000000000000000000000000000000000000000000000000000000");
         std::cout << "pow limit : " << a.GetCompact()<< " "<< nTempBit.GetCompact() << std::endl;
-        findGenesis(&genesis, "testnet");
+        //findGenesis(&genesis, "testnet");
 #endif
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x01"));
-        assert(genesis.hashMerkleRoot == uint256S("0x01"));
+        assert(consensus.hashGenesisBlock == uint256S("00065185c3ffa77ff797ea3141fba9b1ab76a0f336863dec1199042ca5560fc4"));
+        assert(genesis.hashMerkleRoot == uint256S("6f73646aa71aeec2163e047e0028e2c4313f3e88d4fb3e1ade176c56e1a148c4"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -389,7 +389,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (0, uint256S("0x01")),
+            (0, uint256S("00065185c3ffa77ff797ea3141fba9b1ab76a0f336863dec1199042ca5560fc4")),
             1528217388,     // * UNIX timestamp of last checkpoint block
             0,              // * total number of transactions between genesis and last checkpoint
                             //   (the tx=... number in the SetBestChain debug.log lines)
@@ -403,6 +403,7 @@ public:
         };
     }
 };
+
 static CTestNetParams testNetParams;
 
 /**
