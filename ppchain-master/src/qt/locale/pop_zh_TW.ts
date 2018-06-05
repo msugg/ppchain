@@ -3181,7 +3181,7 @@ https://www.transifex.com/projects/p/pop/</translation>
     </message>
     <message>
         <source>InstantX doesn't support sending values that high yet. Transactions are currently limited to %1 PCH.</source>
-        <translation>即時到帳系統暫時並不支援這麼高的交易金額。目前的金額僅限於%1 UT。</translation>
+        <translation>即時到帳系統暫時並不支援這麼高的交易金額。目前的金額僅限於%1 PCH。</translation>
     </message>
 </context>
 <context>
