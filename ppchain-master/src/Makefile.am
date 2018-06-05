@@ -22,8 +22,8 @@ LIBBITCOINQT=qt/libbitcoinqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
 LIBUNIVALUE=univalue/libunivalue.la
 
-# lib cryptohello
-LIBBITCOIN_HELLO=hello/libbitcoin_hello.a
+# lib cryptopop
+LIBBITCOIN_CRYPTOPOP=cryptopop/libbitcoin_cryptopop.a
 
 $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C $(@D) $(@F)
@@ -34,7 +34,7 @@ $(LIBUNIVALUE): $(wildcard univalue/lib/*) $(wildcard univalue/include/*)
 # Make is not made aware of per-object dependencies to avoid limiting building parallelization
 # But to build the less dependent modules first, we manually select their order here:
 EXTRA_LIBRARIES += \
-  hello/libbitcoin_hello.a \
+  cryptopop/libbitcoin_cryptopop.a \
   crypto/libbitcoin_crypto.a \
   libbitcoin_util.a \
   libbitcoin_common.a \
@@ -275,38 +275,38 @@ libbitcoin_wallet_a_SOURCES = \
   policy/rbf.cpp \
   $(BITCOIN_CORE_H)
 
-# hello primitives library
-hello_libbitcoin_hello_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_CONFIG_INCLUDES) $(PIC_FLAGS)
-hello_libbitcoin_hello_a_CFLAGS = $(AM_CFLAGS)
-hello_libbitcoin_hello_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) $(PIC_FLAGS)
-hello_libbitcoin_hello_a_SOURCES = \
-    hello/PoW.c \
-    hello/c_hmac_md5.c \
-    hello/c_aes128.c \
-    hello/c_camellia128.c  \
-    hello/c_crc32.c \
-    hello/c_gost.c \
-    hello/c_ripemd160.c \
-    hello/c_sha1.c \
-    hello/c_sha3_256.c \
-    hello/c_skein512_256.c \
-    hello/c_blake2s256.c \
-    hello/c_des.c \
-    hello/c_haval5_256.c \
-    hello/c_rc4.c \
-    hello/c_sha256.c \
-    hello/c_sha512.c \
-    hello/c_whirlpool.c \
-    hello/jtr_gost.c \
-    hello/jtr_skein.c \
-    hello/jtr_crc32.c \
-    hello/jtr_haval.c \
-    hello/blake2s.c \
-    hello/keccak1600.c \
-    hello/my_time.c \
-    hello/common.c \
-    hello/PoW.c \
-    hello/oneWayFunction.c 
+# cryptopop primitives library
+cryptopop_libbitcoin_cryptopop_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_CONFIG_INCLUDES) $(PIC_FLAGS)
+cryptopop_libbitcoin_cryptopop_a_CFLAGS = $(AM_CFLAGS)
+cryptopop_libbitcoin_cryptopop_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) $(PIC_FLAGS)
+cryptopop_libbitcoin_cryptopop_a_SOURCES = \
+    cryptopop/PoW.c \
+    cryptopop/c_hmac_md5.c \
+    cryptopop/c_aes128.c \
+    cryptopop/c_camellia128.c  \
+    cryptopop/c_crc32.c \
+    cryptopop/c_gost.c \
+    cryptopop/c_ripemd160.c \
+    cryptopop/c_sha1.c \
+    cryptopop/c_sha3_256.c \
+    cryptopop/c_skein512_256.c \
+    cryptopop/c_blake2s256.c \
+    cryptopop/c_des.c \
+    cryptopop/c_haval5_256.c \
+    cryptopop/c_rc4.c \
+    cryptopop/c_sha256.c \
+    cryptopop/c_sha512.c \
+    cryptopop/c_whirlpool.c \
+    cryptopop/jtr_gost.c \
+    cryptopop/jtr_skein.c \
+    cryptopop/jtr_crc32.c \
+    cryptopop/jtr_haval.c \
+    cryptopop/blake2s.c \
+    cryptopop/keccak1600.c \
+    cryptopop/my_time.c \
+    cryptopop/common.c \
+    cryptopop/PoW.c \
+    cryptopop/oneWayFunction.c 
 
 # crypto primitives library
 crypto_libbitcoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_CONFIG_INCLUDES) $(PIC_FLAGS)
@@ -411,7 +411,7 @@ popd_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO) \
-  $(LIBBITCOIN_HELLO) \
+  $(LIBBITCOIN_CRYPTOPOP) \
   $(LIBLEVELDB) \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
@@ -457,7 +457,7 @@ pop_tx_LDADD = \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO) \
-  $(LIBBITCOIN_HELLO) \
+  $(LIBBITCOIN_CRYPTOPOP) \
   $(LIBSECP256K1)
 
 pop_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
@@ -507,7 +507,7 @@ CLEANFILES += univalue/*.gcda univalue/*.gcno
 CLEANFILES += wallet/*.gcda wallet/*.gcno
 CLEANFILES += wallet/test/*.gcda wallet/test/*.gcno
 CLEANFILES += zmq/*.gcda zmq/*.gcno
-CLEANFILES += hello/*.gcda hello/*.gcno
+CLEANFILES += cryptopop/*.gcda cryptopop/*.gcno
 
 DISTCLEANFILES = obj/build.h
 

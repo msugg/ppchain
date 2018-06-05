@@ -1,6 +1,6 @@
 // Copyright (c) 2017-2018 The Popchain Core Developers
-#ifndef POP_HELLO_POW_H
-#define POP_HELLO_POW_H
+#ifndef POP_POW_H
+#define POP_POW_H
 
 #include <stdint.h>
 #include <string.h>
@@ -37,7 +37,7 @@ extern "C" {
 	/*
      * hash function
     */
-    void helloHash(const uint8_t *mess, uint32_t messLen, uint8_t output[OUTPUT_LEN]);
+    void hashpop(const uint8_t *mess, uint32_t messLen, uint8_t output[OUTPUT_LEN]);
 	
 #ifdef __cplusplus
 }
@@ -48,4 +48,4 @@ extern "C" {
 */
 void powFunction(uint8_t *input, uint32_t inputLen, uint8_t *Maddr, uint8_t *output);
 
-#endif // POP_HELLO_POW_H
+#endif // POP_POW_H

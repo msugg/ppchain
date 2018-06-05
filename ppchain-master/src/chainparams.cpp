@@ -70,7 +70,7 @@ void _get(const ch * const pblock, const arith_uint256 hashTarget)
         }
 		if (tcnt !=0 and tcnt % 1000 == 0)
         {
-            std::cout<<"cryptohello tcnt = "<<tcnt<<" time = "<<getCurrentTime()<<" ms"<<std::endl;       
+            std::cout<<"cryptopop tcnt = "<<tcnt<<" time = "<<getCurrentTime()<<" ms"<<std::endl;       
         }
 
     }

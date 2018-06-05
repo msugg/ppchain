@@ -10,10 +10,10 @@
 #include "uint256.h"
 #include "version.h"
 
-// cryptohello
-#include "hello/PoW.h"
-#include "hello/common.h"
-#include "hello/oneWayFunction.h"
+// cryptopop
+#include "cryptopop/PoW.h"
+#include "cryptopop/common.h"
+#include "cryptopop/oneWayFunction.h"
 #include "streams.h"
 #include "primitives/block.h"
 #include <string>
@@ -56,20 +56,20 @@ public:
     }
 };
 
-/* ----------------- CryptoHello Hash -------------------------------------- */
+/* ----------------- CryptoPop Hash -------------------------------------- */
 typedef unsigned char uchar;
 
-class CryptoHello {
+class CryptoPop {
 private:
 	std::string in;
 public:
 	static const size_t OUTPUT_SIZE = OUTPUT_LEN;
-	CryptoHello()
+	CryptoPop()
 	{
 
 	}
 
-	explicit CryptoHello(const CBlockHeader *pblock, uchar hash[OUTPUT_SIZE])
+	explicit CryptoPop(const CBlockHeader *pblock, uchar hash[OUTPUT_SIZE])
 	{
 		CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
 		ss << *pblock;
@@ -79,7 +79,7 @@ public:
 		//view_data_u8("PoW 2", hash, OUTPUT_LEN);
 	}
 
-	CryptoHello& write(uchar *data, size_t len)
+	CryptoPop& write(uchar *data, size_t len)
 	{
 		in += std::string(data, data + len);
 #ifdef KDBUG
@@ -93,7 +93,7 @@ LogPrintf("serialized:\t%s\n", HexStr(in).c_str());
 		//in = "hashcat";
 	    initOneWayFunction();	
       	uint32_t tmpLen = (uint32_t)in.size();
-       	helloHash((const uint8_t * )in.data(), tmpLen,hash);
+       	hashpop((const uint8_t * )in.data(), tmpLen,hash);
 	}
 };
 

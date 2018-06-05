@@ -12,7 +12,7 @@ uint256 CBlockHeader::GetHash() const
 //	return SerializeHash(*this);
 	uint256 hash;
 
-	CryptoHello(this, (unsigned char *)&hash);
+	CryptoPop(this, (unsigned char *)&hash);
 //	view_data_u8("PoW 3", (unsigned char *)&hash, OUTPUT_LEN); 
 //	std::cout<<"gethex() ="<<hash.GetHex()<<std::endl;
 //	std::cout<<"tostring ="<<hash.ToString()<<std::endl; 
