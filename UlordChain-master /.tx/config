@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+
+[pop.qt-translation-012x]
+file_filter = src/qt/locale/pop_<lang>.ts
+source_file = src/qt/locale/pop_en.ts
+source_lang = en
