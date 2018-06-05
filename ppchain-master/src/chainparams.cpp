@@ -14,7 +14,7 @@
 #include "arith_uint256.h"
 #include "chainparamsseeds.h"
 
-//#define GENESIS_GENERATION
+#define GENESIS_GENERATION
 
 #ifdef GENESIS_GENERATION
 #include <cstdlib>
@@ -314,7 +314,7 @@ public:
         consensus.nMajorityRejectBlockOutdated = 75;
         consensus.nMajorityWindow = 100;
         consensus.BIP34Height = 0;
-        consensus.BIP34Hash = uint256S("0x000f378be841f44e75346eebd931b13041f0dee561af6a80cfea6669c1bfec03");
+        consensus.BIP34Hash = uint256S("0x01");
         consensus.powLimit = uint256S("0x000fffffff000000000000000000000000000000000000000000000000000000");
         consensus.nPowAveragingWindow = 17;
         consensus.nPowMaxAdjustDown = 32;                               // 32% adjustment down
@@ -345,15 +345,15 @@ public:
         nPruneAfterHeight = 1000;
 	    
    		arith_uint256 nTempBit =  UintToArith256( consensus.powLimit); 
-    	genesis = CreateGenesisBlock(1524057440, uint256S("0x000020f00dd1af082323e02e1f5b1d866d777abbcf63ba720d35dcf585840073"), nTempBit.GetCompact(), 1,  1 * COIN);
+        genesis = CreateGenesisBlock(1528217388, uint256S("0x01"), nTempBit.GetCompact(), 1,  1 * COIN);
 #ifdef GENESIS_GENERATION
         arith_uint256 a("0x000fffffff000000000000000000000000000000000000000000000000000000");
         std::cout << "pow limit : " << a.GetCompact()<< " "<< nTempBit.GetCompact() << std::endl;
-        //findGenesis(&genesis, "testnet");
+        findGenesis(&genesis, "testnet");
 #endif
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000f378be841f44e75346eebd931b13041f0dee561af6a80cfea6669c1bfec03"));
-        assert(genesis.hashMerkleRoot == uint256S("0xa12949fc4a1735c8cbd6444bf9b4aea61300bc7aee9fec741af5a8c2fe386216"));
+        assert(consensus.hashGenesisBlock == uint256S("0x01"));
+        assert(genesis.hashMerkleRoot == uint256S("0x01"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -389,8 +389,8 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (0, uint256S("0x000f378be841f44e75346eebd931b13041f0dee561af6a80cfea6669c1bfec03")),
-            1524057440,     // * UNIX timestamp of last checkpoint block
+            (0, uint256S("0x01")),
+            1528217388,     // * UNIX timestamp of last checkpoint block
             0,              // * total number of transactions between genesis and last checkpoint
                             //   (the tx=... number in the SetBestChain debug.log lines)
             0               // * estimated number of transactions per day after checkpoint
