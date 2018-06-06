@@ -750,8 +750,8 @@ void SendCoinsDialog::updateSmartFeeLabel()
     if(!model || !model->getOptionsModel())
         return;
 
-    unsigned int nBlocksToConfirm = defaultConfirmTarget - ui->sliderSmartFee->value();
-    unsigned int estimateFoundAtBlocks = nBlocksToConfirm;
+    int nBlocksToConfirm = defaultConfirmTarget - ui->sliderSmartFee->value();
+    int estimateFoundAtBlocks = nBlocksToConfirm;
     CFeeRate feeRate = mempool.estimateSmartFee(nBlocksToConfirm, &estimateFoundAtBlocks);
     if (feeRate <= CFeeRate(0)) // not enough data => minfee
     {
