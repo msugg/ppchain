@@ -1,7 +1,7 @@
 // Copyright (c) 2017-2018 The Popchain Core Developers
 
-#ifndef BITCOIN_RPCSERVER_H
-#define BITCOIN_RPCSERVER_H
+#ifndef POPCHAIN_RPCSERVER_H
+#define POPCHAIN_RPCSERVER_H
 
 #include "amount.h"
 #include "rpcprotocol.h"
@@ -340,4 +340,4 @@ void InterruptRPC();
 void StopRPC();
 std::string JSONRPCExecBatch(const UniValue& vReq);
 
-#endif // BITCOIN_RPCSERVER_H
+#endif // POPCHAIN_RPCSERVER_H
