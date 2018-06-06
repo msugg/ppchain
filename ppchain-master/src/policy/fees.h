@@ -245,7 +245,7 @@ public:
      *  confTarget blocks. If no answer can be given at confTarget, return an
      *  estimate at the lowest target where one can be given.
      */
-    CFeeRate estimateSmartFee(unsigned int confTarget, unsigned int *answerFoundAtTarget, const CTxMemPool& pool);
+    CFeeRate estimateSmartFee(int confTarget, int *answerFoundAtTarget, const CTxMemPool& pool);
 
     /** Return a priority estimate */
     double estimatePriority(int confTarget);
